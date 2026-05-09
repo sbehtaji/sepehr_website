@@ -149,7 +149,7 @@
 
           <div class="timeline-item">
             <h3>MSc Researcher – Data Modelling &amp; Analytics</h3>
-            <p class="meta">Teesside University · Darlington, United Kingdom · Jan 2024 – Jun 2024</p>
+            <p class="meta">Teesside University · Middlesbrough, United Kingdom · Jan 2024 – Jun 2024</p>
             <ul>
               <li>Built and evaluated supervised ML models on large, complex datasets to identify predictive and explainable patterns in gene-level translation outcomes across two treatment conditions.</li>
               <li>Built and compared interpretable ML models (Random Forest, XGBoost, AdaBoost) to identify key predictive features.</li>
@@ -220,15 +220,19 @@
             </article>
 
             <article class="card portfolio-card" data-category="medical-imaging">
-              <img class="portfolio-image" src="projects/img/lung-xray.png"
-                   alt="Chest X-ray — lung segmentation and injury classification" />
+              <img class="portfolio-image-diagram" src="projects/img/lung-ai.svg"
+                   alt="Hybrid deep learning framework — lung CT segmentation and severity classification" />
               <p class="portfolio-tag">Medical Imaging</p>
-              <h3>Lung Region Segmentation &amp; Injury Classification</h3>
+              <h3>Lung CT Segmentation &amp; Severity Classification</h3>
               <p class="meta">Published · Scientific Reports, May 2026</p>
-              <p>High-accuracy deep network pipeline for lung region segmentation and multi-class injury classification with explainable outputs.</p>
+              <ul>
+                <li>Hybrid deep learning framework on 4,392 chest CT slices (local + public) across four severity classes: Healthy, Mild, Moderate, Severe — evaluated with 5-fold cross-validation.</li>
+                <li>U-Net + VGG16 with CLAHE preprocessing achieved 98.1% segmentation accuracy (Dice 0.927); ResNet50 + Gradient Boosting reached 96.35% classification accuracy with ROC-AUC &gt;99% across all classes.</li>
+                <li>Novel Brightness Intensity Range (BIR) method analysed pixel intensity 0.35–0.7 with perimeter-to-area ratio — BIR-VGG16 hit 94.8% accuracy (AUC 0.924–0.986). Hybrid SVM inference in 0.16–0.22 s vs 309–377 s for standalone CNNs.</li>
+              </ul>
               <a class="inline-link" href="https://scholar.google.com/citations?user=qUR4MQMAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">View Publication</a>
               <div class="tech-pills">
-                <span>Deep Learning</span><span>U-Net</span><span>Segmentation</span><span>Python</span>
+                <span>U-Net</span><span>VGG16</span><span>ResNet50</span><span>CLAHE</span><span>SVM</span><span>GradBoost</span><span>BIR</span>
               </div>
             </article>
 
