@@ -1,262 +1,219 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" width="800" height="420">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     viewBox="0 0 800 420" width="800" height="420">
   <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#07111f"/>
-      <stop offset="100%" style="stop-color:#0b1d38"/>
-    </linearGradient>
-    <linearGradient id="lungL" x1="0%" y1="0%" x2="60%" y2="100%">
-      <stop offset="0%" style="stop-color:#1a3a5c"/>
-      <stop offset="100%" style="stop-color:#0d2540"/>
-    </linearGradient>
-    <linearGradient id="lungR" x1="100%" y1="0%" x2="40%" y2="100%">
-      <stop offset="0%" style="stop-color:#1a3a5c"/>
-      <stop offset="100%" style="stop-color:#0d2540"/>
-    </linearGradient>
-    <radialGradient id="scanLine" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" style="stop-color:#4fc3f7;stop-opacity:0.25"/>
-      <stop offset="100%" style="stop-color:#4fc3f7;stop-opacity:0"/>
+    <!-- Grad-CAM style heatmap gradient -->
+    <radialGradient id="hm1" cx="38%" cy="62%" r="22%">
+      <stop offset="0%"   stop-color="#ff1744" stop-opacity="0.82"/>
+      <stop offset="40%"  stop-color="#ff6d00" stop-opacity="0.55"/>
+      <stop offset="75%"  stop-color="#ffea00" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#ffea00" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="hotspot" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" style="stop-color:#ef5350;stop-opacity:0.7"/>
-      <stop offset="100%" style="stop-color:#ef5350;stop-opacity:0"/>
+    <radialGradient id="hm2" cx="60%" cy="48%" r="18%">
+      <stop offset="0%"   stop-color="#ff6d00" stop-opacity="0.65"/>
+      <stop offset="50%"  stop-color="#ffea00" stop-opacity="0.38"/>
+      <stop offset="100%" stop-color="#ffea00" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="hotspot2" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" style="stop-color:#ff9800;stop-opacity:0.55"/>
-      <stop offset="100%" style="stop-color:#ff9800;stop-opacity:0"/>
+    <radialGradient id="hm3" cx="52%" cy="40%" r="12%">
+      <stop offset="0%"   stop-color="#00e5ff" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#00e5ff" stop-opacity="0"/>
     </radialGradient>
+    <radialGradient id="hm4" cx="65%" cy="68%" r="14%">
+      <stop offset="0%"   stop-color="#ff1744" stop-opacity="0.55"/>
+      <stop offset="60%"  stop-color="#ff6d00" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#ff6d00" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Feature map block gradients -->
+    <linearGradient id="fm1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#1a237e"/>
+      <stop offset="100%" stop-color="#283593"/>
+    </linearGradient>
+    <linearGradient id="fm2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#1b5e20"/>
+      <stop offset="100%" stop-color="#2e7d32"/>
+    </linearGradient>
+    <linearGradient id="fm3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#4a148c"/>
+      <stop offset="100%" stop-color="#6a1b9a"/>
+    </linearGradient>
+    <filter id="blur1">
+      <feGaussianBlur stdDeviation="2"/>
+    </filter>
+    <filter id="blur2">
+      <feGaussianBlur stdDeviation="1.2"/>
+    </filter>
     <filter id="glow">
-      <feGaussianBlur stdDeviation="3" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
-    <filter id="softglow">
-      <feGaussianBlur stdDeviation="5" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <filter id="ctlook">
-      <feColorMatrix type="matrix" values="0.15 0.15 0.15 0 0.05
-                                            0.15 0.15 0.15 0 0.1
-                                            0.15 0.15 0.15 0 0.25
-                                            0    0    0    1 0"/>
-    </filter>
-    <marker id="arr" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto">
-      <path d="M0,0 L0,6 L7,3 z" fill="#4fc3f7"/>
-    </marker>
-    <clipPath id="lungClip">
-      <rect x="120" y="40" width="340" height="360"/>
+    <!-- scanline effect over xray -->
+    <pattern id="scanlines" x="0" y="0" width="1" height="3" patternUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="1" height="1" fill="black" fill-opacity="0.08"/>
+    </pattern>
+    <clipPath id="leftPanel">
+      <rect x="0" y="0" width="400" height="420"/>
     </clipPath>
+    <clipPath id="rightPanel">
+      <rect x="400" y="0" width="400" height="420"/>
+    </clipPath>
+    <!-- dark vignette for photo edges -->
+    <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+      <stop offset="0%"   stop-color="black" stop-opacity="0"/>
+      <stop offset="100%" stop-color="black" stop-opacity="0.65"/>
+    </radialGradient>
   </defs>
 
-  <!-- ── Background ── -->
-  <rect width="800" height="420" fill="url(#bg)"/>
+  <!-- ═══════════════════════════════════════════
+       BACKGROUND — pure black like a CT lightbox
+  ═══════════════════════════════════════════ -->
+  <rect width="800" height="420" fill="#000"/>
 
-  <!-- Grid overlay -->
-  <g opacity="0.04" stroke="#4fc3f7" stroke-width="0.5">
-    <line x1="0" y1="84" x2="800" y2="84"/><line x1="0" y1="168" x2="800" y2="168"/>
-    <line x1="0" y1="252" x2="800" y2="252"/><line x1="0" y1="336" x2="800" y2="336"/>
-    <line x1="200" y1="0" x2="200" y2="420"/><line x1="400" y1="0" x2="400" y2="420"/>
-    <line x1="600" y1="0" x2="600" y2="420"/>
+  <!-- ═══════════════════════════════════════════
+       LEFT PANEL — original X-ray
+  ═══════════════════════════════════════════ -->
+  <!-- Real chest X-ray photo, cropped to left half -->
+  <image href="lung-xray.png"
+         x="-80" y="0" width="560" height="420"
+         preserveAspectRatio="xMidYMid slice"
+         clip-path="url(#leftPanel)"
+         opacity="0.92"/>
+  <!-- scanlines texture -->
+  <rect x="0" y="0" width="400" height="420" fill="url(#scanlines)"/>
+  <!-- vignette -->
+  <rect x="0" y="0" width="400" height="420" fill="url(#vignette)" opacity="0.5"/>
+  <!-- label -->
+  <text x="12" y="22" font-family="monospace" font-size="10" fill="#78909c">INPUT · CHEST X-RAY</text>
+
+  <!-- ═══════════════════════════════════════════
+       CENTRE DIVIDER
+  ═══════════════════════════════════════════ -->
+  <line x1="400" y1="0" x2="400" y2="420" stroke="#263238" stroke-width="1.5"/>
+
+  <!-- ═══════════════════════════════════════════
+       RIGHT PANEL — same xray + AI heatmap overlay
+  ═══════════════════════════════════════════ -->
+  <image href="lung-xray.png"
+         x="320" y="0" width="560" height="420"
+         preserveAspectRatio="xMidYMid slice"
+         clip-path="url(#rightPanel)"
+         opacity="0.75"/>
+
+  <!-- Grad-CAM heatmap blobs (covers right half only) -->
+  <!-- apply clip so heatmap stays in right panel -->
+  <g clip-path="url(#rightPanel)">
+    <rect x="400" y="0" width="400" height="420" fill="url(#hm1)" filter="url(#blur1)"/>
+    <rect x="400" y="0" width="400" height="420" fill="url(#hm2)" filter="url(#blur1)"/>
+    <rect x="400" y="0" width="400" height="420" fill="url(#hm3)" filter="url(#blur2)"/>
+    <rect x="400" y="0" width="400" height="420" fill="url(#hm4)" filter="url(#blur2)"/>
   </g>
+  <!-- scanlines -->
+  <rect x="400" y="0" width="400" height="420" fill="url(#scanlines)"/>
+  <!-- vignette -->
+  <rect x="400" y="0" width="400" height="420" fill="url(#vignette)" opacity="0.45"/>
+  <!-- label -->
+  <text x="412" y="22" font-family="monospace" font-size="10" fill="#78909c">GRAD-CAM · SEVERITY LOCALISATION</text>
 
-  <!-- ── TITLE BAR ── -->
-  <rect x="0" y="0" width="800" height="32" fill="#05101d"/>
-  <text x="400" y="21" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="700" fill="#90caf9" letter-spacing="1.2">LUNG CT SEGMENTATION &amp; SEVERITY CLASSIFICATION · HYBRID DL</text>
+  <!-- ═══════════════════════════════════════════
+       CNN FEATURE MAPS — bottom strip
+  ═══════════════════════════════════════════ -->
+  <!-- semi-transparent bar at bottom -->
+  <rect x="0" y="362" width="800" height="58" fill="black" fill-opacity="0.72"/>
+  <line x1="0" y1="362" x2="800" y2="362" stroke="#1a2a3a" stroke-width="1"/>
 
-  <!-- ══════════════════════════════════════════
-       LEFT HALF — CT Scan with AI overlay
-  ══════════════════════════════════════════ -->
+  <!-- label -->
+  <text x="16" y="379" font-family="monospace" font-size="8.5" fill="#546e7a">CNN FEATURE MAPS · ResNet50 intermediate layers</text>
 
-  <!-- CT scan dark panel -->
-  <rect x="16" y="38" width="360" height="368" rx="6" fill="#050e1a" stroke="#1a3a5c" stroke-width="1.5"/>
+  <!-- Feature map thumbnails — simulated activation maps -->
+  <!-- map 1 -->
+  <rect x="16" y="384" width="52" height="30" rx="2" fill="#0a0a12"/>
+  <ellipse cx="35" cy="399" rx="14" ry="9"  fill="#1565c0" opacity="0.7" filter="url(#blur2)"/>
+  <ellipse cx="52" cy="393" rx="8"  ry="6"  fill="#0d47a1" opacity="0.5"/>
+  <rect x="16" y="384" width="52" height="30" rx="2" fill="none" stroke="#1e3a5a" stroke-width="0.8"/>
 
-  <!-- CT background texture (simulated scan slices) -->
-  <g opacity="0.12">
-    <rect x="16" y="38" width="360" height="368" fill="#0a1e36"/>
-    <!-- horizontal scan lines -->
-    <line x1="16" y1="60"  x2="376" y2="60"  stroke="#4fc3f7" stroke-width="0.3"/>
-    <line x1="16" y1="80"  x2="376" y2="80"  stroke="#4fc3f7" stroke-width="0.3"/>
-    <line x1="16" y1="100" x2="376" y2="100" stroke="#4fc3f7" stroke-width="0.3"/>
-    <line x1="16" y1="120" x2="376" y2="120" stroke="#4fc3f7" stroke-width="0.3"/>
-    <line x1="16" y1="140" x2="376" y2="140" stroke="#4fc3f7" stroke-width="0.3"/>
-    <line x1="16" y1="160" x2="376" y2="160" stroke="#4fc3f7" stroke-width="0.3"/>
-    <line x1="16" y1="180" x2="376" y2="180" stroke="#4fc3f7" stroke-width="0.3"/>
-    <line x1="16" y1="200" x2="376" y2="200" stroke="#4fc3f7" stroke-width="0.3"/>
-    <line x1="16" y1="220" x2="376" y2="220" stroke="#4fc3f7" stroke-width="0.3"/>
-    <line x1="16" y1="240" x2="376" y2="240" stroke="#4fc3f7" stroke-width="0.3"/>
-    <line x1="16" y1="260" x2="376" y2="260" stroke="#4fc3f7" stroke-width="0.3"/>
-    <line x1="16" y1="280" x2="376" y2="280" stroke="#4fc3f7" stroke-width="0.3"/>
-    <line x1="16" y1="300" x2="376" y2="300" stroke="#4fc3f7" stroke-width="0.3"/>
-    <line x1="16" y1="320" x2="376" y2="320" stroke="#4fc3f7" stroke-width="0.3"/>
-    <line x1="16" y1="340" x2="376" y2="340" stroke="#4fc3f7" stroke-width="0.3"/>
-    <line x1="16" y1="360" x2="376" y2="360" stroke="#4fc3f7" stroke-width="0.3"/>
-    <line x1="16" y1="380" x2="376" y2="380" stroke="#4fc3f7" stroke-width="0.3"/>
-    <line x1="16" y1="400" x2="376" y2="400" stroke="#4fc3f7" stroke-width="0.3"/>
-  </g>
+  <!-- map 2 -->
+  <rect x="76" y="384" width="52" height="30" rx="2" fill="#0a0a12"/>
+  <ellipse cx="92" cy="397" rx="10" ry="12" fill="#1b5e20" opacity="0.65" filter="url(#blur2)"/>
+  <ellipse cx="110" cy="392" rx="9"  ry="6"  fill="#388e3c" opacity="0.5"/>
+  <rect x="76" y="384" width="52" height="30" rx="2" fill="none" stroke="#1e3a5a" stroke-width="0.8"/>
 
-  <!-- Spine / trachea centre -->
-  <ellipse cx="196" cy="222" rx="12" ry="14" fill="#1a3060" stroke="#2a4a80" stroke-width="1"/>
-  <!-- trachea -->
-  <rect x="190" y="58" width="12" height="80" rx="4" fill="#0e1e3a" stroke="#2a4a80" stroke-width="1"/>
-  <!-- trachea split -->
-  <path d="M196,138 Q175,155 155,165" fill="none" stroke="#2a4a80" stroke-width="2"/>
-  <path d="M196,138 Q218,155 238,165" fill="none" stroke="#2a4a80" stroke-width="2"/>
+  <!-- map 3 -->
+  <rect x="136" y="384" width="52" height="30" rx="2" fill="#0a0a12"/>
+  <ellipse cx="158" cy="400" rx="16" ry="8"  fill="#4a148c" opacity="0.7" filter="url(#blur2)"/>
+  <ellipse cx="148" cy="390" rx="7"  ry="5"  fill="#7b1fa2" opacity="0.55"/>
+  <rect x="136" y="384" width="52" height="30" rx="2" fill="none" stroke="#1e3a5a" stroke-width="0.8"/>
 
-  <!-- Left Lung (anatomically right on image) -->
-  <path d="M155,165 Q118,185 105,230 Q95,270 100,310 Q108,350 130,370 Q155,385 175,370 Q195,355 200,320 L200,165 Z"
-        fill="url(#lungL)" stroke="#4fc3f7" stroke-width="1.5" opacity="0.85"/>
+  <!-- map 4 -->
+  <rect x="196" y="384" width="52" height="30" rx="2" fill="#0a0a12"/>
+  <ellipse cx="214" cy="396" rx="11" ry="10" fill="#bf360c" opacity="0.65" filter="url(#blur2)"/>
+  <ellipse cx="232" cy="401" rx="9"  ry="6"  fill="#e64a19" opacity="0.5"/>
+  <rect x="196" y="384" width="52" height="30" rx="2" fill="none" stroke="#1e3a5a" stroke-width="0.8"/>
 
-  <!-- Right Lung -->
-  <path d="M238,165 Q275,185 290,230 Q302,270 298,310 Q290,350 268,370 Q243,385 222,370 Q202,355 200,320 L200,165 Z"
-        fill="url(#lungR)" stroke="#4fc3f7" stroke-width="1.5" opacity="0.85"/>
+  <!-- map 5 -->
+  <rect x="256" y="384" width="52" height="30" rx="2" fill="#0a0a12"/>
+  <ellipse cx="275" cy="399" rx="13" ry="7"  fill="#006064" opacity="0.7" filter="url(#blur2)"/>
+  <ellipse cx="290" cy="392" rx="7"  ry="8"  fill="#00838f" opacity="0.55"/>
+  <rect x="256" y="384" width="52" height="30" rx="2" fill="none" stroke="#1e3a5a" stroke-width="0.8"/>
 
-  <!-- Lung internal texture (bronchi/vessels) -->
-  <g opacity="0.35" stroke="#4fc3f7" stroke-width="0.8" fill="none">
-    <!-- left lung vessels -->
-    <path d="M155,190 Q140,220 135,260"/>
-    <path d="M160,200 Q148,230 145,270"/>
-    <path d="M170,210 Q162,240 158,280"/>
-    <path d="M155,190 Q145,205 138,230"/>
-    <!-- right lung vessels -->
-    <path d="M238,190 Q252,220 256,260"/>
-    <path d="M232,200 Q244,230 246,270"/>
-    <path d="M222,210 Q230,240 232,280"/>
-    <path d="M238,190 Q248,205 254,230"/>
-  </g>
+  <!-- map 6 -->
+  <rect x="316" y="384" width="52" height="30" rx="2" fill="#0a0a12"/>
+  <ellipse cx="332" cy="398" rx="9"  ry="11" fill="#e65100" opacity="0.6" filter="url(#blur2)"/>
+  <ellipse cx="350" cy="392" rx="11" ry="6"  fill="#bf360c" opacity="0.5"/>
+  <rect x="316" y="384" width="52" height="30" rx="2" fill="none" stroke="#1e3a5a" stroke-width="0.8"/>
 
-  <!-- AI segmentation overlay — bright teal outline -->
-  <path d="M155,165 Q118,185 105,230 Q95,270 100,310 Q108,350 130,370 Q155,385 175,370 Q195,355 200,320 L200,165 Z"
-        fill="none" stroke="#00e5ff" stroke-width="2" stroke-dasharray="6,3" opacity="0.7" filter="url(#glow)"/>
-  <path d="M238,165 Q275,185 290,230 Q302,270 298,310 Q290,350 268,370 Q243,385 222,370 Q202,355 200,320 L200,165 Z"
-        fill="none" stroke="#00e5ff" stroke-width="2" stroke-dasharray="6,3" opacity="0.7" filter="url(#glow)"/>
+  <!-- map 7 — right side (after divider) -->
+  <rect x="376" y="384" width="52" height="30" rx="2" fill="#0a0a12"/>
+  <ellipse cx="397" cy="397" rx="12" ry="9"  fill="#1a237e" opacity="0.7" filter="url(#blur2)"/>
+  <ellipse cx="412" cy="403" rx="7"  ry="5"  fill="#283593" opacity="0.5"/>
+  <rect x="376" y="384" width="52" height="30" rx="2" fill="none" stroke="#1e3a5a" stroke-width="0.8"/>
 
-  <!-- Hotspot — severe region (left lower lobe) -->
-  <ellipse cx="130" cy="310" rx="34" ry="28" fill="url(#hotspot)" filter="url(#softglow)"/>
-  <ellipse cx="130" cy="310" rx="14" ry="11" fill="#ef5350" opacity="0.5"/>
-  <!-- Hotspot — moderate region (right middle) -->
-  <ellipse cx="262" cy="250" rx="28" ry="22" fill="url(#hotspot2)" filter="url(#softglow)"/>
-  <ellipse cx="262" cy="250" rx="11" ry="9" fill="#ff9800" opacity="0.45"/>
+  <!-- map 8 -->
+  <rect x="436" y="384" width="52" height="30" rx="2" fill="#0a0a12"/>
+  <ellipse cx="454" cy="400" rx="14" ry="7"  fill="#880e4f" opacity="0.7" filter="url(#blur2)"/>
+  <ellipse cx="468" cy="391" rx="8"  ry="7"  fill="#ad1457" opacity="0.5"/>
+  <rect x="436" y="384" width="52" height="30" rx="2" fill="none" stroke="#1e3a5a" stroke-width="0.8"/>
 
-  <!-- Scan line sweep -->
-  <rect x="16" y="38" width="360" height="8" fill="url(#scanLine)" opacity="0.5"/>
+  <!-- map 9 -->
+  <rect x="496" y="384" width="52" height="30" rx="2" fill="#0a0a12"/>
+  <ellipse cx="515" cy="396" rx="10" ry="11" fill="#33691e" opacity="0.65" filter="url(#blur2)"/>
+  <ellipse cx="533" cy="402" rx="9"  ry="5"  fill="#558b2f" opacity="0.5"/>
+  <rect x="496" y="384" width="52" height="30" rx="2" fill="none" stroke="#1e3a5a" stroke-width="0.8"/>
 
-  <!-- Corner crosshairs (CT viewer style) -->
-  <g stroke="#1e3a5a" stroke-width="0.8" opacity="0.7">
-    <line x1="20" y1="42" x2="36" y2="42"/><line x1="20" y1="42" x2="20" y2="58"/>
-    <line x1="372" y1="42" x2="356" y2="42"/><line x1="372" y1="42" x2="372" y2="58"/>
-    <line x1="20" y1="402" x2="36" y2="402"/><line x1="20" y1="402" x2="20" y2="386"/>
-    <line x1="372" y1="402" x2="356" y2="402"/><line x1="372" y1="402" x2="372" y2="386"/>
-  </g>
+  <!-- map 10 -->
+  <rect x="556" y="384" width="52" height="30" rx="2" fill="#0a0a12"/>
+  <ellipse cx="572" cy="399" rx="11" ry="8"  fill="#006064" opacity="0.6" filter="url(#blur2)"/>
+  <ellipse cx="590" cy="393" rx="8"  ry="6"  fill="#00838f" opacity="0.5"/>
+  <rect x="556" y="384" width="52" height="30" rx="2" fill="none" stroke="#1e3a5a" stroke-width="0.8"/>
 
-  <!-- CT viewer metadata -->
-  <text x="24" y="54" font-family="monospace" font-size="7.5" fill="#4fc3f7" opacity="0.6">CT · AXIAL · SLICE 024/060</text>
-  <text x="24" y="395" font-family="monospace" font-size="7.5" fill="#4fc3f7" opacity="0.6">WL: 40  WW: 400  CLAHE+</text>
-  <text x="300" y="395" font-family="monospace" font-size="7.5" fill="#4fc3f7" opacity="0.6">U-Net / VGG16</text>
+  <!-- map 11 -->
+  <rect x="616" y="384" width="52" height="30" rx="2" fill="#0a0a12"/>
+  <ellipse cx="635" cy="397" rx="13" ry="9"  fill="#4a148c" opacity="0.65" filter="url(#blur2)"/>
+  <ellipse cx="650" cy="404" rx="7"  ry="4"  fill="#7b1fa2" opacity="0.5"/>
+  <rect x="616" y="384" width="52" height="30" rx="2" fill="none" stroke="#1e3a5a" stroke-width="0.8"/>
 
-  <!-- Severity label callouts -->
-  <!-- Severe -->
-  <line x1="152" y1="310" x2="180" y2="330" stroke="#ef5350" stroke-width="1" opacity="0.8"/>
-  <rect x="62" y="320" width="68" height="16" rx="3" fill="#ef5350" opacity="0.85"/>
-  <text x="96" y="332" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8.5" font-weight="700" fill="#fff">SEVERE</text>
-  <!-- Moderate -->
-  <line x1="245" y1="248" x2="228" y2="268" stroke="#ff9800" stroke-width="1" opacity="0.8"/>
-  <rect x="220" y="268" width="80" height="16" rx="3" fill="#ff9800" opacity="0.85"/>
-  <text x="260" y="280" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8.5" font-weight="700" fill="#fff">MODERATE</text>
-  <!-- Healthy label top right of right lung -->
-  <rect x="240" y="175" width="60" height="16" rx="3" fill="#43a047" opacity="0.85"/>
-  <text x="270" y="187" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8.5" font-weight="700" fill="#fff">HEALTHY</text>
+  <!-- map 12 -->
+  <rect x="676" y="384" width="52" height="30" rx="2" fill="#0a0a12"/>
+  <ellipse cx="695" cy="399" rx="10" ry="9"  fill="#bf360c" opacity="0.7" filter="url(#blur2)"/>
+  <ellipse cx="710" cy="392" rx="9"  ry="6"  fill="#e64a19" opacity="0.55"/>
+  <rect x="676" y="384" width="52" height="30" rx="2" fill="none" stroke="#1e3a5a" stroke-width="0.8"/>
 
-  <!-- ══════════════════════════════════════════
-       RIGHT HALF — AI Pipeline & Results
-  ══════════════════════════════════════════ -->
+  <!-- ═══════════════════════════════════════════
+       Minimal heatmap colour bar (right side)
+  ═══════════════════════════════════════════ -->
+  <defs>
+    <linearGradient id="heatbar" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%"   stop-color="#00e5ff"/>
+      <stop offset="33%"  stop-color="#ffea00"/>
+      <stop offset="66%"  stop-color="#ff6d00"/>
+      <stop offset="100%" stop-color="#ff1744"/>
+    </linearGradient>
+  </defs>
+  <rect x="756" y="38" width="10" height="120" rx="2" fill="url(#heatbar)" opacity="0.85"/>
+  <text x="770" y="44"  font-family="monospace" font-size="7" fill="#ef5350">HIGH</text>
+  <text x="770" y="162" font-family="monospace" font-size="7" fill="#00e5ff">LOW</text>
 
-  <!-- ── Pipeline header ── -->
-  <text x="590" y="52" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#546e7a" letter-spacing="2">AI PIPELINE</text>
-
-  <!-- Step 1: Input -->
-  <rect x="400" y="40" width="186" height="44" rx="6" fill="#081729" stroke="#1565c0" stroke-width="1.3"/>
-  <text x="493" y="57" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9.5" font-weight="700" fill="#90caf9">① Input: Chest CT</text>
-  <text x="493" y="72" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#546e7a">4,392 slices · 4 severity classes</text>
-
-  <!-- Step 2: Preprocessing -->
-  <rect x="400" y="100" width="186" height="44" rx="6" fill="#081729" stroke="#00838f" stroke-width="1.3"/>
-  <text x="493" y="117" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9.5" font-weight="700" fill="#80cbc4">② CLAHE Preprocessing</text>
-  <text x="493" y="132" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#546e7a">Contrast enhancement + morphology</text>
-
-  <!-- Step 3: Segmentation -->
-  <rect x="400" y="160" width="186" height="44" rx="6" fill="#081729" stroke="#1565c0" stroke-width="1.3"/>
-  <text x="493" y="177" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9.5" font-weight="700" fill="#4fc3f7">③ U-Net Segmentation</text>
-  <text x="493" y="192" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#546e7a">VGG16 backbone · Dice 0.927</text>
-
-  <!-- Step 4: Feature extraction -->
-  <rect x="400" y="220" width="186" height="44" rx="6" fill="#081729" stroke="#6a1b9a" stroke-width="1.3"/>
-  <text x="493" y="237" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" font-weight="700" fill="#ce93d8">④ CNN Feature Extraction</text>
-  <text x="493" y="252" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#546e7a">ResNet50 · VGG16 · Xception</text>
-
-  <!-- Step 5: Hybrid classifier -->
-  <rect x="400" y="280" width="186" height="44" rx="6" fill="#081729" stroke="#e65100" stroke-width="1.3"/>
-  <text x="493" y="297" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" font-weight="700" fill="#ffcc80">⑤ Hybrid ML Classifier</text>
-  <text x="493" y="312" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#546e7a">SVM · GradBoost · LogReg + BIR</text>
-
-  <!-- Pipeline arrows -->
-  <line x1="493" y1="84"  x2="493" y2="100" stroke="#4fc3f7" stroke-width="1.3" marker-end="url(#arr)"/>
-  <line x1="493" y1="144" x2="493" y2="160" stroke="#4fc3f7" stroke-width="1.3" marker-end="url(#arr)"/>
-  <line x1="493" y1="204" x2="493" y2="220" stroke="#4fc3f7" stroke-width="1.3" marker-end="url(#arr)"/>
-  <line x1="493" y1="264" x2="493" y2="280" stroke="#4fc3f7" stroke-width="1.3" marker-end="url(#arr)"/>
-
-  <!-- ── Results metrics panel ── -->
-  <rect x="598" y="40" width="188" height="284" rx="6" fill="#040e1c" stroke="#1565c0" stroke-width="1.2"/>
-  <text x="692" y="60" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#90caf9">KEY RESULTS</text>
-  <line x1="610" y1="66" x2="774" y2="66" stroke="#1565c0" stroke-width="0.8"/>
-
-  <!-- Segmentation result -->
-  <text x="614" y="84" font-family="system-ui,sans-serif" font-size="8.5" font-weight="700" fill="#80cbc4">Segmentation (U-Net + VGG16)</text>
-  <text x="614" y="98" font-family="system-ui,sans-serif" font-size="8" fill="#546e7a">Accuracy</text>
-  <text x="774" y="98" text-anchor="end" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#4fc3f7" filter="url(#glow)">98.1%</text>
-  <text x="614" y="112" font-family="system-ui,sans-serif" font-size="8" fill="#546e7a">Dice coefficient</text>
-  <text x="774" y="112" text-anchor="end" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#4fc3f7">0.927</text>
-  <line x1="610" y1="120" x2="774" y2="120" stroke="#1a3a5c" stroke-width="0.7"/>
-
-  <!-- Classification result -->
-  <text x="614" y="136" font-family="system-ui,sans-serif" font-size="8.5" font-weight="700" fill="#ffcc80">Classification (ResNet50 + GradBoost)</text>
-  <text x="614" y="150" font-family="system-ui,sans-serif" font-size="8" fill="#546e7a">Accuracy</text>
-  <text x="774" y="150" text-anchor="end" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#ff9800" filter="url(#glow)">96.35%</text>
-  <text x="614" y="164" font-family="system-ui,sans-serif" font-size="8" fill="#546e7a">ROC-AUC (all classes)</text>
-  <text x="774" y="164" text-anchor="end" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#ff9800">&gt;99%</text>
-  <line x1="610" y1="172" x2="774" y2="172" stroke="#1a3a5c" stroke-width="0.7"/>
-
-  <!-- BIR result -->
-  <text x="614" y="188" font-family="system-ui,sans-serif" font-size="8.5" font-weight="700" fill="#ce93d8">BIR-VGG16 (novel method)</text>
-  <text x="614" y="202" font-family="system-ui,sans-serif" font-size="8" fill="#546e7a">Accuracy</text>
-  <text x="774" y="202" text-anchor="end" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#ce93d8">94.8%</text>
-  <text x="614" y="216" font-family="system-ui,sans-serif" font-size="8" fill="#546e7a">AUC range</text>
-  <text x="774" y="216" text-anchor="end" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#ce93d8">0.924–0.986</text>
-  <line x1="610" y1="224" x2="774" y2="224" stroke="#1a3a5c" stroke-width="0.7"/>
-
-  <!-- Speed result -->
-  <text x="614" y="240" font-family="system-ui,sans-serif" font-size="8.5" font-weight="700" fill="#66bb6a">Inference speed (hybrid SVM)</text>
-  <text x="614" y="254" font-family="system-ui,sans-serif" font-size="8" fill="#546e7a">vs standalone CNN</text>
-  <text x="614" y="268" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#66bb6a" filter="url(#glow)">0.16–0.22 s</text>
-  <text x="774" y="268" text-anchor="end" font-family="system-ui,sans-serif" font-size="8" fill="#37474f">vs 309–377 s</text>
-  <line x1="610" y1="276" x2="774" y2="276" stroke="#1a3a5c" stroke-width="0.7"/>
-
-  <!-- CV label -->
-  <text x="692" y="294" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#37474f">5-fold cross-validation · 4 severity classes</text>
-  <text x="692" y="307" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#37474f">Healthy · Mild · Moderate · Severe</text>
-
-  <!-- ── Severity colour legend (bottom) ── -->
-  <rect x="400" y="336" width="386" height="72" rx="6" fill="#040e1c" stroke="#1a3a5c" stroke-width="1"/>
-  <text x="593" y="354" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" font-weight="700" fill="#78909c">SEVERITY CLASSES</text>
-
-  <circle cx="422" cy="374" r="8" fill="#43a047"/>
-  <text x="434" y="378" font-family="system-ui,sans-serif" font-size="8.5" fill="#a5d6a7">Healthy</text>
-  <circle cx="494" cy="374" r="8" fill="#fdd835"/>
-  <text x="506" y="378" font-family="system-ui,sans-serif" font-size="8.5" fill="#fff59d">Mild</text>
-  <circle cx="554" cy="374" r="8" fill="#ff9800"/>
-  <text x="566" y="378" font-family="system-ui,sans-serif" font-size="8.5" fill="#ffcc80">Moderate</text>
-  <circle cx="634" cy="374" r="8" fill="#ef5350"/>
-  <text x="646" y="378" font-family="system-ui,sans-serif" font-size="8.5" fill="#ef9a9a">Severe</text>
-
-  <text x="593" y="400" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#37474f">1,000 local CT slices + 2,921 public images = 4,392 balanced samples</text>
-
-  <!-- Connection arrow: CT panel → AI pipeline -->
-  <line x1="376" y1="222" x2="400" y2="222" stroke="#4fc3f7" stroke-width="1.5" marker-end="url(#arr)" filter="url(#glow)"/>
+  <!-- ═══════════════════════════════════════════
+       Model label overlays
+  ═══════════════════════════════════════════ -->
+  <!-- bottom-right label -->
+  <text x="788" y="356" text-anchor="end" font-family="monospace" font-size="8" fill="#37474f">U-Net · VGG16 · ResNet50</text>
+  <text x="788" y="369" text-anchor="end" font-family="monospace" font-size="8" fill="#37474f">5-fold CV · 4-class severity</text>
 </svg>
