@@ -7,7 +7,7 @@
   --primary: #0b3d68;
   --primary-dark: #082b49;
   --border: #d9e2ef;
-  --portfolio-thumb-h: 200px;
+  --portfolio-thumb-h: 220px;
 }
 
 * {
@@ -352,6 +352,15 @@ h3 {
   height: var(--portfolio-thumb-h);
   object-fit: cover;
   display: block;
+}
+
+.portfolio-image-diagram {
+  width: 100%;
+  height: var(--portfolio-thumb-h);
+  object-fit: contain;
+  object-position: center center;
+  display: block;
+  background: #08121f;
 }
 
 .portfolio-image-placeholder {

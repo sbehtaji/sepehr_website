@@ -1,205 +1,210 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" width="800" height="420">
   <defs>
     <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#0a1628;stop-opacity:1"/>
-      <stop offset="100%" style="stop-color:#0d2044;stop-opacity:1"/>
-    </linearGradient>
-    <linearGradient id="blueBox" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#1565c0;stop-opacity:1"/>
-      <stop offset="100%" style="stop-color:#0d47a1;stop-opacity:1"/>
-    </linearGradient>
-    <linearGradient id="greenBox" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#1b5e20;stop-opacity:1"/>
-      <stop offset="100%" style="stop-color:#2e7d32;stop-opacity:1"/>
-    </linearGradient>
-    <linearGradient id="purpleBox" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#4a148c;stop-opacity:1"/>
-      <stop offset="100%" style="stop-color:#6a1b9a;stop-opacity:1"/>
-    </linearGradient>
-    <linearGradient id="tealBox" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#004d40;stop-opacity:1"/>
-      <stop offset="100%" style="stop-color:#00695c;stop-opacity:1"/>
-    </linearGradient>
-    <linearGradient id="mlBox" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#b71c1c;stop-opacity:1"/>
-      <stop offset="100%" style="stop-color:#c62828;stop-opacity:1"/>
+      <stop offset="0%" style="stop-color:#07111f"/>
+      <stop offset="100%" style="stop-color:#0b1d38"/>
     </linearGradient>
     <filter id="glow2">
-      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
-    <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-      <path d="M0,0 L0,6 L8,3 z" fill="#4fc3f7"/>
+    <marker id="a0" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#4fc3f7"/>
     </marker>
-    <marker id="arr-green" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-      <path d="M0,0 L0,6 L8,3 z" fill="#66bb6a"/>
+    <marker id="a1" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#ce93d8"/>
     </marker>
-    <marker id="arr-purple" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-      <path d="M0,0 L0,6 L8,3 z" fill="#ce93d8"/>
-    </marker>
-    <marker id="arr-yellow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-      <path d="M0,0 L0,6 L8,3 z" fill="#ffca28"/>
+    <marker id="a2" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#80cbc4"/>
     </marker>
   </defs>
 
   <!-- Background -->
-  <rect width="800" height="500" fill="url(#bg2)"/>
-
+  <rect width="800" height="420" fill="url(#bg2)"/>
   <!-- Grid -->
-  <g opacity="0.04" stroke="#4fc3f7" stroke-width="0.5">
-    <line x1="0" y1="100" x2="800" y2="100"/><line x1="0" y1="200" x2="800" y2="200"/>
-    <line x1="0" y1="300" x2="800" y2="300"/><line x1="0" y1="400" x2="800" y2="400"/>
-    <line x1="100" y1="0" x2="100" y2="500"/><line x1="200" y1="0" x2="200" y2="500"/>
-    <line x1="300" y1="0" x2="300" y2="500"/><line x1="400" y1="0" x2="400" y2="500"/>
-    <line x1="500" y1="0" x2="500" y2="500"/><line x1="600" y1="0" x2="600" y2="500"/>
-    <line x1="700" y1="0" x2="700" y2="500"/>
+  <g opacity="0.05" stroke="#4fc3f7" stroke-width="0.5">
+    <line x1="0" y1="84" x2="800" y2="84"/><line x1="0" y1="168" x2="800" y2="168"/>
+    <line x1="0" y1="252" x2="800" y2="252"/><line x1="0" y1="336" x2="800" y2="336"/>
+    <line x1="200" y1="0" x2="200" y2="420"/><line x1="400" y1="0" x2="400" y2="420"/>
+    <line x1="600" y1="0" x2="600" y2="420"/>
   </g>
 
-  <!-- Title -->
-  <text x="400" y="34" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="700" fill="#90caf9" letter-spacing="1">RBP BINDING PREDICTION · eCLIP + RIBO-SEQ + ML</text>
-  <line x1="60" y1="44" x2="740" y2="44" stroke="#1565c0" stroke-width="1" opacity="0.6"/>
+  <!-- ── TITLE BAR ── -->
+  <rect x="0" y="0" width="800" height="32" fill="#05101d"/>
+  <text x="400" y="21" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="700" fill="#90caf9" letter-spacing="1.2">RBP BINDING PREDICTION · eCLIP-seq + RIBO-SEQ + ML</text>
 
-  <!-- ===== PIPELINE ROW 1: DATA SOURCES ===== -->
-  <text x="400" y="68" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#546e7a" letter-spacing="2">INPUT DATA</text>
+  <!-- ═══════════════════════════════════════════════
+       ROW 1 — DATA INPUTS
+  ═══════════════════════════════════════════════ -->
+  <text x="400" y="50" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8.5" fill="#455a64" letter-spacing="2.5">INPUT DATA</text>
 
-  <!-- eCLIP block -->
-  <rect x="30" y="78" width="210" height="130" rx="8" fill="#0d1f3a" stroke="#1565c0" stroke-width="1.5"/>
-  <text x="135" y="97" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#4fc3f7">eCLIP-seq</text>
-  <text x="135" y="111" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#78909c">enhanced CLIP + sequencing</text>
-  <!-- UV crosslink icon -->
-  <circle cx="75" cy="148" r="26" fill="#0d2a4a" stroke="#ffca28" stroke-width="1.5"/>
-  <text x="75" y="144" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7" fill="#ffca28">UV</text>
-  <text x="75" y="156" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7" fill="#ffe082">crosslink</text>
-  <!-- IP icon -->
-  <rect x="110" y="130" width="42" height="36" rx="4" fill="#1a3a60" stroke="#4fc3f7" stroke-width="1"/>
-  <text x="131" y="148" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7" fill="#90caf9">Immuno-</text>
-  <text x="131" y="159" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7" fill="#90caf9">precip.</text>
-  <!-- Seq icon -->
-  <rect x="162" y="130" width="60" height="36" rx="4" fill="#0d3a2a" stroke="#66bb6a" stroke-width="1"/>
-  <text x="192" y="148" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7" fill="#a5d6a7">Next-Gen</text>
-  <text x="192" y="159" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7" fill="#a5d6a7">Sequencing</text>
-  <!-- ENCODE label -->
-  <text x="135" y="200" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#546e7a">ENCODE RBP binding signals</text>
+  <!-- ── eCLIP block ── -->
+  <rect x="10" y="56" width="238" height="128" rx="7" fill="#08172e" stroke="#1565c0" stroke-width="1.5"/>
+  <text x="129" y="73" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#4fc3f7">eCLIP-seq</text>
+  <text x="129" y="86" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#546e7a">enhanced CLIP + sequencing (ENCODE)</text>
 
-  <!-- Ribosome profiling block -->
-  <rect x="295" y="78" width="210" height="130" rx="8" fill="#0d1f3a" stroke="#6a1b9a" stroke-width="1.5"/>
-  <text x="400" y="97" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#ce93d8">Ribosome Profiling</text>
-  <text x="400" y="111" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#78909c">Ribo-seq · translational dynamics</text>
-  <!-- Ribosome diagram -->
-  <ellipse cx="355" cy="155" rx="28" ry="16" fill="#2d1a5c" stroke="#ce93d8" stroke-width="1.5"/>
-  <ellipse cx="355" cy="148" rx="20" ry="10" fill="#1e1040" stroke="#ce93d8" stroke-width="1"/>
-  <text x="355" y="153" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7" fill="#e1bee7">60S</text>
-  <text x="355" y="163" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7" fill="#e1bee7">40S</text>
-  <!-- mRNA line through ribosome -->
-  <line x1="310" y1="162" x2="395" y2="162" stroke="#ffca28" stroke-width="2.5" stroke-linecap="round"/>
-  <text x="400" y="166" text-anchor="start" font-family="system-ui,sans-serif" font-size="8" fill="#ffe082">mRNA</text>
-  <!-- Ribosome footprint -->
-  <rect x="390" y="130" width="98" height="52" rx="4" fill="#1a0d30" stroke="#9c27b0" stroke-width="1"/>
-  <text x="439" y="148" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" font-weight="600" fill="#ce93d8">Footprint reads</text>
-  <!-- mini bar chart -->
-  <rect x="400" y="162" width="6" height="12" fill="#9c27b0" opacity="0.8"/>
-  <rect x="410" y="157" width="6" height="17" fill="#9c27b0" opacity="0.8"/>
-  <rect x="420" y="153" width="6" height="21" fill="#7b1fa2"/>
-  <rect x="430" y="159" width="6" height="15" fill="#9c27b0" opacity="0.8"/>
-  <rect x="440" y="155" width="6" height="19" fill="#7b1fa2"/>
-  <rect x="450" y="161" width="6" height="13" fill="#9c27b0" opacity="0.8"/>
-  <rect x="460" y="158" width="6" height="16" fill="#9c27b0" opacity="0.8"/>
-  <text x="440" y="200" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#546e7a">Translation efficiency signals</text>
+  <!-- UV crosslink pill -->
+  <rect x="18" y="95" width="66" height="50" rx="5" fill="#0d2240" stroke="#ffca28" stroke-width="1.2"/>
+  <text x="51" y="113" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#ffca28" font-weight="700">UV</text>
+  <text x="51" y="124" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7.5" fill="#ffe082">Cross-</text>
+  <text x="51" y="135" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7.5" fill="#ffe082">linking</text>
 
-  <!-- Treatment response block -->
-  <rect x="560" y="78" width="210" height="130" rx="8" fill="#0d1f3a" stroke="#00695c" stroke-width="1.5"/>
-  <text x="665" y="97" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#80cbc4">Treatment Data</text>
-  <text x="665" y="111" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#78909c">drug-induced translational changes</text>
+  <!-- IP pill -->
+  <rect x="92" y="95" width="66" height="50" rx="5" fill="#102240" stroke="#4fc3f7" stroke-width="1"/>
+  <text x="125" y="113" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7.5" fill="#90caf9">Immuno-</text>
+  <text x="125" y="124" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7.5" fill="#90caf9">precipi-</text>
+  <text x="125" y="135" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7.5" fill="#90caf9">tation</text>
+
+  <!-- Seq pill -->
+  <rect x="166" y="95" width="74" height="50" rx="5" fill="#0a2218" stroke="#66bb6a" stroke-width="1"/>
+  <text x="203" y="113" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7.5" fill="#a5d6a7">CLIP-seq</text>
+  <text x="203" y="124" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7.5" fill="#a5d6a7">Next-Gen</text>
+  <text x="203" y="135" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7.5" fill="#a5d6a7">Seqn.</text>
+
+  <!-- arrow UV→IP, IP→seq -->
+  <line x1="84" y1="120" x2="92" y2="120" stroke="#4fc3f7" stroke-width="1" marker-end="url(#a0)"/>
+  <line x1="158" y1="120" x2="166" y2="120" stroke="#4fc3f7" stroke-width="1" marker-end="url(#a0)"/>
+
+  <text x="129" y="175" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#37474f">RBP binding peaks · ENCODE library</text>
+
+  <!-- ── Ribo-seq block ── -->
+  <rect x="282" y="56" width="238" height="128" rx="7" fill="#08172e" stroke="#6a1b9a" stroke-width="1.5"/>
+  <text x="401" y="73" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#ce93d8">Ribosome Profiling</text>
+  <text x="401" y="86" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#546e7a">Ribo-seq · translation efficiency</text>
+
+  <!-- ribosome circles -->
+  <ellipse cx="330" cy="133" rx="26" ry="14" fill="#2d1a5c" stroke="#ce93d8" stroke-width="1.3"/>
+  <ellipse cx="330" cy="126" rx="18" ry="9" fill="#1e1040" stroke="#ce93d8" stroke-width="1"/>
+  <text x="330" y="130" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7" fill="#e1bee7">60S</text>
+  <text x="330" y="140" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7" fill="#e1bee7">40S</text>
+  <!-- mRNA -->
+  <line x1="290" y1="140" x2="370" y2="140" stroke="#ffca28" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="370" y="145" text-anchor="start" font-family="system-ui,sans-serif" font-size="7.5" fill="#ffe082"> mRNA</text>
+
+  <!-- footprint bars -->
+  <g transform="translate(395,100)">
+    <rect x="0"  y="30" width="7" height="12" fill="#9c27b0" opacity="0.9"/>
+    <rect x="11" y="22" width="7" height="20" fill="#7b1fa2"/>
+    <rect x="22" y="15" width="7" height="27" fill="#9c27b0"/>
+    <rect x="33" y="20" width="7" height="22" fill="#7b1fa2"/>
+    <rect x="44" y="12" width="7" height="30" fill="#9c27b0"/>
+    <rect x="55" y="19" width="7" height="23" fill="#7b1fa2"/>
+    <rect x="66" y="24" width="7" height="18" fill="#9c27b0" opacity="0.9"/>
+    <line x1="0" y1="42" x2="78" y2="42" stroke="#37474f" stroke-width="0.8"/>
+    <text x="39" y="52" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7" fill="#78909c">footprint reads</text>
+  </g>
+  <text x="401" y="175" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#37474f">Translation efficiency per codon</text>
+
+  <!-- ── Treatment data block ── -->
+  <rect x="554" y="56" width="238" height="128" rx="7" fill="#08172e" stroke="#00695c" stroke-width="1.5"/>
+  <text x="673" y="73" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#80cbc4">Treatment Response</text>
+  <text x="673" y="86" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#546e7a">drug-induced translational changes</text>
   <!-- dose-response curve -->
-  <g transform="translate(580,120)">
-    <line x1="0" y1="60" x2="170" y2="60" stroke="#37474f" stroke-width="1"/>
-    <line x1="0" y1="0" x2="0" y2="60" stroke="#37474f" stroke-width="1"/>
-    <path d="M5,58 Q30,55 50,40 Q80,15 120,8 Q145,5 165,4" fill="none" stroke="#80cbc4" stroke-width="2" filter="url(#glow2)"/>
-    <text x="85" y="75" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7" fill="#546e7a">Drug concentration</text>
-    <text x="-10" y="30" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7" fill="#546e7a" transform="rotate(-90,-10,30)">TE</text>
+  <g transform="translate(572,92)">
+    <line x1="0" y1="60" x2="195" y2="60" stroke="#263238" stroke-width="1"/>
+    <line x1="0" y1="0" x2="0" y2="60" stroke="#263238" stroke-width="1"/>
+    <path d="M4,58 Q28,54 52,38 Q84,14 120,7 Q155,2 192,2" fill="none" stroke="#80cbc4" stroke-width="2" filter="url(#glow2)"/>
+    <text x="98" y="75" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7.5" fill="#37474f">Drug concentration</text>
+    <text x="-8" y="32" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7" fill="#37474f" transform="rotate(-90,-8,32)">TE change</text>
   </g>
 
-  <!-- ===== PIPELINE ROW 2: FEATURE ENGINEERING ===== -->
-  <rect x="30" y="240" width="740" height="70" rx="8" fill="#071422" stroke="#1565c0" stroke-width="1" opacity="0.9"/>
-  <text x="55" y="262" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#4fc3f7">FEATURE ENGINEERING</text>
+  <!-- ═══════════════════════════════════════════════
+       ROW 2 — FEATURE ENGINEERING
+  ═══════════════════════════════════════════════ -->
+  <!-- arrows row1 → row2 -->
+  <line x1="129" y1="184" x2="129" y2="210" stroke="#4fc3f7" stroke-width="1.2" marker-end="url(#a0)" stroke-dasharray="4,2"/>
+  <line x1="401" y1="184" x2="401" y2="210" stroke="#4fc3f7" stroke-width="1.2" marker-end="url(#a0)" stroke-dasharray="4,2"/>
+  <line x1="673" y1="184" x2="673" y2="210" stroke="#4fc3f7" stroke-width="1.2" marker-end="url(#a0)" stroke-dasharray="4,2"/>
 
-  <!-- Feature pills -->
-  <rect x="50" y="272" width="90" height="24" rx="4" fill="#1565c0" stroke="#4fc3f7" stroke-width="0.8"/>
-  <text x="95" y="288" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#e3f2fd">eCLIP binding peaks</text>
+  <rect x="10" y="210" width="782" height="58" rx="7" fill="#04101e" stroke="#1565c0" stroke-width="1.2"/>
+  <text x="22" y="227" font-family="system-ui,sans-serif" font-size="9.5" font-weight="700" fill="#4fc3f7">FEATURE ENGINEERING</text>
 
-  <rect x="150" y="272" width="85" height="24" rx="4" fill="#1565c0" stroke="#4fc3f7" stroke-width="0.8"/>
-  <text x="192" y="288" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#e3f2fd">Ribo-seq TE scores</text>
+  <!-- feature pills -->
+  <rect x="22"  y="234" width="96"  height="22" rx="4" fill="#1565c0" stroke="#4fc3f7" stroke-width="0.7"/>
+  <text x="70"  y="249" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#e3f2fd">eCLIP binding peaks</text>
+  <rect x="124" y="234" width="94"  height="22" rx="4" fill="#1565c0" stroke="#4fc3f7" stroke-width="0.7"/>
+  <text x="171" y="249" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#e3f2fd">Ribo-seq TE scores</text>
+  <rect x="224" y="234" width="94"  height="22" rx="4" fill="#1565c0" stroke="#4fc3f7" stroke-width="0.7"/>
+  <text x="271" y="249" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#e3f2fd">RBP motif features</text>
+  <rect x="324" y="234" width="82"  height="22" rx="4" fill="#1565c0" stroke="#4fc3f7" stroke-width="0.7"/>
+  <text x="365" y="249" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#e3f2fd">Codon usage</text>
+  <rect x="412" y="234" width="84"  height="22" rx="4" fill="#1565c0" stroke="#4fc3f7" stroke-width="0.7"/>
+  <text x="454" y="249" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#e3f2fd">mRNA structure</text>
+  <rect x="502" y="234" width="95"  height="22" rx="4" fill="#1565c0" stroke="#4fc3f7" stroke-width="0.7"/>
+  <text x="549" y="249" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#e3f2fd">Sequence context</text>
+  <rect x="603" y="234" width="115" height="22" rx="4" fill="#1565c0" stroke="#4fc3f7" stroke-width="0.7"/>
+  <text x="660" y="249" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#e3f2fd">Treatment response Δ</text>
+  <rect x="724" y="234" width="60"  height="22" rx="4" fill="#1565c0" stroke="#4fc3f7" stroke-width="0.7"/>
+  <text x="754" y="249" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#e3f2fd">+ more</text>
 
-  <rect x="245" y="272" width="95" height="24" rx="4" fill="#1565c0" stroke="#4fc3f7" stroke-width="0.8"/>
-  <text x="292" y="288" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#e3f2fd">RBP motif features</text>
-
-  <rect x="350" y="272" width="80" height="24" rx="4" fill="#1565c0" stroke="#4fc3f7" stroke-width="0.8"/>
-  <text x="390" y="288" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#e3f2fd">Codon usage</text>
-
-  <rect x="440" y="272" width="90" height="24" rx="4" fill="#1565c0" stroke="#4fc3f7" stroke-width="0.8"/>
-  <text x="485" y="288" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#e3f2fd">mRNA structure</text>
-
-  <rect x="540" y="272" width="95" height="24" rx="4" fill="#1565c0" stroke="#4fc3f7" stroke-width="0.8"/>
-  <text x="587" y="288" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#e3f2fd">Sequence context</text>
-
-  <rect x="645" y="272" width="110" height="24" rx="4" fill="#1565c0" stroke="#4fc3f7" stroke-width="0.8"/>
-  <text x="700" y="288" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#e3f2fd">Treatment response Δ</text>
-
-  <!-- Arrows row 1 → row 2 -->
-  <line x1="135" y1="208" x2="260" y2="240" stroke="#4fc3f7" stroke-width="1.2" marker-end="url(#arr)" stroke-dasharray="4,2"/>
-  <line x1="400" y1="208" x2="400" y2="240" stroke="#4fc3f7" stroke-width="1.2" marker-end="url(#arr)" stroke-dasharray="4,2"/>
-  <line x1="665" y1="208" x2="555" y2="240" stroke="#4fc3f7" stroke-width="1.2" marker-end="url(#arr)" stroke-dasharray="4,2"/>
-
-  <!-- ===== PIPELINE ROW 3: MODELS ===== -->
-  <text x="400" y="345" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#546e7a" letter-spacing="2">ML MODELS</text>
-
-  <!-- Arrow feature eng → models -->
-  <line x1="400" y1="310" x2="400" y2="350" stroke="#4fc3f7" stroke-width="1.5" marker-end="url(#arr)"/>
+  <!-- ═══════════════════════════════════════════════
+       ROW 3 — ML MODELS
+  ═══════════════════════════════════════════════ -->
+  <!-- arrow feat → models -->
+  <line x1="401" y1="268" x2="401" y2="288" stroke="#4fc3f7" stroke-width="1.2" marker-end="url(#a0)"/>
+  <text x="400" y="284" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8.5" fill="#37474f" letter-spacing="2">ML MODELS</text>
 
   <!-- XGBoost -->
-  <rect x="50" y="355" width="140" height="60" rx="7" fill="#7b1f00" stroke="#ff7043" stroke-width="1.5"/>
-  <text x="120" y="378" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#ffccbc">XGBoost</text>
-  <text x="120" y="394" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#ff8a65">Gradient Boosted Trees</text>
-  <text x="120" y="407" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#ff8a65">primary classifier</text>
+  <rect x="10"  y="296" width="148" height="66" rx="7" fill="#4e1500" stroke="#ff7043" stroke-width="1.5"/>
+  <text x="84"  y="317" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="700" fill="#ffccbc">XGBoost</text>
+  <text x="84"  y="332" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#ff8a65">Gradient Boosted Trees</text>
+  <text x="84"  y="346" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#ff8a65">primary classifier</text>
+  <!-- mini tree hint -->
+  <line x1="84" y1="349" x2="84" y2="356" stroke="#ff7043" stroke-width="0.8" opacity="0.5"/>
+  <text x="84" y="357" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7" fill="#bf360c" opacity="0.7">▲▲▲</text>
 
   <!-- Random Forest -->
-  <rect x="210" y="355" width="140" height="60" rx="7" fill="#1b4020" stroke="#66bb6a" stroke-width="1.5"/>
-  <text x="280" y="378" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#c8e6c9">Random Forest</text>
-  <text x="280" y="394" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#a5d6a7">ensemble baseline</text>
-  <text x="280" y="407" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#a5d6a7">feature importance</text>
+  <rect x="168" y="296" width="148" height="66" rx="7" fill="#0d2a12" stroke="#66bb6a" stroke-width="1.5"/>
+  <text x="242" y="316" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#c8e6c9">Random Forest</text>
+  <text x="242" y="330" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#a5d6a7">ensemble baseline</text>
+  <text x="242" y="344" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#a5d6a7">feature importance</text>
+  <text x="242" y="357" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#2e7d32" opacity="0.7">🌲🌲🌲</text>
 
-  <!-- Deep / Neural -->
-  <rect x="370" y="355" width="140" height="60" rx="7" fill="#1a237e" stroke="#7986cb" stroke-width="1.5"/>
-  <text x="440" y="375" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#c5cae9">Neural Network</text>
-  <text x="440" y="390" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#9fa8da">sequence-aware</text>
-  <text x="440" y="403" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#9fa8da">binding site model</text>
+  <!-- Neural Network -->
+  <rect x="326" y="296" width="148" height="66" rx="7" fill="#0d1a6e" stroke="#7986cb" stroke-width="1.5"/>
+  <text x="400" y="316" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#c5cae9">Neural Network</text>
+  <text x="400" y="330" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#9fa8da">sequence-aware</text>
+  <text x="400" y="344" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#9fa8da">binding site model</text>
+  <!-- mini NN dots -->
+  <circle cx="366" cy="356" r="3" fill="#3949ab" opacity="0.8"/>
+  <circle cx="380" cy="356" r="3" fill="#3949ab" opacity="0.8"/>
+  <circle cx="394" cy="356" r="3" fill="#5c6bc0" opacity="0.8"/>
+  <circle cx="408" cy="356" r="3" fill="#3949ab" opacity="0.8"/>
+  <circle cx="422" cy="356" r="3" fill="#3949ab" opacity="0.8"/>
+  <line x1="369" y1="356" x2="377" y2="356" stroke="#7986cb" stroke-width="0.7" opacity="0.5"/>
+  <line x1="383" y1="356" x2="391" y2="356" stroke="#7986cb" stroke-width="0.7" opacity="0.5"/>
+  <line x1="397" y1="356" x2="405" y2="356" stroke="#7986cb" stroke-width="0.7" opacity="0.5"/>
+  <line x1="411" y1="356" x2="419" y2="356" stroke="#7986cb" stroke-width="0.7" opacity="0.5"/>
 
   <!-- SHAP -->
-  <rect x="530" y="355" width="115" height="60" rx="7" fill="#4a148c" stroke="#ce93d8" stroke-width="1.5"/>
-  <text x="587" y="378" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#e1bee7">SHAP</text>
-  <text x="587" y="394" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#ce93d8">feature attribution</text>
-  <text x="587" y="407" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#ce93d8">interpretability</text>
+  <rect x="484" y="296" width="148" height="66" rx="7" fill="#2e004a" stroke="#ce93d8" stroke-width="1.5"/>
+  <text x="558" y="317" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="700" fill="#e1bee7">SHAP</text>
+  <text x="558" y="332" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#ce93d8">feature attribution</text>
+  <text x="558" y="346" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#ce93d8">interpretability</text>
+  <!-- SHAP bar chart mini -->
+  <rect x="518" y="350" width="20" height="6" fill="#9c27b0" opacity="0.7"/>
+  <rect x="518" y="358" width="14" height="6" fill="#7b1fa2" opacity="0.7"/>
+  <rect x="518" y="366" width="26" height="6" fill="#9c27b0" opacity="0.7"/>
+  <text x="548" y="356" font-family="system-ui,sans-serif" font-size="6.5" fill="#9e9e9e">feat A</text>
+  <text x="548" y="364" font-family="system-ui,sans-serif" font-size="6.5" fill="#9e9e9e">feat B</text>
+  <text x="548" y="372" font-family="system-ui,sans-serif" font-size="6.5" fill="#9e9e9e">feat C</text>
 
-  <!-- Output badge -->
-  <rect x="660" y="355" width="110" height="60" rx="7" fill="#0d3a28" stroke="#26a69a" stroke-width="1.5"/>
-  <text x="715" y="375" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#80cbc4">Predicted TE</text>
-  <text x="715" y="389" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#4db6ac">drug-induced</text>
-  <text x="715" y="401" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#4db6ac">translational Δ</text>
-  <text x="715" y="413" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7" fill="#546e7a">per RBP target</text>
+  <!-- Output -->
+  <rect x="642" y="296" width="150" height="66" rx="7" fill="#063026" stroke="#26a69a" stroke-width="1.8"/>
+  <text x="717" y="316" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#80cbc4">Predicted TE Δ</text>
+  <text x="717" y="330" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#4db6ac">drug-induced</text>
+  <text x="717" y="343" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#4db6ac">translational change</text>
+  <text x="717" y="356" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#37474f">per RBP binding target</text>
 
-  <!-- Arrows feature eng → each model (fan out) -->
-  <line x1="200" y1="310" x2="120" y2="355" stroke="#4fc3f7" stroke-width="1" marker-end="url(#arr)" stroke-dasharray="3,2" opacity="0.6"/>
-  <line x1="310" y1="310" x2="280" y2="355" stroke="#4fc3f7" stroke-width="1" marker-end="url(#arr)" stroke-dasharray="3,2" opacity="0.6"/>
-  <line x1="490" y1="310" x2="587" y2="355" stroke="#4fc3f7" stroke-width="1" marker-end="url(#arr)" stroke-dasharray="3,2" opacity="0.6"/>
-  <line x1="600" y1="310" x2="690" y2="355" stroke="#4fc3f7" stroke-width="1" marker-end="url(#arr)" stroke-dasharray="3,2" opacity="0.6"/>
+  <!-- fan-out arrows from feature row to models -->
+  <line x1="200" y1="268" x2="84"  y2="296" stroke="#4fc3f7" stroke-width="0.9" marker-end="url(#a0)" stroke-dasharray="3,2" opacity="0.6"/>
+  <line x1="310" y1="268" x2="242" y2="296" stroke="#4fc3f7" stroke-width="0.9" marker-end="url(#a0)" stroke-dasharray="3,2" opacity="0.6"/>
+  <line x1="490" y1="268" x2="558" y2="296" stroke="#4fc3f7" stroke-width="0.9" marker-end="url(#a0)" stroke-dasharray="3,2" opacity="0.6"/>
+  <line x1="620" y1="268" x2="690" y2="296" stroke="#4fc3f7" stroke-width="0.9" marker-end="url(#a0)" stroke-dasharray="3,2" opacity="0.6"/>
 
-  <!-- ===== FOOTER ===== -->
-  <text x="400" y="452" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#37474f">UV Crosslinking → Immunoprecipitation → CLIP-seq → Feature Matrix → XGBoost / RF / NN → SHAP Interpretability → Translation Efficiency Forecasting</text>
-
-  <!-- Labels on blocks -->
-  <text x="30" y="75" font-family="system-ui,sans-serif" font-size="9" fill="#4fc3f7" font-weight="700">①</text>
-  <text x="295" y="75" font-family="system-ui,sans-serif" font-size="9" fill="#ce93d8" font-weight="700">②</text>
-  <text x="560" y="75" font-family="system-ui,sans-serif" font-size="9" fill="#80cbc4" font-weight="700">③</text>
-  <text x="30" y="238" font-family="system-ui,sans-serif" font-size="9" fill="#4fc3f7" font-weight="700">④</text>
-  <text x="30" y="353" font-family="system-ui,sans-serif" font-size="9" fill="#4fc3f7" font-weight="700">⑤</text>
+  <!-- ── bottom footer ── -->
+  <rect x="0" y="388" width="800" height="32" fill="#04101c"/>
+  <text x="400" y="408" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#37474f">
+    UV Crosslinking → Immunoprecipitation → CLIP-seq  ·  Ribo-seq Footprinting → Feature Matrix → XGBoost / RF / NN → SHAP → Translation Efficiency Forecast
+  </text>
 </svg>

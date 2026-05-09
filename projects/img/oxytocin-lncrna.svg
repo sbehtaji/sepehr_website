@@ -1,189 +1,166 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" width="800" height="420">
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#0a1628;stop-opacity:1"/>
-      <stop offset="100%" style="stop-color:#0d2044;stop-opacity:1"/>
+      <stop offset="0%" style="stop-color:#07111f"/>
+      <stop offset="100%" style="stop-color:#0b1d38"/>
     </linearGradient>
     <linearGradient id="cellGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#1a3a5c;stop-opacity:1"/>
-      <stop offset="100%" style="stop-color:#0f2840;stop-opacity:1"/>
+      <stop offset="0%" style="stop-color:#162f4e"/>
+      <stop offset="100%" style="stop-color:#0e2238"/>
     </linearGradient>
     <linearGradient id="geneGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#1565c0;stop-opacity:1"/>
-      <stop offset="100%" style="stop-color:#0d47a1;stop-opacity:1"/>
+      <stop offset="0%" style="stop-color:#1565c0"/>
+      <stop offset="100%" style="stop-color:#0d47a1"/>
     </linearGradient>
     <linearGradient id="lncGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#c62828;stop-opacity:1"/>
-      <stop offset="100%" style="stop-color:#b71c1c;stop-opacity:1"/>
+      <stop offset="0%" style="stop-color:#b71c1c"/>
+      <stop offset="100%" style="stop-color:#8b0000"/>
     </linearGradient>
     <filter id="glow">
-      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
-    <filter id="softglow">
-      <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
-      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-      <path d="M0,0 L0,6 L8,3 z" fill="#4fc3f7"/>
+    <marker id="arr" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#4fc3f7"/>
     </marker>
-    <marker id="arrow-red" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-      <path d="M0,0 L0,6 L8,3 z" fill="#ef5350"/>
+    <marker id="arr-red" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#ef5350"/>
     </marker>
   </defs>
 
   <!-- Background -->
-  <rect width="800" height="500" fill="url(#bg)"/>
+  <rect width="800" height="420" fill="url(#bg)"/>
 
   <!-- Subtle grid -->
-  <g opacity="0.04" stroke="#4fc3f7" stroke-width="0.5">
-    <line x1="0" y1="100" x2="800" y2="100"/><line x1="0" y1="200" x2="800" y2="200"/>
-    <line x1="0" y1="300" x2="800" y2="300"/><line x1="0" y1="400" x2="800" y2="400"/>
-    <line x1="100" y1="0" x2="100" y2="500"/><line x1="200" y1="0" x2="200" y2="500"/>
-    <line x1="300" y1="0" x2="300" y2="500"/><line x1="400" y1="0" x2="400" y2="500"/>
-    <line x1="500" y1="0" x2="500" y2="500"/><line x1="600" y1="0" x2="600" y2="500"/>
-    <line x1="700" y1="0" x2="700" y2="500"/>
+  <g opacity="0.05" stroke="#4fc3f7" stroke-width="0.5">
+    <line x1="0" y1="84" x2="800" y2="84"/><line x1="0" y1="168" x2="800" y2="168"/>
+    <line x1="0" y1="252" x2="800" y2="252"/><line x1="0" y1="336" x2="800" y2="336"/>
+    <line x1="160" y1="0" x2="160" y2="420"/><line x1="320" y1="0" x2="320" y2="420"/>
+    <line x1="480" y1="0" x2="480" y2="420"/><line x1="640" y1="0" x2="640" y2="420"/>
   </g>
 
-  <!-- Title -->
-  <text x="400" y="38" text-anchor="middle" font-family="system-ui,sans-serif" font-size="16" font-weight="700" fill="#90caf9" letter-spacing="1">OXYTOCIN PATHWAY · lncRNA EXPRESSION IN BREAST CANCER</text>
-  <line x1="80" y1="48" x2="720" y2="48" stroke="#1565c0" stroke-width="1" opacity="0.6"/>
+  <!-- ── TITLE BAR ── -->
+  <rect x="0" y="0" width="800" height="32" fill="#05101d"/>
+  <text x="400" y="21" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="700" fill="#90caf9" letter-spacing="1.2">OXYTOCIN PATHWAY · lncRNA EXPRESSION IN BREAST CANCER</text>
 
-  <!-- === CELL (left side) === -->
-  <!-- Cell membrane -->
-  <ellipse cx="155" cy="270" rx="110" ry="130" fill="url(#cellGrad)" stroke="#1565c0" stroke-width="2" opacity="0.9"/>
-  <!-- Nucleus -->
-  <ellipse cx="155" cy="280" rx="60" ry="68" fill="#0a1e38" stroke="#4fc3f7" stroke-width="1.5" stroke-dasharray="4,3"/>
-  <!-- DNA strands in nucleus -->
-  <path d="M128,258 Q143,270 128,282 Q143,294 128,306" fill="none" stroke="#4fc3f7" stroke-width="1.5" opacity="0.7"/>
-  <path d="M182,258 Q167,270 182,282 Q167,294 182,306" fill="none" stroke="#4fc3f7" stroke-width="1.5" opacity="0.7"/>
-  <line x1="130" y1="262" x2="180" y2="262" stroke="#4fc3f7" stroke-width="0.8" opacity="0.4"/>
-  <line x1="127" y1="270" x2="183" y2="270" stroke="#4fc3f7" stroke-width="0.8" opacity="0.4"/>
-  <line x1="130" y1="278" x2="180" y2="278" stroke="#4fc3f7" stroke-width="0.8" opacity="0.4"/>
-  <line x1="127" y1="286" x2="183" y2="286" stroke="#4fc3f7" stroke-width="0.8" opacity="0.4"/>
-  <line x1="130" y1="294" x2="180" y2="294" stroke="#4fc3f7" stroke-width="0.8" opacity="0.4"/>
-  <line x1="130" y1="302" x2="178" y2="302" stroke="#4fc3f7" stroke-width="0.8" opacity="0.4"/>
-  <!-- Nucleus label -->
-  <text x="155" y="248" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#4fc3f7" opacity="0.8">NUCLEUS</text>
-  <!-- Cell label -->
-  <text x="155" y="162" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#90caf9" font-weight="600">Breast Epithelial Cell</text>
-  <text x="155" y="176" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#64b5f6" opacity="0.8">IDC Tumour vs Normal</text>
-  <!-- OXTR receptor on membrane -->
-  <rect x="58" y="252" width="14" height="36" rx="3" fill="#1565c0" stroke="#4fc3f7" stroke-width="1"/>
-  <text x="40" y="265" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#4fc3f7">OXTR</text>
-  <text x="40" y="275" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7" fill="#64b5f6">receptor</text>
+  <!-- ── LEFT: Breast Cell ── -->
+  <ellipse cx="118" cy="215" rx="95" ry="110" fill="url(#cellGrad)" stroke="#1565c0" stroke-width="1.8" opacity="0.95"/>
+  <!-- nucleus -->
+  <ellipse cx="118" cy="222" rx="50" ry="58" fill="#081929" stroke="#4fc3f7" stroke-width="1.2" stroke-dasharray="4,3"/>
+  <!-- DNA rungs -->
+  <path d="M96,200 Q108,212 96,224 Q108,236 96,248" fill="none" stroke="#4fc3f7" stroke-width="1.3" opacity="0.7"/>
+  <path d="M140,200 Q128,212 140,224 Q128,236 140,248" fill="none" stroke="#4fc3f7" stroke-width="1.3" opacity="0.7"/>
+  <line x1="98" y1="204" x2="138" y2="204" stroke="#4fc3f7" stroke-width="0.7" opacity="0.35"/>
+  <line x1="96" y1="212" x2="140" y2="212" stroke="#4fc3f7" stroke-width="0.7" opacity="0.35"/>
+  <line x1="98" y1="220" x2="138" y2="220" stroke="#4fc3f7" stroke-width="0.7" opacity="0.35"/>
+  <line x1="96" y1="228" x2="140" y2="228" stroke="#4fc3f7" stroke-width="0.7" opacity="0.35"/>
+  <line x1="98" y1="236" x2="138" y2="236" stroke="#4fc3f7" stroke-width="0.7" opacity="0.35"/>
+  <line x1="98" y1="244" x2="138" y2="244" stroke="#4fc3f7" stroke-width="0.7" opacity="0.35"/>
+  <text x="118" y="196" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#4fc3f7" opacity="0.8">NUCLEUS</text>
+  <!-- cell labels -->
+  <text x="118" y="128" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#90caf9" font-weight="700">Breast Epithelial Cell</text>
+  <text x="118" y="143" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8.5" fill="#64b5f6">IDC Tumour vs Normal · n=70</text>
+  <!-- OXTR receptor on membrane left -->
+  <rect x="27" y="198" width="12" height="30" rx="3" fill="#1565c0" stroke="#4fc3f7" stroke-width="1"/>
+  <text x="24" y="196" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7.5" fill="#4fc3f7">OXTR</text>
+  <!-- RT-qPCR label -->
+  <text x="118" y="322" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#4fc3f7">RT-qPCR validation</text>
 
-  <!-- === OXYTOCIN molecule (top-left) === -->
-  <circle cx="42" cy="155" r="22" fill="#0d2a4a" stroke="#4fc3f7" stroke-width="1.5" filter="url(#glow)"/>
-  <text x="42" y="151" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" font-weight="700" fill="#e3f2fd">OXY-</text>
-  <text x="42" y="163" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" font-weight="700" fill="#e3f2fd">TOCIN</text>
-  <!-- Arrow from OXT to receptor -->
-  <path d="M55,170 Q62,210 65,252" fill="none" stroke="#4fc3f7" stroke-width="1.5" marker-end="url(#arrow)" stroke-dasharray="4,2"/>
+  <!-- OXT molecule -->
+  <circle cx="34" cy="100" r="20" fill="#0b2240" stroke="#4fc3f7" stroke-width="1.4" filter="url(#glow)"/>
+  <text x="34" y="97" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7.5" font-weight="700" fill="#e3f2fd">OXY-</text>
+  <text x="34" y="108" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7.5" font-weight="700" fill="#e3f2fd">TOCIN</text>
+  <path d="M46,116 Q50,155 37,198" fill="none" stroke="#4fc3f7" stroke-width="1.3" marker-end="url(#arr)" stroke-dasharray="4,2"/>
 
-  <!-- === SIGNALLING CASCADE (center) === -->
-  <!-- Central hub label -->
-  <text x="310" y="72" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#ffca28">OXYTOCIN SIGNALLING CASCADE</text>
+  <!-- ── CENTER: Ca2+ hub ── -->
+  <text x="270" y="52" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#ffca28">OXYTOCIN SIGNALLING CASCADE</text>
+  <circle cx="270" cy="175" r="30" fill="#0b2240" stroke="#ffca28" stroke-width="2" filter="url(#glow)"/>
+  <text x="270" y="171" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="700" fill="#ffca28">Ca²⁺</text>
+  <text x="270" y="185" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#ffe082">signal</text>
+  <!-- arrow cell → Ca2+ -->
+  <path d="M213,215 Q238,195 240,178" fill="none" stroke="#4fc3f7" stroke-width="1.5" marker-end="url(#arr)"/>
 
-  <!-- Ca2+ signal -->
-  <circle cx="310" cy="140" r="28" fill="#0d2a4a" stroke="#ffca28" stroke-width="2" filter="url(#glow)"/>
-  <text x="310" y="136" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#ffca28">Ca²⁺</text>
-  <text x="310" y="152" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#ffe082">signal</text>
-
-  <!-- Arrow from OXTR to Ca2+ -->
-  <path d="M72,270 Q180,270 282,152" fill="none" stroke="#4fc3f7" stroke-width="1.5" marker-end="url(#arrow)"/>
-
-  <!-- TARGET GENES (right of center) -->
+  <!-- ── TARGET GENES ── -->
+  <text x="390" y="52" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9.5" fill="#90caf9" font-weight="600">Target Genes</text>
   <!-- ITPR1 -->
-  <rect x="370" y="100" width="72" height="28" rx="5" fill="url(#geneGrad)" stroke="#64b5f6" stroke-width="1.2"/>
-  <text x="406" y="119" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#e3f2fd">ITPR1</text>
-  <line x1="338" y1="135" x2="370" y2="118" stroke="#4fc3f7" stroke-width="1.2" marker-end="url(#arrow)"/>
-
+  <rect x="340" y="60" width="100" height="24" rx="5" fill="url(#geneGrad)" stroke="#64b5f6" stroke-width="1.1"/>
+  <text x="390" y="77" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#e3f2fd">ITPR1</text>
+  <line x1="295" y1="162" x2="340" y2="72" stroke="#4fc3f7" stroke-width="1.1" marker-end="url(#arr)"/>
   <!-- CAMK2D -->
-  <rect x="370" y="148" width="72" height="28" rx="5" fill="url(#geneGrad)" stroke="#64b5f6" stroke-width="1.2"/>
-  <text x="406" y="167" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#e3f2fd">CAMK2D</text>
-  <line x1="338" y1="145" x2="370" y2="160" stroke="#4fc3f7" stroke-width="1.2" marker-end="url(#arrow)"/>
-
+  <rect x="340" y="100" width="100" height="24" rx="5" fill="url(#geneGrad)" stroke="#64b5f6" stroke-width="1.1"/>
+  <text x="390" y="117" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#e3f2fd">CAMK2D</text>
+  <line x1="295" y1="168" x2="340" y2="112" stroke="#4fc3f7" stroke-width="1.1" marker-end="url(#arr)"/>
   <!-- RCAN1 -->
-  <rect x="370" y="196" width="72" height="28" rx="5" fill="url(#geneGrad)" stroke="#64b5f6" stroke-width="1.2"/>
-  <text x="406" y="215" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#e3f2fd">RCAN1</text>
-  <line x1="338" y1="153" x2="370" y2="207" stroke="#4fc3f7" stroke-width="1.2" marker-end="url(#arrow)"/>
-
+  <rect x="340" y="140" width="100" height="24" rx="5" fill="url(#geneGrad)" stroke="#64b5f6" stroke-width="1.1"/>
+  <text x="390" y="157" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#e3f2fd">RCAN1</text>
+  <line x1="296" y1="175" x2="340" y2="152" stroke="#4fc3f7" stroke-width="1.1" marker-end="url(#arr)"/>
   <!-- FOS -->
-  <rect x="370" y="244" width="72" height="28" rx="5" fill="url(#geneGrad)" stroke="#64b5f6" stroke-width="1.2"/>
-  <text x="406" y="263" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#e3f2fd">FOS</text>
-  <line x1="338" y1="155" x2="370" y2="255" stroke="#4fc3f7" stroke-width="1.2" marker-end="url(#arrow)"/>
-
+  <rect x="340" y="180" width="100" height="24" rx="5" fill="url(#geneGrad)" stroke="#64b5f6" stroke-width="1.1"/>
+  <text x="390" y="197" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#e3f2fd">FOS</text>
+  <line x1="296" y1="181" x2="340" y2="191" stroke="#4fc3f7" stroke-width="1.1" marker-end="url(#arr)"/>
   <!-- CACNA2D1 -->
-  <rect x="370" y="292" width="82" height="28" rx="5" fill="url(#geneGrad)" stroke="#64b5f6" stroke-width="1.2"/>
-  <text x="411" y="311" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#e3f2fd">CACNA2D1</text>
-  <line x1="338" y1="158" x2="370" y2="303" stroke="#4fc3f7" stroke-width="1.2" marker-end="url(#arrow)"/>
+  <rect x="340" y="220" width="100" height="24" rx="5" fill="url(#geneGrad)" stroke="#64b5f6" stroke-width="1.1"/>
+  <text x="390" y="237" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#e3f2fd">CACNA2D1</text>
+  <line x1="293" y1="188" x2="340" y2="229" stroke="#4fc3f7" stroke-width="1.1" marker-end="url(#arr)"/>
+  <!-- OXTR -->
+  <rect x="340" y="260" width="100" height="24" rx="5" fill="url(#geneGrad)" stroke="#64b5f6" stroke-width="1.1"/>
+  <text x="390" y="277" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#e3f2fd">OXTR</text>
+  <line x1="290" y1="193" x2="340" y2="269" stroke="#4fc3f7" stroke-width="1.1" marker-end="url(#arr)"/>
 
-  <!-- OXTR (gene) -->
-  <rect x="370" y="340" width="72" height="28" rx="5" fill="url(#geneGrad)" stroke="#64b5f6" stroke-width="1.2"/>
-  <text x="406" y="359" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#e3f2fd">OXTR</text>
-  <line x1="338" y1="160" x2="370" y2="351" stroke="#4fc3f7" stroke-width="1.2" marker-end="url(#arrow)"/>
-
-  <!-- Target genes label -->
-  <text x="406" y="92" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#90caf9" font-weight="600">Target Genes</text>
-
-  <!-- === lncRNAs (far right) === -->
-  <text x="620" y="92" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#ef9a9a" font-weight="600">Oxytocin-pathway lncRNAs</text>
-
+  <!-- ── lncRNAs ── -->
+  <text x="610" y="52" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9.5" fill="#ef9a9a" font-weight="600">Oxytocin-pathway lncRNAs</text>
   <!-- LincMTX2 -->
-  <rect x="558" y="100" width="120" height="28" rx="5" fill="url(#lncGrad)" stroke="#ef9a9a" stroke-width="1.2"/>
-  <text x="618" y="119" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#fce4ec">LincMTX2 (LINC01116)</text>
-  <line x1="452" y1="114" x2="558" y2="114" stroke="#ef5350" stroke-width="1.2" stroke-dasharray="5,3" marker-end="url(#arrow-red)"/>
-
+  <rect x="460" y="60" width="280" height="24" rx="5" fill="url(#lncGrad)" stroke="#ef9a9a" stroke-width="1.1"/>
+  <text x="600" y="77" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#fce4ec">LincMTX2 · LINC01116 / TALNEC2</text>
+  <line x1="440" y1="72" x2="460" y2="72" stroke="#ef5350" stroke-width="1.1" stroke-dasharray="4,2" marker-end="url(#arr-red)"/>
   <!-- LincTNS1 -->
-  <rect x="558" y="155" width="120" height="28" rx="5" fill="url(#lncGrad)" stroke="#ef9a9a" stroke-width="1.2"/>
-  <text x="618" y="174" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#fce4ec">LincTNS1 (DIRC3)</text>
-  <line x1="452" y1="162" x2="558" y2="167" stroke="#ef5350" stroke-width="1.2" stroke-dasharray="5,3" marker-end="url(#arrow-red)"/>
-
+  <rect x="460" y="112" width="280" height="24" rx="5" fill="url(#lncGrad)" stroke="#ef9a9a" stroke-width="1.1"/>
+  <text x="600" y="129" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#fce4ec">LincTNS1 · DIRC3</text>
+  <line x1="440" y1="124" x2="460" y2="124" stroke="#ef5350" stroke-width="1.1" stroke-dasharray="4,2" marker-end="url(#arr-red)"/>
   <!-- LincZFP161 -->
-  <rect x="558" y="210" width="120" height="28" rx="5" fill="url(#lncGrad)" stroke="#ef9a9a" stroke-width="1.2"/>
-  <text x="618" y="229" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#fce4ec">LincZFP161 (LINC00667)</text>
-  <line x1="452" y1="210" x2="558" y2="222" stroke="#ef5350" stroke-width="1.2" stroke-dasharray="5,3" marker-end="url(#arrow-red)"/>
-
+  <rect x="460" y="164" width="280" height="24" rx="5" fill="url(#lncGrad)" stroke="#ef9a9a" stroke-width="1.1"/>
+  <text x="600" y="181" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#fce4ec">LincZFP161 · LINC00667</text>
+  <line x1="440" y1="176" x2="460" y2="176" stroke="#ef5350" stroke-width="1.1" stroke-dasharray="4,2" marker-end="url(#arr-red)"/>
   <!-- LincFOXF1 -->
-  <rect x="558" y="265" width="120" height="28" rx="5" fill="url(#lncGrad)" stroke="#ef9a9a" stroke-width="1.2"/>
-  <text x="618" y="284" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#fce4ec">LincFOXF1 (FENDRR)</text>
-  <line x1="452" y1="258" x2="558" y2="277" stroke="#ef5350" stroke-width="1.2" stroke-dasharray="5,3" marker-end="url(#arrow-red)"/>
+  <rect x="460" y="216" width="280" height="24" rx="5" fill="url(#lncGrad)" stroke="#ef9a9a" stroke-width="1.1"/>
+  <text x="600" y="233" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#fce4ec">LincFOXF1 · FENDRR</text>
+  <line x1="440" y1="228" x2="460" y2="228" stroke="#ef5350" stroke-width="1.1" stroke-dasharray="4,2" marker-end="url(#arr-red)"/>
 
-  <!-- === ROC/AUC panel (bottom) === -->
-  <rect x="80" y="420" width="640" height="62" rx="8" fill="#071220" stroke="#1565c0" stroke-width="1" opacity="0.9"/>
+  <!-- ── BOTTOM ROC PANEL ── -->
+  <rect x="0" y="340" width="800" height="80" fill="#04101c"/>
+  <line x1="0" y1="340" x2="800" y2="340" stroke="#1565c0" stroke-width="1"/>
 
-  <!-- Mini ROC curve -->
-  <g transform="translate(100, 428)">
-    <line x1="0" y1="44" x2="50" y2="44" stroke="#37474f" stroke-width="1"/>
-    <line x1="0" y1="0" x2="0" y2="44" stroke="#37474f" stroke-width="1"/>
-    <!-- diagonal reference -->
-    <line x1="0" y1="44" x2="50" y2="0" stroke="#546e7a" stroke-width="0.8" stroke-dasharray="2,2"/>
-    <!-- ROC curves -->
-    <path d="M0,44 Q8,20 18,8 Q30,2 50,0" fill="none" stroke="#4fc3f7" stroke-width="2" filter="url(#glow)"/>
-    <path d="M0,44 Q12,26 22,12 Q34,4 50,0" fill="none" stroke="#ef5350" stroke-width="1.5"/>
-    <path d="M0,44 Q14,28 26,16 Q38,6 50,0" fill="none" stroke="#66bb6a" stroke-width="1.5"/>
-    <text x="25" y="54" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7" fill="#78909c">1-Specificity</text>
+  <!-- mini ROC chart -->
+  <g transform="translate(16,350)">
+    <line x1="0" y1="52" x2="60" y2="52" stroke="#263238" stroke-width="1"/>
+    <line x1="0" y1="0" x2="0" y2="52" stroke="#263238" stroke-width="1"/>
+    <line x1="0" y1="52" x2="60" y2="0" stroke="#37474f" stroke-width="0.8" stroke-dasharray="2,2"/>
+    <path d="M0,52 Q9,24 20,9 Q34,2 60,0" fill="none" stroke="#4fc3f7" stroke-width="2" filter="url(#glow)"/>
+    <path d="M0,52 Q13,28 24,13 Q38,4 60,0" fill="none" stroke="#ef5350" stroke-width="1.5"/>
+    <path d="M0,52 Q15,30 28,17 Q42,7 60,0" fill="none" stroke="#66bb6a" stroke-width="1.5"/>
   </g>
 
-  <!-- AUC metrics -->
-  <text x="200" y="443" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#90caf9">ROC / AUC Analysis · 10-fold Cross-Validation</text>
-  <text x="200" y="457" font-family="system-ui,sans-serif" font-size="9" fill="#4fc3f7">Bayesian GLM</text>
-  <text x="200" y="470" font-family="system-ui,sans-serif" font-size="9" fill="#ef5350">GLM</text>
-  <text x="200" y="483" font-family="system-ui,sans-serif" font-size="9" fill="#66bb6a">LDA</text>
-  <text x="320" y="448" font-family="system-ui,sans-serif" font-size="9" fill="#78909c">log₂(transcript values) as features</text>
+  <!-- legend + labels -->
+  <text x="90" y="362" font-family="system-ui,sans-serif" font-size="10" font-weight="700" fill="#90caf9">ROC / AUC Analysis · 10-fold Cross-Validation</text>
+  <text x="90" y="377" font-family="system-ui,sans-serif" font-size="8.5" fill="#4fc3f7">● Bayesian GLM</text>
+  <text x="170" y="377" font-family="system-ui,sans-serif" font-size="8.5" fill="#ef5350">● GLM</text>
+  <text x="210" y="377" font-family="system-ui,sans-serif" font-size="8.5" fill="#66bb6a">● LDA</text>
+  <text x="90" y="392" font-family="system-ui,sans-serif" font-size="8" fill="#546e7a">log₂(transcript values) · 10 genes (6 target + 4 lncRNA)</text>
 
   <!-- AUC badge -->
-  <rect x="490" y="430" width="110" height="42" rx="6" fill="#0d47a1" stroke="#4fc3f7" stroke-width="1.5"/>
-  <text x="545" y="448" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#90caf9">Combined AUC</text>
-  <text x="545" y="465" text-anchor="middle" font-family="system-ui,sans-serif" font-size="18" font-weight="700" fill="#4fc3f7" filter="url(#glow)">0.75</text>
+  <rect x="390" y="348" width="130" height="60" rx="7" fill="#0d47a1" stroke="#4fc3f7" stroke-width="1.5"/>
+  <text x="455" y="367" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#90caf9">Combined AUC</text>
+  <text x="455" y="392" text-anchor="middle" font-family="system-ui,sans-serif" font-size="24" font-weight="700" fill="#4fc3f7" filter="url(#glow)">0.75</text>
 
-  <!-- Sensitivity/Specificity -->
-  <rect x="610" y="430" width="98" height="42" rx="6" fill="#0a1e38" stroke="#1565c0" stroke-width="1"/>
-  <text x="659" y="444" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#90caf9">Sensitivity 0.72</text>
-  <text x="659" y="458" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#90caf9">Specificity 0.71</text>
-  <text x="659" y="469" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7" fill="#546e7a">n = 70 IDC patients</text>
+  <!-- sensitivity/specificity -->
+  <rect x="530" y="348" width="118" height="60" rx="7" fill="#081729" stroke="#1565c0" stroke-width="1"/>
+  <text x="589" y="366" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8.5" fill="#90caf9">Sensitivity 0.72</text>
+  <text x="589" y="381" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8.5" fill="#90caf9">Specificity 0.71</text>
+  <text x="589" y="398" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#546e7a">n = 70 IDC patients</text>
 
-  <!-- RT-qPCR label on cell -->
-  <text x="155" y="385" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#4fc3f7">RT-qPCR validation</text>
-  <text x="155" y="397" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#546e7a">Tumour vs. Normal</text>
+  <!-- FOS highlight -->
+  <rect x="657" y="348" width="130" height="60" rx="7" fill="#0a2218" stroke="#26a69a" stroke-width="1"/>
+  <text x="722" y="364" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#80cbc4">Best single gene</text>
+  <text x="722" y="379" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#4fc3f7">FOS · AUC 0.78</text>
+  <text x="722" y="394" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#546e7a">highest individual marker</text>
 </svg>
