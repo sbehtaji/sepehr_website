@@ -208,9 +208,78 @@ const MODAL_CONTENT = {
     tag: "Bioinformatics · Published",
     title: "Oxytocin lncRNA — Breast Cancer Diagnostics",
     meta: "Scientific Reports, Mar 2021 · 26+ citations",
-    body: `<p><em>Content coming soon.</em></p>`,
+    body: `
+<img class="modal-hero-img" src="projects/img/oxytocin-lncrna.png" alt="Oxytocin lncRNA breast cancer study diagram" />
+
+<h4>Background</h4>
+<p>Oxytocin (OXT) is a neuropeptide hormone with roles extending beyond reproduction — it influences cell proliferation, immune modulation, and tumour suppression. <strong>Long non-coding RNAs (lncRNAs)</strong> are RNA transcripts &gt;200 nucleotides with no protein-coding function; they regulate gene expression via chromatin remodelling, transcription factor interactions, and post-transcriptional control. lncRNA dysregulation is increasingly implicated in cancer, yet no prior study had characterised lncRNAs associated with the oxytocin signalling pathway in breast cancer — the gap this work addresses.</p>
+
+<h4>Objective</h4>
+<p>Identify lncRNAs co-expressed with OXT signalling pathway genes, measure their expression in invasive ductal carcinoma (IDC) versus matched normal breast tissue by RT-qPCR, and evaluate their combined utility as diagnostic biomarkers using machine learning classifiers.</p>
+
+<h4>A &nbsp;·&nbsp; lncRNA Identification — Computational Analysis</h4>
+<p>Candidate lncRNAs were identified by querying FANTOM5 and GENCODE for transcripts co-located or co-expressed with OXT pathway genes. GEO microarray dataset <strong>GSE54002</strong> was used for quality control and differential expression analysis (limma, R). KEGG 2019 enrichment analysis ranked the <strong>Oxytocin Signalling Pathway</strong> as the top enriched pathway — confirming biological relevance before wet-lab validation.</p>
+
+<div class="modal-fig-row">
+  <figure class="modal-figure">
+    <img src="projects/img/oxytocin-fig1-network.jpg"
+         alt="Co-expression network of OXT pathway genes and candidate lncRNAs" loading="lazy" />
+    <figcaption><strong>Fig. 1</strong> — Co-expression network of OXT pathway target genes (blue) and candidate lncRNAs (coloured nodes), built from GSE54002 microarray data.</figcaption>
+  </figure>
+  <figure class="modal-figure">
+    <img src="projects/img/oxytocin-fig2-pathway.jpg"
+         alt="KEGG 2019 pathway enrichment — Oxytocin Signalling Pathway top hit" loading="lazy" />
+    <figcaption><strong>Fig. 2</strong> — KEGG 2019 enrichment ranked by p-value. Oxytocin Signalling Pathway is the most significantly enriched pathway among differentially expressed genes.</figcaption>
+  </figure>
+</div>
+
+<h4>B &nbsp;·&nbsp; Data Collection — RT-qPCR Cohort</h4>
+<p>Patient breast tissue samples (IDC tumour + matched normal adjacent tissue) were profiled for <strong>6 OXT pathway target genes</strong> (OXTR, FOS, ITPR1, RCAN1, CAMK2D, CACNA2D) and <strong>4 candidate lncRNAs</strong> (lnc_TNS1, lnc_FOXF1, lnc_MTX2, lnc_ZFP161) using RT-qPCR with gene-specific primers and ΔΔCt normalisation. The figure below shows expression distributions across all 10 targets, comparing normal and tumour groups.</p>
+
+<figure class="modal-figure">
+  <img src="projects/img/oxytocin-fig3-boxplot.jpg"
+       alt="RT-qPCR boxplots: normal vs tumour expression for 10 OXT pathway genes and lncRNAs" loading="lazy" />
+  <figcaption><strong>Fig. 3</strong> — RT-qPCR expression distributions (normal: red, tumour: teal) for OXTR (A), FOS (B), RFPN (C), RCAN1 (D), CAMCE5 (E), CACNA2D (F), lnc_TNS1 (G), lnc_FOXF1 (H), lnc_MTX2 (I), lnc_ZFP161 (J). Multiple targets show clear separation between groups.</figcaption>
+</figure>
+
+<h4>C &nbsp;·&nbsp; Correlation Analysis</h4>
+<p>Pearson correlation matrices were computed separately for tumour and normal tissue to map co-expression relationships among all 10 targets. The lncRNAs displayed markedly different co-expression patterns in tumour versus normal context — indicating cancer-specific transcriptional rewiring within the OXT pathway and supporting a regulatory (rather than incidental) role for these lncRNAs in IDC.</p>
+
+<figure class="modal-figure">
+  <img src="projects/img/oxytocin-fig5-corr.jpg"
+       alt="Pearson correlation matrices for tumour (A) and normal (B) breast tissue" loading="lazy" />
+  <figcaption><strong>Fig. 5</strong> — Pearson correlation scatterplot matrices for tumour tissue (A) and normal tissue (B). Co-expression structure differs substantially between conditions, revealing cancer-specific lncRNA–gene regulatory interactions.</figcaption>
+</figure>
+
+<h4>D &nbsp;·&nbsp; Diagnostic ML Models &amp; Results</h4>
+<p>Three classifiers were trained in R on the combined lncRNA + OXT gene expression profiles and evaluated with <strong>10-fold cross-validation</strong>:</p>
+<ul>
+  <li><strong>Bayesian GLM</strong> — Bayesian generalised linear model with probabilistic inference</li>
+  <li><strong>GLM</strong> — standard logistic regression (generalised linear model)</li>
+  <li><strong>LDA</strong> — linear discriminant analysis</li>
+</ul>
+
+<figure class="modal-figure">
+  <img src="projects/img/oxytocin-fig4-roc.jpg"
+       alt="ROC curves: combined diagnostic models (A) and individual gene markers (B)" loading="lazy" />
+  <figcaption><strong>Fig. 4</strong> — ROC analysis. <em>Panel A:</em> combined models — BayesGLM AUC = 0.75, GLM AUC = 0.74, LDA AUC = 0.75. <em>Panel B:</em> individual markers — FOS (0.78), ITPR1 (0.73), CAMK2D (0.67), CACNA2D (0.66), RCAN1 (0.65), OXTR (0.63), lnc_TNS1 (0.61), lnc_MTX2 (0.61), lnc_ZFP161 (0.59), lnc_FOXF1 (0.55).</figcaption>
+</figure>
+
+<div class="modal-results-grid">
+  <div class="result-item"><strong>Bayesian GLM</strong><br/>AUC = 0.75</div>
+  <div class="result-item"><strong>GLM</strong><br/>AUC = 0.74</div>
+  <div class="result-item"><strong>LDA</strong><br/>AUC = 0.75</div>
+  <div class="result-item"><strong>Best single marker</strong><br/>FOS &nbsp;·&nbsp; AUC = 0.78</div>
+</div>
+
+<h4>Conclusions &amp; Impact</h4>
+<p>This was the <strong>first study to identify and characterise oxytocin-pathway lncRNAs in breast cancer</strong>. Four novel lncRNAs — lnc_TNS1, lnc_FOXF1, lnc_MTX2, and lnc_ZFP161 — showed significant differential expression in IDC versus normal tissue, and the combined multi-marker diagnostic model achieved AUC ≈ 0.75, demonstrating clinically relevant discriminative signal. Published in <em>Scientific Reports</em> (Nature Portfolio), March 2021 — <strong>26+ citations</strong>. A fully reproducible R pipeline covering data download, QC, differential expression, correlation, and ML modelling is available on GitHub.</p>
+`,
     pills: ["R","ROC/AUC","Bayesian GLM","LDA","RT-qPCR","10-fold CV"],
-    links: [{ label: "View on GitHub", url: "https://github.com/sbehtaji/oxytocin-lncrna-breast-cancer-2021" }]
+    links: [
+      { label: "View on GitHub", url: "https://github.com/sbehtaji/oxytocin-lncrna-breast-cancer-2021" },
+      { label: "Read Paper", url: "https://www.nature.com/articles/s41598-021-86097-2" }
+    ]
   },
 
   "rbp": {
