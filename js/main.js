@@ -209,7 +209,7 @@ const MODAL_CONTENT = {
     title: "Oxytocin lncRNA — Breast Cancer Diagnostics",
     meta: "Scientific Reports, Mar 2021 · 26+ citations",
     body: `
-<img class="modal-hero-img" src="projects/img/oxytocin-lncrna.png" alt="Oxytocin lncRNA breast cancer study diagram" />
+<img class="modal-hero-img" src="projects/img/oxytocin-hero.png" alt="Oxytocin Pathway · lncRNA Expression in Breast Cancer — study overview" />
 
 <h4>Background</h4>
 <p>Oxytocin (OXT) is a neuropeptide hormone with roles extending beyond reproduction — it influences cell proliferation, immune modulation, and tumour suppression. <strong>Long non-coding RNAs (lncRNAs)</strong> are RNA transcripts &gt;200 nucleotides with no protein-coding function; they regulate gene expression via chromatin remodelling, transcription factor interactions, and post-transcriptional control. lncRNA dysregulation is increasingly implicated in cancer, yet no prior study had characterised lncRNAs associated with the oxytocin signalling pathway in breast cancer — the gap this work addresses.</p>
