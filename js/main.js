@@ -227,7 +227,7 @@ const MODAL_CONTENT = {
     <figcaption><strong>Fig. 1</strong> — Co-expression network of OXT pathway target genes (blue) and candidate lncRNAs (coloured nodes), built from GSE54002 microarray data.</figcaption>
   </figure>
   <figure class="modal-figure">
-    <img src="projects/img/oxytocin-fig2-pathway.png"
+    <img src="projects/img/oxytocin-fig2-pathway.jpg"
          alt="KEGG 2019 pathway enrichment — Oxytocin Signalling Pathway top hit" loading="lazy" />
     <figcaption><strong>Fig. 2</strong> — KEGG 2019 enrichment ranked by p-value. Oxytocin Signalling Pathway is the most significantly enriched pathway among differentially expressed genes.</figcaption>
   </figure>
@@ -245,11 +245,18 @@ const MODAL_CONTENT = {
 <h4>C &nbsp;·&nbsp; Correlation Analysis</h4>
 <p>Pearson correlation matrices were computed separately for tumour and normal tissue to map co-expression relationships among all 10 targets. The lncRNAs displayed markedly different co-expression patterns in tumour versus normal context — indicating cancer-specific transcriptional rewiring within the OXT pathway and supporting a regulatory (rather than incidental) role for these lncRNAs in IDC.</p>
 
-<figure class="modal-figure">
-  <img src="projects/img/oxytocin-fig5-corr.png"
-       alt="Pearson correlation matrices for tumour (A) and normal (B) breast tissue" loading="lazy" />
-  <figcaption><strong>Fig. 5</strong> — Pearson correlation scatterplot matrices for tumour tissue (A) and normal tissue (B). Co-expression structure differs substantially between conditions, revealing cancer-specific lncRNA–gene regulatory interactions.</figcaption>
-</figure>
+<div class="modal-fig-row">
+  <figure class="modal-figure">
+    <img src="projects/img/oxytocin-fig5-corr-tumor.png"
+         alt="Pearson correlation matrix — tumour tissue" loading="lazy" />
+    <figcaption><strong>Fig. 5A — Tumour Tissue.</strong> Strong inter-gene correlations emerge in IDC, reflecting cancer-driven co-regulatory rewiring across OXT pathway targets and lncRNAs.</figcaption>
+  </figure>
+  <figure class="modal-figure">
+    <img src="projects/img/oxytocin-fig6-corr-normal.png"
+         alt="Pearson correlation matrix — normal tissue" loading="lazy" />
+    <figcaption><strong>Fig. 5B — Normal Tissue.</strong> Correlation structure in normal breast tissue is notably different, highlighting lncRNA co-expression patterns specific to the tumour context.</figcaption>
+  </figure>
+</div>
 
 <h4>D &nbsp;·&nbsp; Diagnostic ML Models &amp; Results</h4>
 <p>Three classifiers were trained in R on the combined lncRNA + OXT gene expression profiles and evaluated with <strong>10-fold cross-validation</strong>:</p>
