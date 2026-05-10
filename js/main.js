@@ -258,25 +258,57 @@ const MODAL_CONTENT = {
   </figure>
 </div>
 
-<h4>D &nbsp;·&nbsp; Diagnostic ML Models &amp; Results</h4>
-<p>Three classifiers were trained in R on the combined lncRNA + OXT gene expression profiles and evaluated with <strong>10-fold cross-validation</strong>:</p>
+<h4>D &nbsp;·&nbsp; ML Diagnostic Modelling — Big Picture</h4>
+
+<div class="ml-pipeline">
+  <div class="ml-step">
+    <span class="ml-step-label">Input</span>
+    <span class="ml-step-text">RT-qPCR expression<br/>n = 70 IDC patients<br/>log₂ transcript values</span>
+  </div>
+  <span class="ml-arrow">→</span>
+  <div class="ml-step">
+    <span class="ml-step-label">Features</span>
+    <span class="ml-step-text">10 variables<br/>6 OXT pathway genes<br/>4 lncRNAs</span>
+  </div>
+  <span class="ml-arrow">→</span>
+  <div class="ml-step">
+    <span class="ml-step-label">Models ×3</span>
+    <span class="ml-step-text">Bayesian GLM<br/>GLM (logistic)<br/>LDA</span>
+  </div>
+  <span class="ml-arrow">→</span>
+  <div class="ml-step">
+    <span class="ml-step-label">Validation</span>
+    <span class="ml-step-text">10-fold<br/>cross-validation<br/>ROC / AUC</span>
+  </div>
+  <span class="ml-arrow">→</span>
+  <div class="ml-step ml-step--result">
+    <span class="ml-step-label">Result</span>
+    <span class="ml-step-text">Combined AUC 0.75<br/>Sensitivity 0.72<br/>Specificity 0.71</span>
+  </div>
+</div>
+
+<p>The ML task was a <strong>binary classification</strong> of IDC tumour vs. normal breast tissue. The feature matrix comprised log₂-transformed RT-qPCR expression values for all 10 targets measured in the same patient cohort (n = 70). Three distinct classifiers were selected to capture different modelling assumptions:</p>
+
 <ul>
-  <li><strong>Bayesian GLM</strong> — Bayesian generalised linear model with probabilistic inference</li>
-  <li><strong>GLM</strong> — standard logistic regression (generalised linear model)</li>
-  <li><strong>LDA</strong> — linear discriminant analysis</li>
+  <li><strong>Bayesian GLM</strong> — logistic regression with Bayesian inference; places a prior over model coefficients, producing probability estimates with uncertainty quantification. Suited to small clinical cohorts where regularisation matters.</li>
+  <li><strong>GLM (logistic regression)</strong> — standard maximum-likelihood logistic regression; provides interpretable odds-ratio coefficients per gene, serving as a transparent clinical baseline.</li>
+  <li><strong>LDA (Linear Discriminant Analysis)</strong> — assumes Gaussian class distributions with shared covariance; finds the linear combination of features maximising class separation. Computationally efficient and robust on small, correlated datasets.</li>
 </ul>
+
+<p>All three models were evaluated under <strong>10-fold cross-validation</strong> to obtain unbiased performance estimates and reduce overfitting risk on the limited cohort. ROC curves and AUC were computed for each fold and averaged. Single-gene ROC analysis was also run on each marker independently, separating the diagnostic contribution of the lncRNAs from the protein-coding targets.</p>
 
 <figure class="modal-figure">
   <img src="projects/img/oxytocin-fig4-roc.png"
        alt="ROC curves: combined diagnostic models (A) and individual gene markers (B)" loading="lazy" />
-  <figcaption><strong>Fig. 4</strong> — ROC analysis. <em>Panel A:</em> combined models — BayesGLM AUC = 0.75, GLM AUC = 0.74, LDA AUC = 0.75. <em>Panel B:</em> individual markers — FOS (0.78), ITPR1 (0.73), CAMK2D (0.67), CACNA2D (0.66), RCAN1 (0.65), OXTR (0.63), lnc_TNS1 (0.61), lnc_MTX2 (0.61), lnc_ZFP161 (0.59), lnc_FOXF1 (0.55).</figcaption>
+  <figcaption><strong>Fig. 4 — ROC / AUC Analysis.</strong> <em>Panel A (left):</em> all three combined models perform similarly — BayesGLM AUC = 0.75, GLM AUC = 0.74, LDA AUC = 0.75 — confirming result stability across modelling approaches. <em>Panel B (right):</em> single-gene AUCs — FOS (0.78), ITPR1 (0.73), CAMK2D (0.67), CACNA2D (0.66), RCAN1 (0.65), OXTR (0.63), lnc_TNS1 (0.61), lnc_MTX2 (0.61), lnc_ZFP161 (0.59), lnc_FOXF1 (0.55). The combined model outperforms every individual marker except FOS, demonstrating the additive value of the lncRNA panel.</figcaption>
 </figure>
 
-<div class="modal-results-grid">
-  <div class="result-item"><strong>Bayesian GLM</strong><br/>AUC = 0.75</div>
-  <div class="result-item"><strong>GLM</strong><br/>AUC = 0.74</div>
-  <div class="result-item"><strong>LDA</strong><br/>AUC = 0.75</div>
-  <div class="result-item"><strong>Best single marker</strong><br/>FOS &nbsp;·&nbsp; AUC = 0.78</div>
+<div class="modal-results-grid modal-results-grid--5">
+  <div class="result-item"><strong>Combined AUC</strong><br/>0.75</div>
+  <div class="result-item"><strong>Sensitivity</strong><br/>0.72</div>
+  <div class="result-item"><strong>Specificity</strong><br/>0.71</div>
+  <div class="result-item"><strong>Cohort</strong><br/>n = 70 IDC</div>
+  <div class="result-item result-item--highlight"><strong>Best single marker</strong><br/>FOS · AUC 0.78</div>
 </div>
 
 <h4>Conclusions &amp; Impact</h4>

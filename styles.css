@@ -925,6 +925,64 @@ body {
   color: var(--text);
 }
 .result-item strong { color: var(--primary-dark); }
+.result-item--highlight {
+  border-color: var(--primary);
+  background: rgba(11,61,104,0.07);
+}
+.modal-results-grid--5 {
+  grid-template-columns: repeat(5, 1fr);
+}
+@media (max-width: 600px) {
+  .modal-results-grid--5 { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ML pipeline flow */
+.ml-pipeline {
+  display: flex;
+  align-items: stretch;
+  gap: 0.3rem;
+  margin: 1rem 0 1.2rem;
+  flex-wrap: wrap;
+}
+.ml-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--surface-soft);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.55rem 0.7rem;
+  text-align: center;
+  flex: 1;
+  min-width: 90px;
+}
+.ml-step--result {
+  background: rgba(11,61,104,0.07);
+  border-color: var(--primary);
+}
+.ml-step-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--primary);
+  margin-bottom: 0.3rem;
+}
+.ml-step-text {
+  font-size: 0.78rem;
+  color: var(--text);
+  line-height: 1.5;
+}
+.ml-arrow {
+  align-self: center;
+  color: var(--muted);
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+@media (max-width: 580px) {
+  .ml-arrow { display: none; }
+  .ml-step { min-width: 42%; }
+}
 
 /* Clickable card cursor + hover hint */
 .portfolio-card[data-modal] {
