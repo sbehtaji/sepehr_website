@@ -222,12 +222,12 @@ const MODAL_CONTENT = {
 
 <div class="modal-fig-row">
   <figure class="modal-figure">
-    <img src="projects/img/oxytocin-fig1-network.jpg"
+    <img src="projects/img/oxytocin-fig1-network.png"
          alt="Co-expression network of OXT pathway genes and candidate lncRNAs" loading="lazy" />
     <figcaption><strong>Fig. 1</strong> — Co-expression network of OXT pathway target genes (blue) and candidate lncRNAs (coloured nodes), built from GSE54002 microarray data.</figcaption>
   </figure>
   <figure class="modal-figure">
-    <img src="projects/img/oxytocin-fig2-pathway.jpg"
+    <img src="projects/img/oxytocin-fig2-pathway.png"
          alt="KEGG 2019 pathway enrichment — Oxytocin Signalling Pathway top hit" loading="lazy" />
     <figcaption><strong>Fig. 2</strong> — KEGG 2019 enrichment ranked by p-value. Oxytocin Signalling Pathway is the most significantly enriched pathway among differentially expressed genes.</figcaption>
   </figure>
@@ -237,7 +237,7 @@ const MODAL_CONTENT = {
 <p>Patient breast tissue samples (IDC tumour + matched normal adjacent tissue) were profiled for <strong>6 OXT pathway target genes</strong> (OXTR, FOS, ITPR1, RCAN1, CAMK2D, CACNA2D) and <strong>4 candidate lncRNAs</strong> (lnc_TNS1, lnc_FOXF1, lnc_MTX2, lnc_ZFP161) using RT-qPCR with gene-specific primers and ΔΔCt normalisation. The figure below shows expression distributions across all 10 targets, comparing normal and tumour groups.</p>
 
 <figure class="modal-figure">
-  <img src="projects/img/oxytocin-fig3-boxplot.jpg"
+  <img src="projects/img/oxytocin-fig3-boxplot.png"
        alt="RT-qPCR boxplots: normal vs tumour expression for 10 OXT pathway genes and lncRNAs" loading="lazy" />
   <figcaption><strong>Fig. 3</strong> — RT-qPCR expression distributions (normal: red, tumour: teal) for OXTR (A), FOS (B), RFPN (C), RCAN1 (D), CAMCE5 (E), CACNA2D (F), lnc_TNS1 (G), lnc_FOXF1 (H), lnc_MTX2 (I), lnc_ZFP161 (J). Multiple targets show clear separation between groups.</figcaption>
 </figure>
@@ -246,7 +246,7 @@ const MODAL_CONTENT = {
 <p>Pearson correlation matrices were computed separately for tumour and normal tissue to map co-expression relationships among all 10 targets. The lncRNAs displayed markedly different co-expression patterns in tumour versus normal context — indicating cancer-specific transcriptional rewiring within the OXT pathway and supporting a regulatory (rather than incidental) role for these lncRNAs in IDC.</p>
 
 <figure class="modal-figure">
-  <img src="projects/img/oxytocin-fig5-corr.jpg"
+  <img src="projects/img/oxytocin-fig5-corr.png"
        alt="Pearson correlation matrices for tumour (A) and normal (B) breast tissue" loading="lazy" />
   <figcaption><strong>Fig. 5</strong> — Pearson correlation scatterplot matrices for tumour tissue (A) and normal tissue (B). Co-expression structure differs substantially between conditions, revealing cancer-specific lncRNA–gene regulatory interactions.</figcaption>
 </figure>
@@ -260,7 +260,7 @@ const MODAL_CONTENT = {
 </ul>
 
 <figure class="modal-figure">
-  <img src="projects/img/oxytocin-fig4-roc.jpg"
+  <img src="projects/img/oxytocin-fig4-roc.png"
        alt="ROC curves: combined diagnostic models (A) and individual gene markers (B)" loading="lazy" />
   <figcaption><strong>Fig. 4</strong> — ROC analysis. <em>Panel A:</em> combined models — BayesGLM AUC = 0.75, GLM AUC = 0.74, LDA AUC = 0.75. <em>Panel B:</em> individual markers — FOS (0.78), ITPR1 (0.73), CAMK2D (0.67), CACNA2D (0.66), RCAN1 (0.65), OXTR (0.63), lnc_TNS1 (0.61), lnc_MTX2 (0.61), lnc_ZFP161 (0.59), lnc_FOXF1 (0.55).</figcaption>
 </figure>
