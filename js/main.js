@@ -218,7 +218,17 @@ const MODAL_CONTENT = {
 <p>Identify lncRNAs co-expressed with OXT signalling pathway genes, measure their expression in invasive ductal carcinoma (IDC) versus matched normal breast tissue by RT-qPCR, and evaluate their combined utility as diagnostic biomarkers using machine learning classifiers.</p>
 
 <h4>A &nbsp;·&nbsp; lncRNA Identification — Computational Analysis</h4>
-<p>Candidate lncRNAs were identified by querying FANTOM5 and GENCODE for transcripts co-located or co-expressed with OXT pathway genes. GEO microarray dataset <strong>GSE54002</strong> was used for quality control and differential expression analysis (limma, R). KEGG 2019 enrichment analysis ranked the <strong>Oxytocin Signalling Pathway</strong> as the top enriched pathway — confirming biological relevance before wet-lab validation.</p>
+<p>Candidate lncRNAs were identified by querying lncRNA databases for transcripts co-located or co-expressed with OXT pathway genes. Their biological relevance was then confirmed via differential expression analysis on a large public microarray dataset before wet-lab validation.</p>
+<p><strong>Dataset:</strong> GEO <strong>GSE54002</strong> · platform GPL570 (Affymetrix HG-U133 Plus 2.0 Array) · <strong>n = 433</strong> (417 tumour, 16 normal breast tissue samples).</p>
+<p><strong>Pipeline (R / Bioconductor):</strong></p>
+<ul>
+  <li><strong>Download &amp; QC</strong> — dataset retrieved via <code>GEOquery</code>; sample labels validated against GEO metadata titles to prevent silent mis-labelling errors.</li>
+  <li><strong>Normalisation</strong> — quantile normalisation across all arrays (<code>limma::normalizeBetweenArrays</code>) to remove technical variation.</li>
+  <li><strong>QC visualisations</strong> — expression boxplot, sample-correlation heatmap (<code>pheatmap</code>), and PCA coloured by tumour/normal group.</li>
+  <li><strong>Differential expression</strong> — linear model with effects-coded design matrix (<code>~ group + 0</code>), explicit contrast <em>tumour − normal</em>, empirical Bayes moderation (<code>eBayes</code>), results ranked by B-statistic (log-odds of differential expression).</li>
+  <li><strong>Multiple testing correction</strong> — Benjamini-Hochberg FDR; DEG lists exported at two thresholds: |logFC| &gt; 2 (primary) and |logFC| &gt; 1 (secondary), both at adj.P &lt; 0.05.</li>
+</ul>
+<p>KEGG 2019 enrichment of the DEG list ranked the <strong>Oxytocin Signalling Pathway</strong> as the top hit, validating the pathway selection and guiding the subsequent lncRNA–gene panel for RT-qPCR.</p>
 
 <div class="modal-fig-row">
   <figure class="modal-figure">
