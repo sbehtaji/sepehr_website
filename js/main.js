@@ -141,22 +141,44 @@ const initEndorsementSlider = () => {
 
 initEndorsementSlider();
 
-// Contact form — shows a success message on submit (wire up a backend later)
+// Contact form — Formspree submission
 const form = document.getElementById("contact-form");
 const status = document.getElementById("contact-form-status");
 
 if (form && status) {
-  form.addEventListener("submit", (e) => {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     // Honeypot check
     if (form.elements["website"]?.value) return;
 
-    status.textContent = "Thanks for your message! I'll get back to you soon.";
-    status.className = "form-status is-success";
-    status.hidden = false;
-    form.reset();
+    const submitBtn = form.querySelector('[type="submit"]');
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Sending…";
 
+    try {
+      const res = await fetch("https://formspree.io/f/mbdwpbaa", {
+        method: "POST",
+        headers: { "Accept": "application/json" },
+        body: new FormData(form),
+      });
+
+      if (res.ok) {
+        status.textContent = "Thanks for your message! I'll get back to you soon.";
+        status.className = "form-status is-success";
+        form.reset();
+      } else {
+        status.textContent = "Something went wrong — please email me directly.";
+        status.className = "form-status is-error";
+      }
+    } catch {
+      status.textContent = "Network error — please email me directly.";
+      status.className = "form-status is-error";
+    }
+
+    status.hidden = false;
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Send message";
     setTimeout(() => { status.hidden = true; }, 8000);
   });
 }
