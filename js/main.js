@@ -332,11 +332,117 @@ const MODAL_CONTENT = {
   },
 
   "rbp": {
-    tag: "Bioinformatics · Research Project",
+    tag: "Bioinformatics · MSc Dissertation · Teesside University",
     title: "RBP Disease Prediction Pipeline",
-    meta: "MSc Dissertation · Teesside University",
-    body: `<p><em>Content coming soon.</em></p>`,
-    pills: ["Python","XGBoost","AdaBoost","Random Forest","KNN","Naive Bayes","SGD","SHAP","Ribo-seq","ENCODE","eCLIP"],
+    meta: "Deciphering Translational Regulation in Leukaemia via eCLIP + Ribo-seq + ML · 2024",
+    body: `
+<img class="modal-hero-img" src="projects/img/rbp-eclip.png" alt="RBP Binding Prediction — eCLIP-seq + Ribo-seq + ML pipeline overview" />
+
+<h4>Background</h4>
+<p><strong>RNA-Binding Proteins (RBPs)</strong> are a family of >1,542 human proteins that regulate gene expression post-transcriptionally — controlling mRNA splicing, stability, localisation, and translation. Their dysregulation is increasingly linked to cancer, including chronic myeloid leukaemia (CML). This study used <strong>K562 cells</strong>, the canonical CML model carrying the Philadelphia chromosome (BCR-ABL fusion), to investigate whether RBP binding patterns can predict how individual genes respond translationally to two distinct molecular perturbations.</p>
+
+<h4>Objective</h4>
+<p>Build supervised ML classifiers that predict the translational response (up- or down-regulated) of <strong>20,049 protein-coding genes</strong> in K562 cells under two treatment conditions, using the binding signals of <strong>139 RBPs</strong> from ENCODE eCLIP as features and Ribo-seq translation data as labels.</p>
+
+<h4>A &nbsp;·&nbsp; Datasets</h4>
+<ul>
+  <li><strong>Gene annotations:</strong> GENCODE Release 45 (GRCh38.p14) — 20,049 protein-coding genes, ~1.4 million exon regions</li>
+  <li><strong>eCLIP features (ENCODE):</strong> 139 unique RBPs profiled in K562 cells via eCLIP-seq — 90 paired-end + 49 single-end libraries, each with 2 biological replicates. BED narrowPeak files intersected with exon regions using a chromosome-sorted binary search algorithm.</li>
+  <li><strong>Ribo-seq labels (BioProject PRJDB15060):</strong> Ribosome footprint counts quantified via FeatureCounts on Galaxy, averaged across replicates, TPM-normalised. Two conditions:
+    <ul>
+      <li><strong>Condition 1:</strong> shDDX41 (DDX41 knockdown) vs shScramble control</li>
+      <li><strong>Condition 2:</strong> CX5461 (ribosome biogenesis inhibitor) vs DMSO control</li>
+    </ul>
+  </li>
+</ul>
+<p><strong>Final dataset:</strong> 20,049 rows × 144 columns — 1 gene ID, 140 RBP signal columns, 4 TPM outcome columns. After filtering genes with no translational change: ~1,818 genes (Cond 1) and ~1,790 genes (Cond 2) used for modelling.</p>
+
+<figure class="modal-figure">
+  <img src="projects/img/rbp-fig2-dataset.png" alt="Final merged dataset: gene IDs, RBP signals, TPM values per condition" loading="lazy" />
+  <figcaption><strong>Dataset structure</strong> — each row is a protein-coding gene; columns include RBP signal values (DDX1, XRCC6, GEMIN5…) and TPM expression under each condition (shScramble, shDDX41, DMSO, CX5461).</figcaption>
+</figure>
+
+<h4>B &nbsp;·&nbsp; Feature Engineering</h4>
+<p>Two parallel feature representations were tested throughout all experiments to assess the value of signal quantification vs. simple presence/absence:</p>
+<ul>
+  <li><strong>Binary (0/1):</strong> 1 if any eCLIP peak overlaps the gene's exon regions, 0 otherwise.</li>
+  <li><strong>Actual signal values:</strong> summed eCLIP signal strength per RBP per gene; for RBPs with two experiments, the mean signal across consensus overlaps was used.</li>
+</ul>
+<p><strong>Labels:</strong> <code>sign(Treatment TPM − Control TPM)</code> → class 0 (decreased translation) or class 1 (increased translation). Genes with zero difference discarded.</p>
+
+<h4>C &nbsp;·&nbsp; ML Pipeline — Big Picture</h4>
+
+<figure class="modal-figure">
+  <img src="projects/img/rbp-fig1-pipeline.png" alt="Full ML pipeline: Gene Annotations + RBP Signal Strength + Treatment Data → Merge → Preprocess → Binary/Actual → Model Construction → Evaluation" loading="lazy" />
+  <figcaption><strong>Fig. 1 — End-to-end pipeline.</strong> Three data sources (GENCODE annotations, ENCODE eCLIP signals, Ribo-seq treatment data) are merged into a single feature matrix. Two feature representations (binary and actual) feed into model construction and evaluation.</figcaption>
+</figure>
+
+<div class="ml-pipeline">
+  <div class="ml-step">
+    <span class="ml-step-label">Input</span>
+    <span class="ml-step-text">139 RBPs · eCLIP<br/>20,049 genes<br/>2 conditions</span>
+  </div>
+  <span class="ml-arrow">→</span>
+  <div class="ml-step">
+    <span class="ml-step-label">Features</span>
+    <span class="ml-step-text">Binary 0/1<br/>— or —<br/>Actual signal</span>
+  </div>
+  <span class="ml-arrow">→</span>
+  <div class="ml-step">
+    <span class="ml-step-label">3 Experiments</span>
+    <span class="ml-step-text">Default baseline<br/>6-model comparison<br/>Tuned top 3</span>
+  </div>
+  <span class="ml-arrow">→</span>
+  <div class="ml-step">
+    <span class="ml-step-label">Tuning</span>
+    <span class="ml-step-text">RandomizedSearchCV<br/>10 → 100 iters<br/>accuracy metric</span>
+  </div>
+  <span class="ml-arrow">→</span>
+  <div class="ml-step ml-step--result">
+    <span class="ml-step-label">Best</span>
+    <span class="ml-step-text">AdaBoost<br/>Cond 1 · actual<br/>Acc = 61.05%</span>
+  </div>
+</div>
+
+<p>Three experiments were run in parallel across both conditions and both feature types:</p>
+<ul>
+  <li><strong>Exp 1:</strong> XGBoost with default parameters — establishes a baseline.</li>
+  <li><strong>Exp 2:</strong> All six classifiers with default parameters — breadth comparison to identify suitable algorithm families.</li>
+  <li><strong>Exp 3:</strong> Top performers (XGBoost, Random Forest, AdaBoost) hyperparameter-tuned via <code>RandomizedSearchCV</code> in two phases (10 iterations to identify promising ranges, then 100 iterations for fine-grained search).</li>
+</ul>
+
+<h4>D &nbsp;·&nbsp; Results</h4>
+<p><strong>AdaBoost was the best-performing model</strong> across all conditions and feature types. Using actual RBP signal values consistently outperformed binary features. Condition 1 (DDX41-knockdown) was easier to predict than Condition 2 (CX5461), suggesting greater biological complexity in the CX5461 response.</p>
+
+<div class="modal-fig-row">
+  <figure class="modal-figure">
+    <img src="projects/img/rbp-fig4-adaboost-best.png" alt="AdaBoost best result: Condition 1, actual values — accuracy 61.05%" loading="lazy" />
+    <figcaption><strong>Best model — AdaBoost · Cond 1 · actual values</strong><br/>Accuracy 61.05% · macro F1 = 0.57<br/>Class 0 (down): P=0.61, R=0.83, F1=0.70<br/>Class 1 (up): P=0.62, R=0.34, F1=0.44</figcaption>
+  </figure>
+  <figure class="modal-figure">
+    <img src="projects/img/rbp-fig5-adaboost-cond2.png" alt="AdaBoost Condition 2 result — accuracy 55.81%" loading="lazy" />
+    <figcaption><strong>AdaBoost · Cond 2 · binary features</strong><br/>Accuracy 55.81% · macro F1 = 0.54<br/>Class 0 (down): P=0.59, R=0.68, F1=0.63<br/>Class 1 (up): P=0.50, R=0.41, F1=0.45</figcaption>
+  </figure>
+</div>
+
+<div class="modal-results-grid modal-results-grid--5">
+  <div class="result-item"><strong>Best accuracy</strong><br/>61.05%</div>
+  <div class="result-item"><strong>Best model</strong><br/>AdaBoost</div>
+  <div class="result-item"><strong>Best features</strong><br/>Actual values</div>
+  <div class="result-item"><strong>Best condition</strong><br/>Cond 1 · DDX41-KD</div>
+  <div class="result-item result-item--highlight"><strong>Worst model</strong><br/>GNB · ~45%</div>
+</div>
+
+<h4>Key Findings &amp; Conclusions</h4>
+<ul>
+  <li><strong>Actual RBP signal strengths outperform binary encoding</strong> — quantitative signal values carry more predictive information than simple presence/absence, particularly for Condition 1.</li>
+  <li><strong>All models showed class imbalance bias</strong> — down-regulated genes (class 0) were consistently detected with higher recall than up-regulated genes (class 1). The positive class was systematically underdetected across every model and condition.</li>
+  <li><strong>Hyperparameter tuning provided modest but not dramatic gains</strong> — AdaBoost and XGBoost improved with tuning; Random Forest and GNB were largely unresponsive.</li>
+  <li><strong>~61% accuracy ceiling reflects biological complexity</strong> — RBP binding alone does not fully explain translational regulation; miRNA activity, codon availability, mRNA secondary structure, and ribosome availability contribute but were not included as features.</li>
+  <li><strong>Future directions:</strong> multi-omics integration (transcriptomics, proteomics), expanded feature sets, and deep learning architectures to improve both accuracy and class-balance in leukaemia translational prediction.</li>
+</ul>
+`,
+    pills: ["Python","scikit-learn","XGBoost","AdaBoost","Random Forest","SGD","KNN","Naive Bayes","RandomizedSearchCV","Ribo-seq","ENCODE","eCLIP","TPM","GENCODE"],
     links: [{ label: "View on GitHub", url: "https://github.com/sbehtaji/rbp-disease-prediction" }]
   },
 
