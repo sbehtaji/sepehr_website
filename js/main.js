@@ -182,3 +182,120 @@ if (form && status) {
     setTimeout(() => { status.hidden = true; }, 8000);
   });
 }
+
+// ===== PROJECT MODALS =====
+const MODAL_CONTENT = {
+
+  "goodmind": {
+    tag: "Medical Imaging · GoodFolio LTD",
+    title: "GoodMind CT/MRI Neurodiagnostic Platform",
+    meta: "May 2025 – Present",
+    body: `<p><em>Content coming soon.</em></p>`,
+    pills: ["PyTorch","ResNet50","VGG16","Grad-CAM","DICOM","U-Net"],
+    links: []
+  },
+
+  "ct-stroke": {
+    tag: "Medical Imaging · GoodFolio LTD",
+    title: "CT-Stroke Classification Workflow",
+    meta: "2025 – Present",
+    body: `<p><em>Content coming soon.</em></p>`,
+    pills: ["CNN","Xception","Python","DICOM","Triage AI"],
+    links: []
+  },
+
+  "oxytocin": {
+    tag: "Bioinformatics · Published",
+    title: "Oxytocin lncRNA — Breast Cancer Diagnostics",
+    meta: "Scientific Reports, Mar 2021 · 26+ citations",
+    body: `<p><em>Content coming soon.</em></p>`,
+    pills: ["R","ROC/AUC","Bayesian GLM","LDA","RT-qPCR","10-fold CV"],
+    links: [{ label: "View on GitHub", url: "https://github.com/sbehtaji/oxytocin-lncrna-breast-cancer-2021" }]
+  },
+
+  "rbp": {
+    tag: "Bioinformatics · Research Project",
+    title: "RBP Disease Prediction Pipeline",
+    meta: "MSc Dissertation · Teesside University",
+    body: `<p><em>Content coming soon.</em></p>`,
+    pills: ["Python","XGBoost","AdaBoost","Random Forest","KNN","Naive Bayes","SGD","SHAP","Ribo-seq","ENCODE","eCLIP"],
+    links: [{ label: "View on GitHub", url: "https://github.com/sbehtaji/rbp-disease-prediction" }]
+  },
+
+  "ai-agents": {
+    tag: "AI Agents & FinTech · GoodFolio LTD",
+    title: "AI Agent Platform — Automated Outreach",
+    meta: "2025 – Present",
+    body: `<p><em>Content coming soon.</em></p>`,
+    pills: ["Google ADK","Gemini","Vertex AI","Cloud Run"],
+    links: []
+  },
+
+  "fintech": {
+    tag: "AI Agents & FinTech · Published",
+    title: "AI-Powered Adaptive Engagement Framework",
+    meta: "Scientific Reports, Apr 2026",
+    body: `<p><em>Content coming soon.</em></p>`,
+    pills: ["AI","NLP","FinTech","Adaptive Systems"],
+    links: [{ label: "View Publication", url: "https://scholar.google.com/citations?user=qUR4MQMAAAAJ&hl=en" }]
+  }
+
+};
+
+function buildModalHTML(id) {
+  const d = MODAL_CONTENT[id];
+  if (!d) return "";
+  const pills = d.pills.map(p => `<span>${p}</span>`).join("");
+  const links = d.links.map(l =>
+    `<a class="btn primary" href="${l.url}" target="_blank" rel="noopener noreferrer">${l.label}</a>`
+  ).join("");
+  return `
+    <p class="modal-tag">${d.tag}</p>
+    <h2 id="modal-title">${d.title}</h2>
+    <p class="modal-meta">${d.meta}</p>
+    <div class="modal-body">${d.body}</div>
+    ${d.pills.length ? `<div class="modal-tech-pills">${pills}</div>` : ""}
+    ${links ? `<div class="modal-links">${links}</div>` : ""}
+  `;
+}
+
+(function initModals() {
+  const overlay = document.getElementById("project-modal");
+  const body    = document.getElementById("modal-body");
+  const closeBtn = document.getElementById("modal-close-btn");
+  if (!overlay || !body) return;
+
+  function openModal(id) {
+    body.innerHTML = buildModalHTML(id);
+    overlay.hidden = false;
+    document.body.style.overflow = "hidden";
+    closeBtn.focus();
+  }
+
+  function closeModal() {
+    overlay.hidden = true;
+    document.body.style.overflow = "";
+  }
+
+  // Card clicks
+  document.querySelectorAll(".portfolio-card[data-modal]").forEach(card => {
+    card.addEventListener("click", e => {
+      // Don't open if user clicked a link inside the card
+      if (e.target.closest("a")) return;
+      openModal(card.dataset.modal);
+    });
+  });
+
+  // Close button
+  closeBtn.addEventListener("click", closeModal);
+
+  // Click outside modal card
+  overlay.addEventListener("click", e => {
+    if (e.target === overlay) closeModal();
+  });
+
+  // ESC key
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape" && !overlay.hidden) closeModal();
+  });
+})();

@@ -192,7 +192,7 @@
           </div>
           <div class="grid-3 portfolio-grid">
 
-            <article class="card portfolio-card" data-category="medical-imaging">
+            <article class="card portfolio-card" data-category="medical-imaging" data-modal="goodmind">
               <img class="portfolio-image" src="projects/img/brain-mri.jpg"
                    alt="Brain MRI scan — GoodMind neurodiagnostic platform" />
               <p class="portfolio-tag">Medical Imaging</p>
@@ -207,7 +207,7 @@
               </div>
             </article>
 
-            <article class="card portfolio-card" data-category="medical-imaging">
+            <article class="card portfolio-card" data-category="medical-imaging" data-modal="ct-stroke">
               <img class="portfolio-image" src="projects/img/ct-brain.png"
                    alt="CT brain scan — stroke and neuroimaging classification" />
               <p class="portfolio-tag">Medical Imaging</p>
@@ -232,7 +232,7 @@
               </div>
             </article>
 
-            <article class="card portfolio-card" data-category="bioinformatics">
+            <article class="card portfolio-card" data-category="bioinformatics" data-modal="oxytocin">
               <img class="portfolio-image-diagram" src="projects/img/oxytocin-lncrna.png"
                    alt="Oxytocin signalling pathway lncRNA expression — breast cancer study diagram" />
               <p class="portfolio-tag">Bioinformatics</p>
@@ -245,7 +245,7 @@
               </div>
             </article>
 
-            <article class="card portfolio-card" data-category="bioinformatics">
+            <article class="card portfolio-card" data-category="bioinformatics" data-modal="rbp">
               <img class="portfolio-image-diagram" src="projects/img/rbp-eclip.png"
                    alt="eCLIP + Ribo-seq ML pipeline for RBP disease prediction" />
               <p class="portfolio-tag">Bioinformatics</p>
@@ -258,7 +258,7 @@
               </div>
             </article>
 
-            <article class="card portfolio-card" data-category="ai-agents">
+            <article class="card portfolio-card" data-category="ai-agents" data-modal="ai-agents">
               <img class="portfolio-image" src="projects/img/ai-agents.png"
                    alt="AI agent pipeline — Google ADK and Vertex AI" />
               <p class="portfolio-tag">AI Agents &amp; FinTech</p>
@@ -270,7 +270,7 @@
               </div>
             </article>
 
-            <article class="card portfolio-card" data-category="ai-agents">
+            <article class="card portfolio-card" data-category="ai-agents" data-modal="fintech">
               <img class="portfolio-image" src="projects/img/fintech-ai.png"
                    alt="AI-powered adaptive engagement framework for banking" />
               <p class="portfolio-tag">AI Agents &amp; FinTech</p>
@@ -490,6 +490,14 @@
         </div>
       </section>
     </main>
+
+    <!-- ===== PROJECT MODAL ===== -->
+    <div id="project-modal" class="modal-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-card">
+        <button class="modal-close" id="modal-close-btn" aria-label="Close">✕</button>
+        <div id="modal-body"></div>
+      </div>
+    </div>
 
     <footer class="site-footer">
       <div class="container">
