@@ -374,63 +374,72 @@ const MODAL_CONTENT = {
 
 <figure class="modal-figure">
   <img src="projects/img/rbp-fig1-pipeline.png" alt="Full ML pipeline: Gene Annotations + RBP Signal Strength + Treatment Data → Merge → Preprocess → Binary/Actual → Model Construction → Evaluation" loading="lazy" />
-  <figcaption><strong>Fig. 1 — End-to-end pipeline.</strong> Three data sources (GENCODE annotations, ENCODE eCLIP signals, Ribo-seq treatment data) are merged into a single feature matrix. Two feature representations (binary and actual) feed into model construction and evaluation.</figcaption>
+  <figcaption><strong>Fig. 1 — End-to-end pipeline.</strong> Three data sources merged into a single feature matrix, preprocessed in two parallel representations, then fed into model construction and evaluation.</figcaption>
 </figure>
+
+<p><strong>Input matrix (post-preprocessing):</strong> After one-hot encoding the Geneid column, the working dataset expands to <strong>9,521 rows × 9,661 columns</strong> — 139 RBP signal features plus ~9,500 binary gene-ID indicator columns. An 80/20 train/test split (<code>random_state=42</code>) was applied, yielding ~7,616 training and ~1,905 test samples. Labels were computed as:</p>
+<ul>
+  <li><strong>Condition 1:</strong> <code>sign(shScramble TPM − shDDX41 TPM)</code> → binary: class 0 / class 1</li>
+  <li><strong>Condition 2:</strong> <code>sign(DMSO TPM − CX5461 TPM)</code> → binary: class 0 / class 1</li>
+</ul>
+<p>Genes with zero differential (no change) were excluded, leaving ~9,521 informative genes. A <strong>3-class variant</strong> was also tested (retaining the neutral class as class 2), yielding 51–56% accuracy — lower than binary, confirming that the neutral class adds ambiguity without gain.</p>
 
 <div class="ml-pipeline">
   <div class="ml-step">
-    <span class="ml-step-label">Input</span>
-    <span class="ml-step-text">139 RBPs · eCLIP<br/>20,049 genes<br/>2 conditions</span>
+    <span class="ml-step-label">Matrix</span>
+    <span class="ml-step-text">9,521 × 9,661<br/>RBP signals +<br/>gene-ID OHE</span>
   </div>
   <span class="ml-arrow">→</span>
   <div class="ml-step">
-    <span class="ml-step-label">Features</span>
-    <span class="ml-step-text">Binary 0/1<br/>— or —<br/>Actual signal</span>
+    <span class="ml-step-label">Split</span>
+    <span class="ml-step-text">80 / 20<br/>train / test<br/>random_state=42</span>
   </div>
   <span class="ml-arrow">→</span>
   <div class="ml-step">
-    <span class="ml-step-label">3 Experiments</span>
-    <span class="ml-step-text">Default baseline<br/>6-model comparison<br/>Tuned top 3</span>
+    <span class="ml-step-label">6 Classifiers</span>
+    <span class="ml-step-text">XGB · RF · AdaBoost<br/>SGD · KNN · GNB<br/>default → tuned</span>
   </div>
   <span class="ml-arrow">→</span>
   <div class="ml-step">
     <span class="ml-step-label">Tuning</span>
-    <span class="ml-step-text">RandomizedSearchCV<br/>10 → 100 iters<br/>accuracy metric</span>
+    <span class="ml-step-text">RandomizedSearchCV<br/>cv=3 · accuracy<br/>10 → 100 iters</span>
   </div>
   <span class="ml-arrow">→</span>
   <div class="ml-step ml-step--result">
     <span class="ml-step-label">Best</span>
-    <span class="ml-step-text">AdaBoost<br/>Cond 1 · actual<br/>Acc = 61.05%</span>
+    <span class="ml-step-text">AdaBoost<br/>Cond 1 · actual<br/>61.05%</span>
   </div>
 </div>
 
-<p>Three experiments were run in parallel across both conditions and both feature types:</p>
+<p>Three iterative experiments were conducted for both conditions and both feature types (binary and actual):</p>
 <ul>
-  <li><strong>Exp 1:</strong> XGBoost with default parameters — establishes a baseline.</li>
-  <li><strong>Exp 2:</strong> All six classifiers with default parameters — breadth comparison to identify suitable algorithm families.</li>
-  <li><strong>Exp 3:</strong> Top performers (XGBoost, Random Forest, AdaBoost) hyperparameter-tuned via <code>RandomizedSearchCV</code> in two phases (10 iterations to identify promising ranges, then 100 iterations for fine-grained search).</li>
+  <li><strong>Exp 1 — Baseline:</strong> XGBoost with default parameters. Established reference performance (~59% binary, ~57% actual for Cond 2).</li>
+  <li><strong>Exp 2 — Breadth comparison:</strong> All six classifiers (XGBoost, Random Forest, AdaBoost, SGD, KNN, GaussianNB) with default parameters. AdaBoost emerged as the strongest; GNB was immediately identified as unsuitable (extreme class bias, ~45–46%).</li>
+  <li><strong>Exp 3 — Hyperparameter optimisation:</strong> <code>RandomizedSearchCV</code> in two phases — 10 iterations (range exploration) then 100 iterations (fine search) — with 3-fold CV scored on accuracy. Applied to all six classifiers. Best AdaBoost params: <code>learning_rate=0.193, n_estimators=121</code>.</li>
 </ul>
 
 <h4>D &nbsp;·&nbsp; Results</h4>
-<p><strong>AdaBoost was the best-performing model</strong> across all conditions and feature types. Using actual RBP signal values consistently outperformed binary features. Condition 1 (DDX41-knockdown) was easier to predict than Condition 2 (CX5461), suggesting greater biological complexity in the CX5461 response.</p>
+<p><strong>AdaBoost with actual RBP signal values on Condition 1 achieved the highest accuracy of 61.05%</strong> — the overall best across all models, conditions, and feature types. Actual signal values consistently outperformed binary encoding. Condition 1 (DDX41-KD) was systematically easier to predict than Condition 2 (CX5461), suggesting that CX5461's translational effects are more diffuse and less RBP-mediated.</p>
 
 <div class="modal-fig-row">
   <figure class="modal-figure">
     <img src="projects/img/rbp-fig4-adaboost-best.png" alt="AdaBoost best result: Condition 1, actual values — accuracy 61.05%" loading="lazy" />
-    <figcaption><strong>Best model — AdaBoost · Cond 1 · actual values</strong><br/>Accuracy 61.05% · macro F1 = 0.57<br/>Class 0 (down): P=0.61, R=0.83, F1=0.70<br/>Class 1 (up): P=0.62, R=0.34, F1=0.44</figcaption>
+    <figcaption><strong>Best — AdaBoost · Cond 1 · actual values · n_iter=10</strong><br/>Acc = 61.05% · macro avg F1 = 0.57<br/>Class 0: P=0.61, R=0.83, F1=0.70 (n=1051)<br/>Class 1: P=0.62, R=0.34, F1=0.44 (n=854)</figcaption>
   </figure>
   <figure class="modal-figure">
-    <img src="projects/img/rbp-fig5-adaboost-cond2.png" alt="AdaBoost Condition 2 result — accuracy 55.81%" loading="lazy" />
-    <figcaption><strong>AdaBoost · Cond 2 · binary features</strong><br/>Accuracy 55.81% · macro F1 = 0.54<br/>Class 0 (down): P=0.59, R=0.68, F1=0.63<br/>Class 1 (up): P=0.50, R=0.41, F1=0.45</figcaption>
+    <img src="projects/img/rbp-fig5-adaboost-cond2.png" alt="AdaBoost Condition 2 — accuracy 55.81%" loading="lazy" />
+    <figcaption><strong>AdaBoost · Cond 2 · binary · default</strong><br/>Acc = 55.81% · macro avg F1 = 0.54<br/>Class 0: P=0.59, R=0.68, F1=0.63 (n=995)<br/>Class 1: P=0.50, R=0.41, F1=0.45 (n=795)</figcaption>
   </figure>
 </div>
 
+<p>All models shared a consistent pattern: <strong>class 0 recall was always substantially higher than class 1 recall</strong>, meaning down-regulation events were easier to detect than up-regulation events. GaussianNB showed extreme failure — on binary features it predicted 100% of instances as class 1 (0% recall for class 0); on actual values the bias reversed completely. Both failure modes persisted through 100 iterations of tuning, confirming GNB is fundamentally unsuited to this high-dimensional sparse dataset.</p>
+
 <div class="modal-results-grid modal-results-grid--5">
-  <div class="result-item"><strong>Best accuracy</strong><br/>61.05%</div>
-  <div class="result-item"><strong>Best model</strong><br/>AdaBoost</div>
-  <div class="result-item"><strong>Best features</strong><br/>Actual values</div>
+  <div class="result-item result-item--highlight"><strong>Best accuracy</strong><br/>AdaBoost · 61.05%</div>
+  <div class="result-item"><strong>Runner-up</strong><br/>XGBoost · 60.47%</div>
+  <div class="result-item"><strong>Best features</strong><br/>Actual signal values</div>
   <div class="result-item"><strong>Best condition</strong><br/>Cond 1 · DDX41-KD</div>
-  <div class="result-item result-item--highlight"><strong>Worst model</strong><br/>GNB · ~45%</div>
+  <div class="result-item"><strong>Worst model</strong><br/>GNB · ~45–46%</div>
 </div>
 
 <h4>Key Findings &amp; Conclusions</h4>
