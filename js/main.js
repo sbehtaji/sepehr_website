@@ -342,7 +342,7 @@ const MODAL_CONTENT = {
 <p><strong>RNA-Binding Proteins (RBPs)</strong> are a family of >1,542 human proteins that regulate gene expression post-transcriptionally — controlling mRNA splicing, stability, localisation, and translation. Their dysregulation is increasingly linked to cancer, including chronic myeloid leukaemia (CML). This study used <strong>K562 cells</strong>, the canonical CML model carrying the Philadelphia chromosome (BCR-ABL fusion), to investigate whether RBP binding patterns can predict how individual genes respond translationally to two distinct molecular perturbations.</p>
 
 <h4>Objective</h4>
-<p>Build supervised ML classifiers that predict the translational response (up- or down-regulated) of <strong>20,049 protein-coding genes</strong> in K562 cells under two treatment conditions, using the binding signals of <strong>139 RBPs</strong> from ENCODE eCLIP as features and Ribo-seq translation data as labels.</p>
+<p>Build supervised ML classifiers that predict the translational response (up- or down-regulated) of <strong>20,049 protein-coding genes</strong> in K562 cells under two treatment conditions, using the binding signals of <strong>139 RBPs</strong> from ENCODE eCLIP as features and Ribo-seq translation data as labels. Six classifiers were systematically evaluated: <strong>XGBoost, Random Forest, AdaBoost, SGD (Stochastic Gradient Descent), K-Nearest Neighbours (KNN), and Gaussian Naïve Bayes (GNB)</strong>.</p>
 
 <h4>A &nbsp;·&nbsp; Datasets</h4>
 <ul>
@@ -397,7 +397,7 @@ const MODAL_CONTENT = {
   <span class="ml-arrow">→</span>
   <div class="ml-step">
     <span class="ml-step-label">6 Classifiers</span>
-    <span class="ml-step-text">XGB · RF · AdaBoost<br/>SGD · KNN · GNB<br/>default → tuned</span>
+    <span class="ml-step-text">XGBoost · Random Forest<br/>AdaBoost · SGD<br/>KNN · Gaussian NB</span>
   </div>
   <span class="ml-arrow">→</span>
   <div class="ml-step">
@@ -414,7 +414,16 @@ const MODAL_CONTENT = {
 <p>Three iterative experiments were conducted for both conditions and both feature types (binary and actual):</p>
 <ul>
   <li><strong>Exp 1 — Baseline:</strong> XGBoost with default parameters. Established reference performance (~59% binary, ~57% actual for Cond 2).</li>
-  <li><strong>Exp 2 — Breadth comparison:</strong> All six classifiers (XGBoost, Random Forest, AdaBoost, SGD, KNN, GaussianNB) with default parameters. AdaBoost emerged as the strongest; GNB was immediately identified as unsuitable (extreme class bias, ~45–46%).</li>
+  <li><strong>Exp 2 — Breadth comparison:</strong> All six classifiers with default parameters:
+    <ul>
+      <li><strong>XGBoost</strong> — gradient boosting on decision trees; strong baseline (~59–60%)</li>
+      <li><strong>Random Forest</strong> — bagging ensemble; comparable to XGBoost with less sensitivity to tuning</li>
+      <li><strong>AdaBoost</strong> — adaptive boosting; emerged as the overall strongest classifier</li>
+      <li><strong>SGD</strong> (Stochastic Gradient Descent with log-loss) — linear model; moderate performance, fast convergence</li>
+      <li><strong>KNN</strong> (K-Nearest Neighbours) — instance-based; reasonable accuracy on actual features, slow on high-dimensional space</li>
+      <li><strong>GaussianNB</strong> — probabilistic Naive Bayes; immediately identified as unsuitable — extreme class bias (~45–46%) that hyperparameter tuning could not correct</li>
+    </ul>
+  </li>
   <li><strong>Exp 3 — Hyperparameter optimisation:</strong> <code>RandomizedSearchCV</code> in two phases — 10 iterations (range exploration) then 100 iterations (fine search) — with 3-fold CV scored on accuracy. Applied to all six classifiers. Best AdaBoost params: <code>learning_rate=0.193, n_estimators=121</code>.</li>
 </ul>
 
