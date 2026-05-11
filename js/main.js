@@ -474,12 +474,111 @@ const MODAL_CONTENT = {
   },
 
   "fintech": {
-    tag: "AI Agents & FinTech · Published",
+    tag: "AI & FinTech · Scientific Reports · 2026",
     title: "AI-Powered Adaptive Engagement Framework",
-    meta: "Scientific Reports, Apr 2026",
-    body: `<p><em>Content coming soon.</em></p>`,
-    pills: ["AI","NLP","FinTech","Adaptive Systems"],
-    links: [{ label: "View Publication", url: "https://scholar.google.com/citations?user=qUR4MQMAAAAJ&hl=en" }]
+    meta: "Shahbazi A., Behtaji S. et al. · Scientific Reports, Apr 2026 · DOI: 10.1038/s41598-026-49522-y",
+    body: `
+<img class="modal-hero-img" src="projects/img/fintech/fintech-hero-framework.png" alt="Adaptive Engagement Framework — full methodology pipeline overview" />
+
+<h4>Background &amp; Motivation</h4>
+<p>Traditional bank marketing relies on direct promotions that customers often perceive as intrusive, triggering resistance and reducing engagement. <strong>Invisible marketing</strong> — embedding AI-generated recommendations seamlessly within a customer's natural interaction journey so they feel like helpful service rather than advertising — is theoretically distinct from personalisation and permission-based marketing, and remains under-studied in digital banking. This paper proposes the <strong>Adaptive Engagement Framework (AEF)</strong>, a methodologically rigorous pipeline that classifies customers by interaction propensity and aligns channel selection and engagement timing to empirically identified behavioural receptivity signals, grounded in Persuasion Knowledge Theory, Behavioural Economics, and Algorithmic Governance.</p>
+
+<h4>Dataset</h4>
+<ul>
+  <li><strong>Source:</strong> Bank Mellat (Iran) — 45,211 customer records including purchase history, call logs, demographic, credit, and campaign data</li>
+  <li><strong>Class distribution:</strong> 5,308 High Interaction (11.7%) · 39,903 Low Interaction (88.3%) — heavily imbalanced</li>
+  <li><strong>Features (16 total):</strong> call duration, account balance, pdays, previous contacts, campaign count, contact method, month/day, age, job, marital status, education, default, housing loan, personal loan, prior campaign outcome</li>
+  <li><strong>Class balancing:</strong> Random OverSampling applied strictly within each training fold of 5-fold stratified cross-validation to prevent data leakage</li>
+</ul>
+
+<h4>A &nbsp;·&nbsp; Feature Importance — Mutual Information</h4>
+<p>Mutual Information (MI) was used to rank all 16 features by statistical dependency with the interaction label. The top 10 features were selected for model training.</p>
+
+<figure class="modal-figure">
+  <img src="projects/img/fintech/fintech-fig1-feature-importance.png" alt="Feature Importance using Mutual Information — duration and balance dominate" loading="lazy" />
+  <figcaption><strong>Fig. 1 — Mutual Information feature importance ranking.</strong> Call duration (MI = 1.000) and account balance (MI = 0.995) are overwhelmingly the two dominant predictors. Sociodemographic features (education, marital, default) rank at near-zero, confirming that behavioural and financial signals — not demographics — drive interaction classification.</figcaption>
+</figure>
+
+<h4>B &nbsp;·&nbsp; Classical ML Classification</h4>
+<p>Four supervised classifiers were evaluated on the top-10 MI-selected features under 5-fold stratified cross-validation:</p>
+
+<div class="ml-pipeline">
+  <div class="ml-step">
+    <span class="ml-step-label">Input</span>
+    <span class="ml-step-text">45,211 records<br/>Top-10 MI<br/>features</span>
+  </div>
+  <span class="ml-arrow">→</span>
+  <div class="ml-step">
+    <span class="ml-step-label">Classifiers</span>
+    <span class="ml-step-text">Random Forest<br/>Decision Tree<br/>SVM · DNN</span>
+  </div>
+  <span class="ml-arrow">→</span>
+  <div class="ml-step">
+    <span class="ml-step-label">CV</span>
+    <span class="ml-step-text">5-fold stratified<br/>ROS within<br/>train folds</span>
+  </div>
+  <span class="ml-arrow">→</span>
+  <div class="ml-step ml-step--result">
+    <span class="ml-step-label">Best</span>
+    <span class="ml-step-text">Random Forest<br/>Acc = 0.9698<br/>AUC = 0.9997</span>
+  </div>
+</div>
+
+<figure class="modal-figure">
+  <img src="projects/img/fintech/fintech-fig2-ml-results.png" alt="Classification results — RF, DT, SVM, DNN bar charts and confusion matrices" loading="lazy" />
+  <figcaption><strong>Fig. 2 — ML classification results across 5-fold CV.</strong> Bar charts (top) show mean ± SD for Accuracy, AUC, Precision, Recall, and F1. Confusion matrices (bottom) summarise per-fold aggregated predictions. Random Forest achieves the highest accuracy (0.9698) and near-perfect AUC (0.9997); SVM and DNN lag substantially at ~0.84 and ~0.86 respectively.</figcaption>
+</figure>
+
+<div class="modal-results-grid">
+  <div class="result-item result-item--highlight"><strong>Random Forest</strong><br/>Acc = 0.9698 · AUC = 0.9997</div>
+  <div class="result-item"><strong>Decision Tree</strong><br/>Acc = 0.9602 · AUC = 0.9602</div>
+  <div class="result-item"><strong>DNN</strong><br/>Acc = 0.8626 · AUC = 0.9302</div>
+  <div class="result-item"><strong>SVM (RBF)</strong><br/>Acc = 0.8392 · AUC = 0.9114</div>
+</div>
+
+<h4>C &nbsp;·&nbsp; Novel Contribution — Feature-to-Image Transformation</h4>
+<p>A key innovation of this study is encoding tabular customer records as <strong>64 × 64 grayscale images</strong>, enabling convolutional neural networks to capture spatial interaction patterns across feature groups. The pipeline: (i) group 16 consecutive records into a 16×16 feature matrix, (ii) apply min–max pixel normalisation, (iii) pad to 64×64 with 24-pixel symmetric zero-padding. Features are spatially ordered by semantic group — temporal, financial, campaign history — so that CNN receptive fields span semantically coherent subsets.</p>
+
+<figure class="modal-figure">
+  <img src="projects/img/fintech/fintech-fig4-img-transform.png" alt="Step-by-step feature-to-image transformation: raw matrix → normalised grayscale → padded 64×64" loading="lazy" />
+  <figcaption><strong>Fig. 3 — Feature-to-image transformation pipeline.</strong> (a) Raw 16×16 feature matrix from 16 consecutive customer records. (b) Min–max normalised grayscale image. (c) Final 64×64 zero-padded image used as CNN input. This approach enables spatially sensitive deep learning on purely tabular banking data.</figcaption>
+</figure>
+
+<h4>D &nbsp;·&nbsp; CNN Architecture — RDAD-CNN</h4>
+<p>Three CNN architectures of increasing complexity were evaluated on the transformed image dataset:</p>
+<ul>
+  <li><strong>Plain CNN (baseline):</strong> Four sequential Conv→BN→ReLU→MaxPool blocks + FC head</li>
+  <li><strong>CNN-SE:</strong> Adds Squeeze-and-Excitation channel attention after each convolutional block</li>
+  <li><strong>RDAD-CNN (proposed):</strong> Integrates depthwise-separable convolutions, <em>dual-path</em> channel attention (avg-pool + max-pool branches), spatial attention (7×7 conv), and residual skip connections — ~3.8M parameters</li>
+</ul>
+
+<figure class="modal-figure">
+  <img src="projects/img/fintech/fintech-fig3-cnn-results.png" alt="CNN training curves and confusion matrices — Plain CNN, CNN-SE, RDAD-CNN" loading="lazy" />
+  <figcaption><strong>Fig. 4 — CNN results across 5-fold CV.</strong> (a) Per-fold training/validation learning curves for loss, accuracy, AUC, precision, and recall over 50 epochs. (b) Multi-metric bar comparison showing monotonic improvement across architectures. (c) Aggregated confusion matrices (n=4,990 per model). RDAD-CNN achieves Acc = 0.9906, AUC = 0.9942, MCC = 0.9812.</figcaption>
+</figure>
+
+<div class="modal-results-grid">
+  <div class="result-item result-item--highlight"><strong>RDAD-CNN</strong><br/>Acc = 0.9906 · AUC = 0.9942 · MCC = 0.9812</div>
+  <div class="result-item"><strong>CNN-SE</strong><br/>Acc = 0.9828 · AUC = 0.9871</div>
+  <div class="result-item"><strong>Plain CNN</strong><br/>Acc = 0.9748 · AUC = 0.9801</div>
+  <div class="result-item"><strong>Statistical significance</strong><br/>Friedman χ² = 10.00, p = 0.0067<br/>Cohen's d: 17–39 (all large)</div>
+</div>
+
+<h4>Key Findings &amp; Conclusions</h4>
+<ul>
+  <li><strong>Behavioural signals dominate demographics</strong> — call duration and account balance (MI ≥ 0.995) far outrank age, job, education, and marital status as predictors of customer engagement.</li>
+  <li><strong>Random Forest is the strongest classical classifier</strong> — achieving 96.98% accuracy and near-perfect AUC of 0.9997, with Cohen's d values confirming large and consistent superiority over SVM and DNN.</li>
+  <li><strong>Feature-to-image encoding enables deep learning on tabular data</strong> — the 64×64 grayscale transformation pipeline is a novel and replicable contribution that lifts performance beyond all classical baselines.</li>
+  <li><strong>RDAD-CNN achieves state-of-the-art 99.06% accuracy</strong> — statistically significant improvements over both CNN baselines confirmed by Friedman test and uniformly large effect sizes (Cohen's d 17.29–39.39).</li>
+  <li><strong>Ethical governance integrated</strong> — the framework includes Algorithmic Governance provisions distinguishing beneficial financial nudges from exploitative persuasion, a design-level contribution absent from prior segmentation studies.</li>
+  <li><strong>Future work:</strong> longitudinal validation, cross-institutional replication, and adaptive learning mechanisms for dynamic market conditions.</li>
+</ul>
+`,
+    pills: ["Python","PyTorch","CNN","RDAD-CNN","Random Forest","Decision Tree","SVM","DNN","Mutual Information","Feature-to-Image","Banking Analytics","Explainable AI","Invisible Marketing","Scientific Reports"],
+    links: [
+      { label: "View Publication (DOI)", url: "https://doi.org/10.1038/s41598-026-49522-y" },
+      { label: "Google Scholar", url: "https://scholar.google.com/citations?user=qUR4MQMAAAAJ&hl=en" }
+    ]
   }
 
 };
