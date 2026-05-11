@@ -478,7 +478,7 @@ const MODAL_CONTENT = {
     title: "AI-Powered Adaptive Engagement Framework",
     meta: "Shahbazi A., Behtaji S. et al. · Scientific Reports, Apr 2026 · DOI: 10.1038/s41598-026-49522-y",
     body: `
-<img class="modal-hero-img" src="projects/img/fintech/fintech-hero-framework.png" alt="Adaptive Engagement Framework — full methodology pipeline overview" />
+<img class="modal-hero-img modal-hero-img--vertical" src="projects/img/fintech/fintech-hero-framework.png" alt="Adaptive Engagement Framework — full methodology pipeline overview" />
 
 <h4>Background &amp; Motivation</h4>
 <p>Traditional bank marketing relies on direct promotions that customers often perceive as intrusive, triggering resistance and reducing engagement. <strong>Invisible marketing</strong> — embedding AI-generated recommendations seamlessly within a customer's natural interaction journey so they feel like helpful service rather than advertising — is theoretically distinct from personalisation and permission-based marketing, and remains under-studied in digital banking. This paper proposes the <strong>Adaptive Engagement Framework (AEF)</strong>, a methodologically rigorous pipeline that classifies customers by interaction propensity and aligns channel selection and engagement timing to empirically identified behavioural receptivity signals, grounded in Persuasion Knowledge Theory, Behavioural Economics, and Algorithmic Governance.</p>

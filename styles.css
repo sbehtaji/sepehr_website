@@ -879,6 +879,12 @@ body {
   margin-bottom: 1.2rem;
   border: 1px solid var(--border);
 }
+.modal-hero-img--vertical {
+  width: 100%;
+  max-height: none;
+  height: auto;
+  object-fit: unset;
+}
 .modal-figure {
   margin: 1rem 0 1.2rem;
   text-align: center;
