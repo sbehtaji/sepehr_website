@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Open+Sans:wght@400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Open+Sans:wght@400;600;700&family=Cormorant+Garamond:wght@300;400&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
@@ -397,6 +397,50 @@
         </div>
       </section>
 
+      <!-- ===== CINEMATIC SCROLL ===== -->
+      <section id="cinematic" class="cinematic-scroll-section" aria-label="Cinematic reel">
+        <div class="cinematic-sticky">
+          <video
+            id="cinematic-video"
+            class="cinematic-video"
+            muted
+            playsinline
+            preload="auto"
+            poster="video/cinematic-poster.jpg"
+          >
+            <source src="video/cinematic.mp4" type="video/mp4" />
+          </video>
+          <div class="cinematic-vignette"></div>
+          <div class="cinematic-grain"></div>
+
+          <div class="cinematic-overlay" id="cine-overlay-1">
+            <span class="cine-label">01 &nbsp;/&nbsp; Signal</span>
+            <h2 class="cine-headline">Reading<br>the Signal</h2>
+            <p class="cine-sub">Every scan, every sequence, every transaction holds a hidden pattern.</p>
+          </div>
+
+          <div class="cinematic-overlay" id="cine-overlay-2">
+            <span class="cine-label">02 &nbsp;/&nbsp; Domains</span>
+            <h2 class="cine-headline">Three Domains.<br>One Intelligence.</h2>
+            <p class="cine-sub">Medical Imaging &nbsp;·&nbsp; Genomics &nbsp;·&nbsp; Financial AI</p>
+          </div>
+
+          <div class="cinematic-overlay" id="cine-overlay-3">
+            <span class="cine-label">03 &nbsp;/&nbsp; Discovery</span>
+            <h2 class="cine-headline">Where Data<br>Becomes Discovery</h2>
+            <p class="cine-sub">Machine learning that sees what the human eye cannot.</p>
+          </div>
+
+          <div class="cinematic-overlay" id="cine-overlay-4">
+            <span class="cine-label">04 &nbsp;/&nbsp; Identity</span>
+            <h2 class="cine-headline">Sepehr Behtaji</h2>
+            <p class="cine-sub">ML Engineer &nbsp;·&nbsp; Computer Vision &nbsp;·&nbsp; Applied AI</p>
+          </div>
+
+          <div class="cine-progress-bar"><div class="cine-progress-fill" id="cine-progress-fill"></div></div>
+        </div>
+      </section>
+
       <!-- ===== FAQ ===== -->
       <section id="faq" class="section">
         <div class="container">
@@ -506,5 +550,8 @@
     </footer>
 
     <script src="js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="js/cinematic.js"></script>
   </body>
 </html>
