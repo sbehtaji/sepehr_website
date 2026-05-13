@@ -4,91 +4,87 @@
   const section = document.getElementById('cinematic');
   const video   = document.getElementById('cinematic-video');
   const fill    = document.getElementById('cine-progress-fill');
-
   if (!section || !video) return;
 
-  gsap.registerPlugin(ScrollTrigger);
+  // Keep video frozen — scroll drives every frame
+  video.pause();
+  video.currentTime = 0;
 
-  // Overlay definitions: [id, fadeIn-start%, peak%, fadeOut-end%]
-  // Mapped to 6-clip video:
-  //  0-17%  → clip1 (brain MRI + DNA)
-  //  17-33% → clip2 (explosion)
-  //  33-50% → clip3 (CT segmentation)
-  //  50-67% → clip4 (three streams converge)
-  //  67-83% → clip5 (neural network alive)
-  //  83-100%→ clip6 (hands + panels)
   const overlays = [
-    { id: 'cine-overlay-1', inStart: 0.04, inEnd: 0.12, outStart: 0.20, outEnd: 0.28 },
-    { id: 'cine-overlay-2', inStart: 0.28, inEnd: 0.36, outStart: 0.44, outEnd: 0.52 },
-    { id: 'cine-overlay-3', inStart: 0.52, inEnd: 0.60, outStart: 0.68, outEnd: 0.76 },
-    { id: 'cine-overlay-4', inStart: 0.80, inEnd: 0.88, outStart: 0.96, outEnd: 1.00 },
+    { id: 'cine-overlay-1', i0: 0.04, i1: 0.13, o0: 0.22, o1: 0.30 },
+    { id: 'cine-overlay-2', i0: 0.30, i1: 0.40, o0: 0.48, o1: 0.56 },
+    { id: 'cine-overlay-3', i0: 0.56, i1: 0.65, o0: 0.73, o1: 0.80 },
+    { id: 'cine-overlay-4', i0: 0.82, i1: 0.90, o0: 0.97, o1: 1.00 },
   ];
 
-  function setupCinematic(duration) {
-    // ── Scroll → video.currentTime ──────────────────────────────
-    ScrollTrigger.create({
-      trigger: section,
-      start: 'top top',
-      end: 'bottom bottom',
-      scrub: 1.2,
-      onUpdate(self) {
-        const t = self.progress * duration;
-        // iOS Safari: only seek when paused to avoid stutter
-        if (Math.abs(video.currentTime - t) > 0.08) {
-          video.currentTime = t;
-        }
-        // Progress bar
-        if (fill) fill.style.width = (self.progress * 100).toFixed(2) + '%';
-        // Overlays driven by raw progress value
-        updateOverlays(self.progress);
-      },
-    });
+  /* ── scroll progress 0→1 ── */
+  function getProgress() {
+    const top       = section.getBoundingClientRect().top;
+    const scrollable = section.offsetHeight - window.innerHeight;
+    return Math.max(0, Math.min(1, -top / scrollable));
   }
 
+  /* ── drive overlay opacity + y ── */
   function updateOverlays(p) {
-    overlays.forEach(({ id, inStart, inEnd, outStart, outEnd }) => {
+    overlays.forEach(({ id, i0, i1, o0, o1 }) => {
       const el = document.getElementById(id);
       if (!el) return;
-
-      let opacity = 0;
-      let y = 18;
-
-      if (p >= inStart && p < inEnd) {
-        // Fading in
-        const t = (p - inStart) / (inEnd - inStart);
+      let opacity = 0, y = 20;
+      if (p >= i0 && p < i1) {
+        const t = (p - i0) / (i1 - i0);
         opacity = t;
-        y = 18 * (1 - t);
-      } else if (p >= inEnd && p < outStart) {
-        // Fully visible
+        y = 20 * (1 - t);
+      } else if (p >= i1 && p < o0) {
         opacity = 1;
         y = 0;
-      } else if (p >= outStart && p < outEnd) {
-        // Fading out
-        const t = (p - outStart) / (outEnd - outStart);
+      } else if (p >= o0 && p < o1) {
+        const t = (p - o0) / (o1 - o0);
         opacity = 1 - t;
-        y = -14 * t;
+        y = -16 * t;
       }
-
-      el.style.opacity = opacity;
-      el.style.transform = `translateY(${y}px)`;
+      el.style.opacity  = opacity;
+      el.style.transform = 'translateY(' + y.toFixed(2) + 'px)';
     });
   }
 
-  // ── Boot sequence ─────────────────────────────────────────────
-  function boot() {
-    video.muted = true;
-    video.load();
+  /* ── main update loop ── */
+  let rafId = null;
 
-    if (video.readyState >= 1 && video.duration) {
-      setupCinematic(video.duration);
-    } else {
-      video.addEventListener('loadedmetadata', () => {
-        setupCinematic(video.duration);
-      }, { once: true });
+  function update() {
+    rafId = null;
+    const p = getProgress();
+
+    // Seek video
+    if (video.duration && video.readyState >= 2) {
+      const target = p * video.duration;
+      video.currentTime = target;
     }
+
+    // Progress bar
+    if (fill) fill.style.width = (p * 100).toFixed(2) + '%';
+
+    // Overlays
+    updateOverlays(p);
   }
 
-  // Run after DOM + GSAP are ready
+  function onScroll() {
+    if (!rafId) rafId = requestAnimationFrame(update);
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* ── boot: wait for video to be ready ── */
+  function boot() {
+    video.muted = true;
+    // Force browser to load enough data for seeking
+    video.addEventListener('canplay', function onReady() {
+      video.pause();
+      update(); // set initial frame
+      video.removeEventListener('canplay', onReady);
+    });
+    video.load();
+  }
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', boot);
   } else {
