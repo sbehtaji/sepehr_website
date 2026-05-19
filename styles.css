@@ -296,17 +296,13 @@ h3 {
   box-shadow: 0 8px 28px rgba(19, 68, 127, 0.08);
 }
 
-/* ── Colour strips ── */
-.card--burgundy  { border-top: 3px solid var(--strip-burgundy); }
-.card--caspian   { border-top: 3px solid var(--strip-caspian); }
-.card--violet    { border-top: 3px solid var(--strip-violet); }
-.card--duck      { border-top: 3px solid var(--strip-duck); }
-.card--dark-gold { border-top: 3px solid var(--strip-dark-gold); }
-.card--blue      { border-top: 3px solid var(--strip-blue); }
-.card--teal      { border-top: 3px solid var(--strip-teal); }
-.card--purple    { border-top: 3px solid var(--strip-purple); }
+/* ── Colour strips — insight & endorsement cards only ── */
+.card--blue   { border-top: 3px solid var(--strip-blue); }
+.card--teal   { border-top: 3px solid var(--strip-teal); }
+.card--purple { border-top: 3px solid var(--strip-purple); }
+.card--gold   { border-top: 3px solid var(--strip-dark-gold); }
 
-/* kicker label */
+/* kicker label — insight cards */
 .card-kicker {
   display: block;
   font-size: 0.68rem;
@@ -316,13 +312,9 @@ h3 {
   margin-bottom: 0.45rem;
   color: var(--muted);
 }
-.card--burgundy  .card-kicker { color: var(--strip-burgundy); }
-.card--caspian   .card-kicker { color: var(--strip-caspian); }
-.card--violet    .card-kicker { color: var(--strip-violet); }
-.card--duck      .card-kicker { color: var(--strip-duck); }
-.card--dark-gold .card-kicker { color: var(--strip-dark-gold); }
-.card--blue      .card-kicker { color: var(--strip-blue); }
-.card--teal      .card-kicker { color: var(--strip-teal); }
+.card--blue  .card-kicker { color: var(--strip-blue); }
+.card--teal  .card-kicker { color: var(--strip-teal); }
+.card--gold  .card-kicker { color: var(--strip-dark-gold); }
 
 .timeline-item + .timeline-item {
   margin-top: 0.9rem;
@@ -414,25 +406,16 @@ h3 {
 }
 
 .portfolio-tag {
-  display: block;
-  margin: 0.75rem 1rem 0.3rem;
-  padding: 0;
-  border-radius: 0;
-  font-size: 0.68rem;
+  display: inline-block;
+  margin: 0.8rem 1rem 0.45rem;
+  padding: 0.2rem 0.52rem;
+  border-radius: 999px;
+  font-size: 0.76rem;
   font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  background: none;
-  color: var(--muted);
+  letter-spacing: 0.02em;
+  background: rgba(19, 68, 127, 0.12);
+  color: var(--primary-dark);
 }
-/* portfolio-tag kicker colour matches card strip */
-.card--burgundy  .portfolio-tag { color: var(--strip-burgundy); }
-.card--caspian   .portfolio-tag { color: var(--strip-caspian); }
-.card--violet    .portfolio-tag { color: var(--strip-violet); }
-.card--duck      .portfolio-tag { color: var(--strip-duck); }
-.card--dark-gold .portfolio-tag { color: var(--strip-dark-gold); }
-.card--blue      .portfolio-tag { color: var(--strip-blue); }
-.card--teal      .portfolio-tag { color: var(--strip-teal); }
 
 .portfolio-card h3,
 .portfolio-card p,
