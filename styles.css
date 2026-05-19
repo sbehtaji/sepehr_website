@@ -8,6 +8,13 @@
   --primary-dark: #082b49;
   --border: #d9e2ef;
   --portfolio-thumb-h: 220px;
+
+  /* Card accent strips — handbook pattern */
+  --strip-blue:   #2b6cb8;
+  --strip-green:  #2a8a5c;
+  --strip-gold:   #b8902a;
+  --strip-purple: #6b4fa0;
+  --strip-teal:   #1a7a8a;
 }
 
 * {
@@ -285,6 +292,29 @@ h3 {
   box-shadow: 0 8px 28px rgba(19, 68, 127, 0.08);
 }
 
+/* ── Handbook-style colour strips ── */
+.card--blue   { border-top: 3px solid var(--strip-blue); }
+.card--green  { border-top: 3px solid var(--strip-green); }
+.card--gold   { border-top: 3px solid var(--strip-gold); }
+.card--purple { border-top: 3px solid var(--strip-purple); }
+.card--teal   { border-top: 3px solid var(--strip-teal); }
+
+/* kicker label inside insight cards */
+.card-kicker {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 0.45rem;
+  color: var(--muted);
+}
+.card--blue   .card-kicker { color: var(--strip-blue); }
+.card--green  .card-kicker { color: var(--strip-green); }
+.card--gold   .card-kicker { color: var(--strip-gold); }
+.card--purple .card-kicker { color: var(--strip-purple); }
+.card--teal   .card-kicker { color: var(--strip-teal); }
+
 .timeline-item + .timeline-item {
   margin-top: 0.9rem;
 }
@@ -375,16 +405,23 @@ h3 {
 }
 
 .portfolio-tag {
-  display: inline-block;
-  margin: 0.8rem 1rem 0.45rem;
-  padding: 0.2rem 0.52rem;
-  border-radius: 999px;
-  font-size: 0.76rem;
+  display: block;
+  margin: 0.75rem 1rem 0.3rem;
+  padding: 0;
+  border-radius: 0;
+  font-size: 0.68rem;
   font-weight: 700;
-  letter-spacing: 0.02em;
-  background: rgba(19, 68, 127, 0.12);
-  color: var(--primary-dark);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: none;
+  color: var(--muted);
 }
+/* Kicker colour inherits from parent card strip colour */
+.card--blue   .portfolio-tag { color: var(--strip-blue); }
+.card--green  .portfolio-tag { color: var(--strip-green); }
+.card--gold   .portfolio-tag { color: var(--strip-gold); }
+.card--purple .portfolio-tag { color: var(--strip-purple); }
+.card--teal   .portfolio-tag { color: var(--strip-teal); }
 
 .portfolio-card h3,
 .portfolio-card p,
@@ -480,6 +517,7 @@ h3 {
 
 .endorsement-slider {
   border: 1px solid rgba(19, 68, 127, 0.16);
+  border-top: 3px solid var(--strip-purple);
   border-radius: 16px;
   background: var(--surface);
   overflow: hidden;
