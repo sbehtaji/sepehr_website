@@ -272,6 +272,68 @@ h1 {
   border-block: 1px solid rgba(19, 68, 127, 0.1);
 }
 
+/* ===== RESEARCH INTERESTS ===== */
+.research-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 1.6rem;
+}
+
+.research-item {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1rem 1.1rem;
+  box-shadow: 0 2px 8px rgba(19, 68, 127, 0.05);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.research-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(19, 68, 127, 0.12);
+  border-color: rgba(11, 61, 104, 0.3);
+}
+
+.research-icon {
+  flex-shrink: 0;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #e8f0fa 0%, #d6e6f7 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+}
+
+.research-icon svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+.research-item span {
+  font-size: 0.93rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .research-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .research-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 h2 {
   margin: 0 0 1rem;
   font-size: 1.7rem;
