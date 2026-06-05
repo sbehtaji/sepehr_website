@@ -589,7 +589,7 @@ const MODAL_CONTENT = {
 <img class="modal-hero-img" src="projects/img/geniran-ml.png" alt="Gene-expression ML pipeline — Geniran Research Laboratory" />
 
 <h4>Overview</h4>
-<p>Built end-to-end machine-learning workflows for biomedical datasets, combining gene-expression data (RNA-seq / microarray) with clinical and contextual variables. The focus was on turning raw, messy inputs into model-ready datasets — choosing methods grounded in data assumptions, and producing results that were robust, interpretable, and actionable for hypothesis generation.</p>
+<p>Built end-to-end machine-learning workflows for biomedical datasets, combining gene-expression data (RNA-seq / microarray) with clinical variables — applied to <strong>health vs. disease differentiation</strong> and <strong>disease categorisation</strong>. The focus was on turning raw, messy inputs into model-ready datasets, choosing methods grounded in data assumptions, and producing results that were robust, interpretable, and actionable for hypothesis generation.</p>
 
 <h4>Pipeline & Methods</h4>
 <p>Owned the full workflow from data validation and preprocessing (encoding, normalisation, batch correction, missingness handling) through feature engineering and model evaluation. Applied <strong>unsupervised methods</strong> — PCA and clustering — to explore data structure and identify subgroup patterns. Used <strong>supervised classifiers</strong> (RF, XGBoost, SVM) with LASSO / Elastic Net feature selection and nested cross-validation to quantify predictive signal and surface key biological drivers.</p>
