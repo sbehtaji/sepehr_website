@@ -735,7 +735,7 @@ summary {
 
 .contact-top {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 2rem;
 }
 
