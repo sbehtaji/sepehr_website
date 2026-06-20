@@ -746,6 +746,8 @@ summary {
 .contact-qr {
   flex-shrink: 0;
   text-align: center;
+  margin-top: 1.5rem;
+  margin-right: 2rem;
 }
 
 .contact-qr img {
