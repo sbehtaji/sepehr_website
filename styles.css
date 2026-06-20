@@ -733,6 +733,34 @@ summary {
   font-family: "Roboto", "Open Sans", Arial, sans-serif;
 }
 
+.contact-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.contact-top > div:first-child {
+  flex: 1;
+}
+
+.contact-qr {
+  flex-shrink: 0;
+  text-align: center;
+}
+
+.contact-qr img {
+  width: 110px;
+  height: 110px;
+  display: block;
+}
+
+.contact-qr small {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
 .contact-links {
   display: flex;
   gap: 1rem;
