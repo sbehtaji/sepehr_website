@@ -581,6 +581,26 @@ const MODAL_CONTENT = {
     ]
   },
 
+  "hokpa": {
+    tag: "Medical Devices · Embedded AI",
+    title: "HokPa Hip — Wearable Fall-Detection Device",
+    meta: "Sazeh Teb Parla · Feb 2021",
+    body: `
+<img class="modal-hero-img" src="projects/img/hokpa-hip.png" alt="HokPa Hip — wearable AI airbag belt for hip fracture prevention" />
+
+<h4>Overview</h4>
+<p>The HokPa Hip Smart Belt is equipped with airbag chambers that guarantee a softened impact upon falling, effectively preventing hip fractures. Designed to be worn invisibly and comfortably beneath everyday clothing, it allows elderly users to move freely without restriction — ergonomic, body-conforming, and machine washable across five sizes.</p>
+
+<h4>How It Works</h4>
+<p>Onboard sensors sample movement 500 times per second. On fall detection, the airbag deploys within 200ms — before the hip reaches the ground. An optional GPS module automatically sends an SMS alert with the user's location to a designated contact. The rechargeable Li-Po battery delivers up to 20 hours of continuous operation.</p>
+
+<h4>My Contribution</h4>
+<p>Designed a signal-to-image transformation pipeline converting inertial sensor time-series into 2D representations for deep-learning classification. Trained and evaluated decision-tree classifiers achieving above 96% detection accuracy. Supported microcontroller integration for embedded real-time deployment. The device is endorsed by Tabriz University of Medical Sciences and the East Azerbaijan Welfare Organisation.</p>
+`,
+    pills: ["Python","Signal Processing","Decision Tree","Feature Engineering","Embedded ML","Deep Learning","k-fold CV"],
+    links: []
+  },
+
   "geniran": {
     tag: "Bioinformatics · Geniran Research Laboratory",
     title: "ML on Gene-Expression & Clinical Data",
