@@ -586,7 +586,7 @@ const MODAL_CONTENT = {
     title: "HokPa Hip — Wearable Fall-Detection Device",
     meta: "Sazeh Teb Parla · Feb 2021",
     body: `
-<img class="modal-hero-img" src="projects/img/hokpa-hip.png" alt="HokPa Hip — wearable AI airbag belt for hip fracture prevention" />
+<img class="modal-hero-img" src="projects/img/hokpa-modal.png" alt="HokPa Hip — wearable AI airbag belt for hip fracture prevention" />
 
 <h4>Overview</h4>
 <p>The HokPa Hip Smart Belt is equipped with airbag chambers that guarantee a softened impact upon falling, effectively preventing hip fractures. Designed to be worn invisibly and comfortably beneath everyday clothing, it allows elderly users to move freely without restriction — ergonomic, body-conforming, and machine washable across five sizes.</p>
