@@ -204,6 +204,18 @@ const MODAL_CONTENT = {
     links: []
   },
 
+  "eeg-cnn": {
+    tag: "Neuroscience · Deep Learning",
+    title: "Automated Trigeminal Neuralgia Detection — CNN-Attention EEG",
+    meta: "In Preparation · Comparative ML Study",
+    body: `
+<img class="modal-hero-img" src="projects/img/automated-cnn.png" alt="CNN-Attention architecture for EEG-based trigeminal neuralgia detection" />
+<p><em>Full project summary coming soon.</em></p>
+`,
+    pills: ["Python","CNN","Attention","EEG","Signal Processing","Machine Learning"],
+    links: []
+  },
+
   "oxytocin": {
     tag: "Bioinformatics · Published",
     title: "Oxytocin lncRNA — Breast Cancer Diagnostics",
