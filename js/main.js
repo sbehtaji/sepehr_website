@@ -209,7 +209,7 @@ const MODAL_CONTENT = {
     title: "Automated Trigeminal Neuralgia Detection — CNN-Attention EEG",
     meta: "In Preparation · Comparative ML Study",
     body: `
-<img class="modal-hero-img" src="projects/img/automated-cnn.png" alt="CNN-Attention architecture for EEG-based trigeminal neuralgia detection" />
+<img class="modal-hero-img" src="projects/img/automated-cnn.png" alt="CNN-Attention architecture for EEG-based trigeminal neuralgia detection" style="width:100%;max-height:420px;object-fit:contain;background:#f4f4f4;" />
 <p><em>Full project summary coming soon.</em></p>
 `,
     pills: ["Python","CNN","Attention","EEG","Signal Processing","Machine Learning"],
