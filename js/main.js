@@ -207,10 +207,21 @@ const MODAL_CONTENT = {
   "eeg-cnn": {
     tag: "Neuroscience · Deep Learning",
     title: "Automated Trigeminal Neuralgia Detection — CNN-Attention EEG",
-    meta: "In Preparation · Comparative ML Study",
+    meta: "Accepted · Comparative ML Study",
     body: `
 <img class="modal-hero-img" src="projects/img/automated-cnn.png" alt="CNN-Attention architecture for EEG-based trigeminal neuralgia detection" style="width:100%;max-height:420px;object-fit:contain;background:#f4f4f4;" />
-<p><em>Full project summary coming soon.</em></p>
+<p>
+Trigeminal neuralgia (TN) is one of the most severe pain disorders known — yet its diagnosis relies almost entirely on patient-reported symptoms, leading to frequent misdiagnosis and years of misdirected treatment. This study explores whether resting-state EEG can serve as an objective, non-invasive window into the neurological signature of TN.
+</p>
+<p>
+Working with 72 subjects (36 TN patients, 36 healthy controls), we extracted a rich set of features from EEG signals across five frequency bands — spanning temporal dynamics, spectral power, signal complexity, and nonlinear measures. Statistical analysis revealed that the Gamma band and frontal brain regions carry the strongest discriminative signal, suggesting that TN reorganizes high-frequency cortical activity in ways that are measurable at rest.
+</p>
+<p>
+Six classification architectures were systematically compared, from classical approaches (SVM, Random Forest, Decision Tree) to deep learning (DNN, baseline CNN). The key contribution is a novel CNN with a channel-wise attention mechanism: EEG features are transformed into grayscale images that encode temporal and feature structure, then fed into a convolutional network that learns to weight the most informative signal patterns automatically. The CNN+Attention model outperformed all baselines and achieved the highest accuracy and recall across all folds.
+</p>
+<p>
+A covariate analysis confirmed that the identified EEG signatures reflect TN-specific neurophysiology rather than age-related differences between cohorts. This is the first study to apply a multi-domain, image-based deep learning approach specifically to TN classification, providing proof-of-concept for automated, objective detection of this debilitating condition.
+</p>
 `,
     pills: ["Python","CNN","Attention","EEG","Signal Processing","Machine Learning"],
     links: []
