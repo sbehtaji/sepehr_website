@@ -204,6 +204,29 @@ const MODAL_CONTENT = {
     links: []
   },
 
+  "ct-lung-cancer": {
+    tag: "Medical Imaging · Deep Learning",
+    title: "CT-Based Lung Cancer Detection — Deep Learning Framework",
+    meta: "Accepted · Discover Computing (Springer Nature)",
+    body: `
+<img class="modal-hero-img" src="projects/img/lung-cancer-paper.png" alt="CT-based lung cancer detection deep learning framework" style="width:100%;max-height:380px;object-fit:contain;background:#f4f4f4;" />
+<p>
+Lung cancer is among the leading causes of cancer-related mortality worldwide, yet early detection from CT imaging remains a significant clinical challenge. This study builds a binary lung cancer classification framework directly from chest CT images, asking a precise question: does morphological lung segmentation improve deep learning models, and which architecture family performs best?
+</p>
+<p>
+Seven architectures were evaluated on two independent datasets — covering standalone CNN, three hybrid CNN-ensemble models (CNN+SVM, CNN+Random Forest, CNN+Gradient Boosting), and three fine-tuned pre-trained networks (ResNet50, VGG16, Xception). Each was tested both with and without a nine-step morphological lung segmentation pipeline, independently validated by radiologists, giving a controlled comparison of segmentation's contribution to model stability and performance.
+</p>
+<p>
+Preprocessing combined CLAHE contrast enhancement, median blur, and boundary removal to isolate pulmonary regions reliably. All models were evaluated under 5-fold cross-validation with McNemar's statistical tests to ensure differences in performance were significant rather than incidental. Grad-CAM visualisations confirmed that models were attending to anatomically correct lung regions rather than artefacts.
+</p>
+<p>
+Segmentation consistently improved model stability across architectures. Hybrid CNN-ensemble models were particularly strong beneficiaries, with the best results coming from CNN+Gradient Boosting. The study provides a systematic, statistically rigorous benchmark to guide architecture selection for CT-based lung cancer detection in clinical pipelines.
+</p>
+`,
+    pills: ["Python","CNN","ResNet50","VGG16","Xception","SVM","Random Forest","Gradient Boosting","CLAHE","Grad-CAM","5-fold CV"],
+    links: []
+  },
+
   "eeg-cnn": {
     tag: "Neuroscience · Deep Learning",
     title: "Automated Trigeminal Neuralgia Detection — CNN-Attention EEG",
