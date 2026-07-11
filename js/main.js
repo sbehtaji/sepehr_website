@@ -198,8 +198,33 @@ const MODAL_CONTENT = {
   "ct-stroke": {
     tag: "Medical Imaging · GoodFolio LTD",
     title: "CT-Stroke Classification Workflow",
-    meta: "2025 – Present",
-    body: `<p><em>Content coming soon.</em></p>`,
+    meta: "GoodFolio LTD · 2025 – Present",
+    body: `
+<img class="modal-hero-img" src="projects/img/ct-brain.png" alt="CT brain scan — stroke classification workflow" style="width:100%;max-height:380px;object-fit:cover;" />
+
+<h4>Why Speed Is Everything</h4>
+<p>
+At the start of a stroke, a patient can lose around <strong>two million brain cells a minute</strong>. Treatment eligibility narrows fast: within 4.5 hours, both medical and surgical options are available; up to six hours, surgical treatment remains on the table; beyond that, more cases become irreversible and the decision becomes far harder. The pressure on clinicians to act quickly — and correctly — is enormous.
+</p>
+
+<h4>How CT Fits Into the Pathway</h4>
+<p>
+Patients arriving with a suspected stroke immediately undergo a CT scan. Clinicians review it visually, assessing how dark the affected areas (lesions) appear — darker lesions indicate a stroke that has progressed further. From this, they estimate when the stroke likely started and whether the damage may still be reversible. That estimate directly drives the treatment decision.
+</p>
+<p>
+The problem is that this visual assessment is fast but subjective. This workflow was built to sit alongside that process: not as a replacement for clinical judgement, but as <strong>standardised decision support embedded in the imaging pathway</strong> — giving clinicians a consistent, quantitative read of the scan to act on.
+</p>
+
+<h4>The Workflow</h4>
+<p>
+A multi-class CNN classifier (built on Xception) reads DICOM CT scans and distinguishes between normal brain, ischemic stroke, and haemorrhagic/bleeding cases. The model was validated across independent datasets to test generalisability beyond the training cohort. The result: a triage tool that flags urgency and stroke type before the radiologist report is ready — compressing the time between scan and decision.
+</p>
+
+<h4>Impact</h4>
+<p>
+Average door-to-treatment time fell from <strong>140 to 79 minutes</strong>. The system is positioned not as "AI does diagnosis" but as a layer of standardised support inside the national stroke imaging pathway — augmenting the clinician's read, not replacing it.
+</p>
+`,
     pills: ["CNN","Xception","Python","DICOM","Triage AI"],
     links: []
   },
