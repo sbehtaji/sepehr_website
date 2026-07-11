@@ -233,17 +233,28 @@ Segmentation consistently improved model stability across architectures. Hybrid 
     meta: "Accepted · Comparative ML Study",
     body: `
 <img class="modal-hero-img" src="projects/img/automated-cnn.png" alt="CNN-Attention architecture for EEG-based trigeminal neuralgia detection" style="width:100%;max-height:420px;object-fit:contain;background:#f4f4f4;" />
+
+<h4>Why EEG?</h4>
 <p>
-Trigeminal neuralgia (TN) is one of the most severe pain disorders known — yet its diagnosis relies almost entirely on patient-reported symptoms, leading to frequent misdiagnosis and years of misdirected treatment. This study explores whether resting-state EEG can serve as an objective, non-invasive window into the neurological signature of TN.
+EEG measures tiny electrical voltages from the brain using scalp electrodes — millisecond-fast, non-invasive, widely available, and cheaper than MRI or PET. Think of the scalp as a neighbourhood: prefrontal sites track attention and decision-making; the motor strip controls movement; parietal areas integrate touch and space; occipital handles vision. Each region speaks in brainwave bands — <strong>delta</strong> (deep sleep), <strong>theta</strong> (memory/drowsiness), <strong>alpha</strong> (relaxed, eyes closed), <strong>beta</strong> (alert thinking), and <strong>gamma</strong> (higher-order processing). These bands give us a fast, quantitative readout of brain function that we can extract as features and feed into machine learning models.
+</p>
+
+<h4>The Problem</h4>
+<p>
+Trigeminal neuralgia (TN) is one of the most severe pain disorders known — yet its diagnosis relies almost entirely on patient-reported symptoms, leading to frequent misdiagnosis and years of misdirected treatment. There are no objective biomarkers. This study asks: can resting-state EEG serve as a non-invasive window into the neurological signature of TN?
+</p>
+
+<h4>The Approach</h4>
+<p>
+Working with 72 subjects (36 TN patients, 36 healthy controls), features were extracted across five frequency bands spanning temporal dynamics, spectral power, signal complexity, and nonlinear measures. Statistical analysis revealed that the <strong>Gamma band and frontal brain regions</strong> carry the strongest discriminative signal — TN reorganizes high-frequency cortical activity in ways that are measurable at rest.
 </p>
 <p>
-Working with 72 subjects (36 TN patients, 36 healthy controls), we extracted a rich set of features from EEG signals across five frequency bands — spanning temporal dynamics, spectral power, signal complexity, and nonlinear measures. Statistical analysis revealed that the Gamma band and frontal brain regions carry the strongest discriminative signal, suggesting that TN reorganizes high-frequency cortical activity in ways that are measurable at rest.
+Six classification architectures were compared, from classical ML (SVM, Random Forest, Decision Tree) to deep learning (DNN, CNN). The key contribution is a novel <strong>CNN with a channel-wise attention mechanism</strong>: EEG features are transformed into grayscale images encoding temporal and feature structure, then processed by a convolutional network that learns to weight the most informative signal patterns automatically. The CNN+Attention model outperformed all baselines across all folds.
 </p>
+
+<h4>Key Finding</h4>
 <p>
-Six classification architectures were systematically compared, from classical approaches (SVM, Random Forest, Decision Tree) to deep learning (DNN, baseline CNN). The key contribution is a novel CNN with a channel-wise attention mechanism: EEG features are transformed into grayscale images that encode temporal and feature structure, then fed into a convolutional network that learns to weight the most informative signal patterns automatically. The CNN+Attention model outperformed all baselines and achieved the highest accuracy and recall across all folds.
-</p>
-<p>
-A covariate analysis confirmed that the identified EEG signatures reflect TN-specific neurophysiology rather than age-related differences between cohorts. This is the first study to apply a multi-domain, image-based deep learning approach specifically to TN classification, providing proof-of-concept for automated, objective detection of this debilitating condition.
+A covariate analysis confirmed the identified EEG signatures reflect TN-specific neurophysiology — not age-related differences between cohorts. This is the first study to apply a multi-domain, image-based deep learning approach specifically to TN, providing proof-of-concept for automated, objective detection of this debilitating condition.
 </p>
 `,
     pills: ["Python","CNN","Attention","EEG","Signal Processing","Machine Learning"],
