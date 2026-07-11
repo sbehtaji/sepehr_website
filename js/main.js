@@ -222,7 +222,7 @@ A multi-class CNN classifier (built on Xception) reads DICOM CT scans and distin
 
 <h4>Impact</h4>
 <p>
-Average door-to-treatment time was <strong>cut in half</strong>. The system is positioned not as "AI does diagnosis" but as a layer of standardised support inside the stroke imaging pathway — augmenting the clinician's read, not replacing it.
+Upon pilot, it is expected that average door-to-treatment time will be <strong>cut in half</strong>. The system is positioned not as "AI does diagnosis" but as a layer of standardised support inside the stroke imaging pathway — augmenting the clinician's read, not replacing it.
 </p>
 `,
     pills: ["CNN","Xception","Python","DICOM","Triage AI"],
