@@ -283,7 +283,7 @@ A covariate analysis confirmed the identified EEG signatures reflect TN-specific
 </p>
 `,
     pills: ["Python","CNN","Attention","EEG","Signal Processing","Machine Learning"],
-    links: []
+    links: [{ label: "Read Paper", url: "https://doi.org/10.1038/s41598-026-62292-x" }]
   },
 
   "oxytocin": {
