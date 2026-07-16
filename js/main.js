@@ -255,7 +255,7 @@ Segmentation consistently improved model stability across architectures. Hybrid 
   "eeg-cnn": {
     tag: "Neuroscience · Deep Learning",
     title: "Automated Trigeminal Neuralgia Detection — CNN-Attention EEG",
-    meta: "Accepted · Comparative ML Study",
+    meta: "Published · Scientific Reports · 2026",
     body: `
 <img class="modal-hero-img" src="projects/img/automated-cnn.png" alt="CNN-Attention architecture for EEG-based trigeminal neuralgia detection" style="width:100%;max-height:420px;object-fit:contain;background:#f4f4f4;" />
 
@@ -279,7 +279,7 @@ Six classification architectures were compared, from classical ML (SVM, Random F
 
 <h4>Key Finding</h4>
 <p>
-A covariate analysis confirmed the identified EEG signatures reflect TN-specific neurophysiology — not age-related differences between cohorts. This is the first study to apply a multi-domain, image-based deep learning approach specifically to TN, providing proof-of-concept for automated, objective detection of this debilitating condition.
+The CNN+Attention model achieved <strong>96.44% accuracy and ROC-AUC of 0.996</strong> across subject-wise cross-validation, outperforming all five baseline architectures. A covariate analysis confirmed the identified EEG signatures reflect TN-specific neurophysiology — not age-related differences between cohorts. This is the first study to apply a multi-domain, image-based deep learning approach specifically to TN, providing proof-of-concept for automated, objective detection of this debilitating condition.
 </p>
 `,
     pills: ["Python","CNN","Attention","EEG","Signal Processing","Machine Learning"],
