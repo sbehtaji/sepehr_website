@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "Rostex";
+  src: url("fonts/Rostex-Oblique.ttf") format("truetype");
+  font-weight: normal;
+  font-style: oblique;
+  font-display: swap;
+}
+
 :root {
   --bg: #f4f7fb;
   --surface: #ffffff;
@@ -144,6 +152,11 @@ h1 {
   margin: 0;
   line-height: 1.15;
   font-size: clamp(2.25rem, 4.2vw, 3.25rem);
+}
+
+.hero h1 {
+  font-family: "Rostex", serif;
+  font-style: oblique;
 }
 
 .lead {
