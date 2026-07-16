@@ -1,8 +1,8 @@
 @font-face {
-  font-family: "Rostex";
-  src: url("fonts/Rostex-Oblique.ttf") format("truetype");
-  font-weight: normal;
-  font-style: oblique;
+  font-family: "Velour";
+  src: url("fonts/Velour-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
   font-display: swap;
 }
 
@@ -155,8 +155,8 @@ h1 {
 }
 
 .hero h1 {
-  font-family: "Rostex", serif;
-  font-style: oblique;
+  font-family: "Velour", sans-serif;
+  font-weight: 600;
 }
 
 .lead {
