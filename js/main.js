@@ -229,6 +229,38 @@ Upon pilot, it is expected that average door-to-treatment time will <strong>redu
     links: []
   },
 
+  "lung-seg": {
+    tag: "Medical Imaging · Deep Learning",
+    title: "Lung CT Segmentation & Severity Classification",
+    meta: "Published · Scientific Reports · July 2026",
+    body: `
+<img class="modal-hero-img" src="projects/img/lung-seg-poster.png" alt="Lung CT segmentation pipeline — original scan, predicted mask, overlay, severity map" style="width:100%;max-height:340px;object-fit:contain;background:#111;" />
+
+<h4>The Problem</h4>
+<p>
+Lung cancer is the leading cause of cancer-related mortality worldwide — yet most cases are diagnosed at advanced stages, when treatment options are limited. CT imaging can detect abnormalities early, but reading and grading scans manually is time-consuming, inconsistent across clinicians, and unreliable when disease presentations vary across populations. There is a pressing need for automated tools that can segment lung regions precisely and classify injury severity in a way that holds up across different patient cohorts and imaging conditions.
+</p>
+
+<h4>What We Did</h4>
+<p>
+We built an end-to-end hybrid deep learning framework that handles two tasks in sequence: first, it isolates the lung region from the raw CT slice; second, it grades the severity of any findings into four classes — Healthy, Mild, Moderate, or Severe. The segmentation stage used U-Net architectures with three CNN backbones (VGG16, ResNet50, Xception), trained and validated against both algorithmic pseudo-labels and independently annotated expert ground truth.
+</p>
+<p>
+For classification, we introduced a novel method called <strong>Brightness Intensity Range (BIR)</strong> — a pixel-level approach that focuses on the specific HU intensity window where ground-glass opacities and partial consolidation appear in lung tissue. Rather than treating the whole scan as input, the BIR method filters to the diagnostically relevant range and uses perimeter-to-area ratios to stratify severity. This was combined with hybrid CNN pipelines pairing deep feature extraction with classical classifiers (SVM, Gradient Boosting, Logistic Regression).
+</p>
+<p>
+The dataset comprised 3,921 chest CT images sourced from three geographically distinct cohorts — Iran, Bangladesh, and Iraq — harmonised through a structured expert annotation protocol and augmented to ensure class balance. All models were evaluated under 5-fold cross-validation, and a controlled ablation study was run to isolate the contribution of each preprocessing step.
+</p>
+
+<h4>What We Found</h4>
+<p>
+The VGG16-based U-Net achieved the highest segmentation agreement with expert annotations and generalised well, with performance remaining clinically acceptable even against independently drawn radiologist masks. The hybrid ResNet50 + Gradient Boosting pipeline delivered the strongest overall classification, and the BIR-VGG16 model proved the most interpretable — outputting spatially explicit severity maps that directly show which lung regions are affected and to what degree. Preprocessing, particularly CLAHE normalisation, was identified as the dominant contributor to model performance, with the ablation study providing a mechanistic explanation for why preprocessed conditions consistently outperformed raw inputs. Cross-dataset generalisation held up on an independent cohort, supporting the framework's clinical viability.
+</p>
+`,
+    pills: ["U-Net","VGG16","ResNet50","Xception","BIR","CLAHE","SVM","Gradient Boosting","5-fold CV","Python"],
+    links: []
+  },
+
   "ct-lung-cancer": {
     tag: "Medical Imaging · Deep Learning",
     title: "CT-Based Lung Cancer Detection — Deep Learning Framework",
