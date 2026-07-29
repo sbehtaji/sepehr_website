@@ -234,7 +234,13 @@ Upon pilot, it is expected that average door-to-treatment time will <strong>redu
     title: "Lung CT Segmentation & Severity Classification",
     meta: "Published · Scientific Reports · July 2026",
     body: `
-<img class="modal-hero-img" src="projects/img/lung-seg-poster.png" alt="Lung CT segmentation pipeline — original scan, predicted mask, overlay, severity map" style="width:100%;max-height:340px;object-fit:contain;background:#111;" />
+<img class="modal-hero-img" src="projects/img/lung-seg-poster.png" alt="Lung CT segmentation — segmented overlay and BIR severity map" style="width:100%;max-height:420px;object-fit:cover;background:#0a0a0a;border-radius:8px;" />
+
+<div style="display:inline-flex;align-items:center;gap:8px;margin:0.8rem 0 0.4rem;padding:0.45rem 1rem;background:#fff4e0;border:1.5px solid #FFAA33;border-radius:20px;">
+  <span style="width:9px;height:9px;border-radius:50%;background:#FFAA33;display:inline-block;animation:pulse 1.4s infinite;"></span>
+  <span style="font-size:0.82rem;font-weight:600;color:#7a4800;letter-spacing:0.03em;">Publishing Soon — Scientific Reports · est. within days</span>
+</div>
+<style>@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.35}}</style>
 
 <h4>The Problem</h4>
 <p>
