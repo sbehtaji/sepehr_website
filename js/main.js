@@ -232,7 +232,7 @@ Upon pilot, it is expected that average door-to-treatment time will <strong>redu
   "lung-seg": {
     tag: "Medical Imaging · Deep Learning",
     title: "Lung CT Segmentation & Severity Classification",
-    meta: "Published · Scientific Reports · Jul 2026",
+    meta: "Published · Scientific Reports · 2026",
     body: `
 <img class="modal-hero-img" src="projects/img/lung-seg-poster.png" alt="Lung CT segmentation — segmented overlay and BIR severity map" style="width:100%;max-height:420px;object-fit:cover;background:#0a0a0a;border-radius:8px;" />
 
